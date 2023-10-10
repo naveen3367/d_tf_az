@@ -1,0 +1,2332 @@
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # module.app["app1"].azurerm_function_app.app will be updated in-place
+  ~ resource "azurerm_function_app" "app" {
+        id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCAPI"
+        name                            = "CTGWEPPDAZFGTCAPI"
+      ~ storage_account_access_key      = (sensitive value)
+        tags                            = {
+            "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+            "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+            "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (17 unchanged attributes hidden)
+
+        # (4 unchanged blocks hidden)
+    }
+
+  # module.app["app10"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          - "AdapterId"                          = "LCR_Luwa_1" -> null
+          + "ApplicationsToLogCommandFor"        = "RMM"
+          + "AzureWebJobsSecretStorageType"      = "Files"
+          - "ContextEventHubMaxBatchSize"        = "200" -> null
+          - "DatalakeEventHubMaxBatchSize"       = "200" -> null
+          - "Disable_Sensor"                     = "false" -> null
+          - "Disable_Tpi"                        = "true" -> null
+          - "Disable_TrafficDensity"             = "false" -> null
+          - "Disable_TrafficDensityLevel"        = "false" -> null
+          - "Disable_TravelTime"                 = "false" -> null
+          - "Disable_Way"                        = "false" -> null
+          - "EquipmentBatchSize"                 = "750" -> null
+          - "ExponentialBackOff"                 = "2" -> null
+          - "ExponentialOffset"                  = "0" -> null
+          - "GetSensorTimeout_Minutes"           = "45" -> null
+          - "GetWaysTimeout_Minutes"             = "45" -> null
+          - "IndividualTravelTimesCron"          = "0 0 0 * * *" -> null
+          - "LacroixUrl"                         = "https://api.webvia.lx-connect.com" -> null
+          - "LcrWebvia1SyncTopicLcrSubscriber"   = "adapter_lcr_luwa_1" -> null
+          - "LcrWebvia1SyncTopicName"            = "sbt_lcr_luwa_1_sync_message" -> null
+          - "ListEquipmentTypeToMap"             = "" -> null
+          - "MeasurementPublishMaxBatchSize"     = "200" -> null
+          - "RetryCount"                         = "3" -> null
+          - "SegmentProcessMaxBatchSize"         = "50" -> null
+          - "ServiceBusConnectionString"         = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets" -> null
+          - "TrafficDensityCron"                 = "0 * * * * *" -> null
+          - "TrafficDensityLevelCron"            = "0 */10 * * * *" -> null
+          - "TrafficDensityLevelTimeout_Minutes" = "45" -> null
+          - "TrafficDensityTimeout_Minutes"      = "15" -> null
+          - "TravelTimesCron"                    = "0 * * * * *" -> null
+          - "TravelTimesTimeout_Minutes"         = "15" -> null
+            # (2 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtclacroixbluevia.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCLACROIXBLUEVIA" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCLACROIXBLUEVIA" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "9YGubDjGs5mxHd6Blfavnu7DdGtL0fgWpYgb1s4cQszBigtfBgzMk7yhpYFy"
+              - username = "$CTGWEPPDAZFGTCLACROIXBLUEVIA"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+      ~ tags                            = {
+          + "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+          + "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+          + "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "e95208a7-012c-44e9-b5a2-48ca22ad7dd8" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app11"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          - "AckTopicMuseSubscriber"                                       = "adapter_mus_luwa_1" -> null
+          - "AckTopicName"                                                 = "sbt_acknowledgement_message" -> null
+          - "AdapterId"                                                    = "MUS_Luwa_1" -> null
+          + "ApplicationsToLogCommandFor"                                  = "RMM"
+          - "AzureWebJobs.MUS_RMQ_CommissioningMessageSubscriber.Disabled" = "0" -> null
+          - "AzureWebJobs.MUS_TMR_ODataPatrimoineAssetTimerStart.Disabled" = "0" -> null
+          + "AzureWebJobsSecretStorageType"                                = "Files"
+          - "CctCircutor1SyncTopicName"                                    = "sbt_cct_luwa_1_sync_message" -> null
+          - "ContextEventHubMaxBatchSize"                                  = "200" -> null
+          - "CttLuwa1SyncTopicName"                                        = "sbt_ctt_luwa_1_sync_message" -> null
+          - "DatalakeEventHubMaxBatchSize"                                 = "200" -> null
+          - "DbServiceKey"                                                 = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig==" -> null
+          - "DbServiceUrl"                                                 = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net" -> null
+          - "DeltaLightOff"                                                = "-15" -> null
+          - "DeltaLightOn"                                                 = "16" -> null
+          - "DisableMuseProcessMeasurementsBatch"                          = "false" -> null
+          - "Disable_FMEServiceFaultGrouping"                              = "true" -> null
+          - "Disable_OdataPatrimoinePuller"                                = "false" -> null
+          - "EnablePublishPassageMeasureToRabbit"                          = "false" -> null
+          - "EnablePublishTrafficDensityLevelMeasureToRabbit"              = "true" -> null
+          - "EnablePublishWrongWayEventToRabbit"                           = "true" -> null
+          - "EnablePublishWrongWayMeasureToRabbit"                         = "false" -> null
+          - "EquipmentMessageCron"                                         = "0 0 */1 * * *" -> null
+          - "EventTopicCircutorEventName"                                  = "sbt_event_circutorevents_message" -> null
+          - "EventTopicMuseSubscriber"                                     = "adapter_mus_luwa_1" -> null
+          - "EventTopicName"                                               = "sbt_event_message" -> null
+          - "EventTopicSwitchingPointName"                                 = "sbt_event_switchingpoints_message" -> null
+          - "EventTopicWrongWayName"                                       = "sbt_event_wrongways_message" -> null
+          - "ExponentialBackOff"                                           = "2" -> null
+          - "ExponentialOffset"                                            = "0" -> null
+          - "FMEServiceFaultFilterList"                                    = "HasNotCommunicatedSince,LampOutage" -> null
+          - "FUNCTIONS_WORKER_RUNTIME"                                     = "dotnet" -> null
+          - "FaultBatchSize"                                               = "100" -> null
+          - "FaultRetryDelayInSeconds"                                     = "60" -> null
+          - "FaultRetryLimit"                                              = "3" -> null
+          - "FmeAuthBaseAddress"                                           = "https://fme2.citegestion.fr" -> null
+          - "FmeUserOrdersBaseAddress"                                     = "https://fme2.citegestion.fr" -> null
+          - "ListProtocolToMap"                                            = "Citytouch, circutor" -> null
+          - "MeasurementTopicMuseSubscriber"                               = "adapter_mus_luwa_1" -> null
+          - "MeasurementTopicName"                                         = "sbt_measurement_message" -> null
+          - "MuseCalendarAssignmentExchange"                               = "LUWA.PP.V10.EXC.RMT.CMD" -> null
+          - "MuseCalendarAssignmentKey"                                    = "EVT.RMT.CMD_ASSIGN.SNT" -> null
+          - "MuseCalendarAssignmentType"                                   = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.GTC.RmtAssignCommandSent:Citegestion.MUSE.EventMessaging.Contracts" -> null
+          - "MuseCommissioningQueueName"                                   = "LUWA.PP.POLLOW.V10.RMT.DEVICE.CHD" -> null
+          - "MuseDimmingExchange"                                          = "LUWA.PP.V10.EXC.RMT.CMD" -> null
+          - "MuseDimmingKey"                                               = "EVT.RMT.CMD_DIMMING.SNT" -> null
+          - "MuseDimmingType"                                              = "Citegestion.MUSE.EventMessaging.Contracts.V10.RMT.RmtDimmingCommandSent:Citegestion.MUSE.EventMessaging.Contracts" -> null
+          - "MuseGmaoApiUri"                                               = "https://stage.musesoftware.citegestion.fr/LUWA/PP/TlgGenerique" -> null
+          - "MuseGmaoGetElementTypesApiUrl"                                = "https://stage.musesoftware.citegestion.fr/LUWA/PP" -> null
+          - "MuseGroupAcknowledgementExchange"                             = "LUWA.PP.V10.EXC.GRP.CMD" -> null
+          - "MuseGroupAcknowledgementKey"                                  = "EVT.GRP.CMD.SNT" -> null
+          - "MuseGroupAcknowledgementType"                                 = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.GRP.GtcGroupAcknowledge:Citegestion.MUSE.EventMessaging.Contracts" -> null
+          - "MuseGroupContentChangeQueueName"                              = "LUWA.PP.POLLOW.V10.GRP.GRP_ITM.UPD_LUWGTCPP" -> null
+          - "MuseGroupCreationQueueName"                                   = "LUWA.PP.POLLOW.V10.GRP.GRP.CRD_LUWGTCPP" -> null
+          - "MuseGroupDeleteQueueName"                                     = "LUWA.PP.POLLOW.V10.GRP.GRP.DLD_LUWGTCPP" -> null
+          - "MuseGroupMessageBaseUri"                                      = "https://stage.musesoftware.citegestion.fr/pf/luwa/grp/api/v1" -> null
+          - "MuseGroupMessageGrantType"                                    = "client_credentials" -> null
+          - "MuseGroupMessageScope"                                        = "api://05f98b1f-712f-4463-8f9e-0b1206490cf7/.default" -> null
+          - "MuseGroupMessageSysCode"                                      = "GTC" -> null
+          - "MuseGroupUpdateQueueName"                                     = "LUWA.PP.POLLOW.V10.GRP.GRP.UPD_LUWGTCPP" -> null
+          - "MuseMeasurePassageExchange"                                   = "V10.EXC.SENSOR.TRAFFIC" -> null
+          - "MuseMeasurePassageKey"                                        = "EVT.SENSOR.PASSAGEFLOW.RCV" -> null
+          - "MuseMeasurePassageType"                                       = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.Sensor.PasssageFlowChanged:Citegestion.MUSE.EventMessaging.Contracts" -> null
+          - "MuseMeasureTrafficDensityLevelExchange"                       = "LUWA.PP.V10.EXC.SENSOR.TRAFFICDENSITY" -> null
+          - "MuseMeasureTrafficDensityLevelKey"                            = "EVT.SENSOR.DENSITYLEVEL.MES" -> null
+          - "MuseMeasureTrafficDensityLevelType"                           = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.Sensor.TrafficDensityFlowChangeed:Citegestion.MUSE.EventMessaging.Contracts" -> null
+          - "MuseOAuthTokenUrl"                                            = "https://login.microsoftonline.com/56c66bcb-80c6-4246-a185-3e2c772359e2" -> null
+          - "MuseOdataAssetApiUrl"                                         = "https://stage.musesoftware.citegestion.fr/LUWA/PP" -> null
+          - "MuseProcessMeasurementsBatchSize"                             = "200" -> null
+          - "MuseProcessMeasurementsBatchSizeForBlobStorage"               = "10" -> null
+          - "MuseProcessSwitchingPointEventsBatchSize"                     = "100" -> null
+          - "MuseProcessSwitchingPointEventsBatchSizeForBlobStorage"       = "10" -> null
+          - "MuseResumeExchange"                                           = "LUWA.PP.V10.EXC.RMT.CMD" -> null
+          - "MuseResumeKey"                                                = "EVT.RMT.CMD_RESUME.SNT" -> null
+          - "MuseResumeType"                                               = "Citegestion.MUSE.EventMessaging.Contracts.V10.RMT.RmtResumeCommandSent:Citegestion.MUSE.EventMessaging.Contracts" -> null
+          - "MuseVendorsWithChildren"                                      = "signify" -> null
+          - "MuseWrongWayEventExchange"                                    = "LUWA.PP.V10.EXC.SENSOR.EVENT" -> null
+          - "MuseWrongWayEventKey"                                         = "EVT.SENSOR.WRONGWAY.EVT" -> null
+          - "MuseWrongWayEventType"                                        = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.Sensor.WrongWayDetected:Citegestion.MUSE.EventMessaging.Contracts" -> null
+          - "MuseWrongWayMeasureExchange"                                  = "musemeasureexchange" -> null
+          - "MuseWrongWayMeasureKey"                                       = "musemeasureexchange_key" -> null
+          - "MuseWrongWayMeasureType"                                      = "WrongWay" -> null
+          - "Muse_OdataAsset_MaxCount"                                     = "10000" -> null
+          - "Muse_OdataAsset_ToPaginate"                                   = "false" -> null
+          - "NumberOfMessagesToPublish"                                    = "1" -> null
+          - "Paginate"                                                     = "25" -> null
+          - "RabbitMqConnectionStr-Muse"                                   = "amqp://10.0.15.71:5671" -> null
+          - "RetryCount"                                                   = "3" -> null
+          - "Server"                                                       = "Muse" -> null
+          - "ServiceBusConnectionString"                                   = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets" -> null
+          - "TimeDifferenceToUTCInMinutes"                                 = "-120" -> null
+          - "UnavailibiltyWorkspaceId"                                     = "1916" -> null
+          - "VirtualHost-Muse"                                             = "/" -> null
+          - "duration"                                                     = "60" -> null
+          - "emailOptionId"                                                = "2" -> null
+          - "orderDate"                                                    = "" -> null
+          - "priorityId"                                                   = "1" -> null
+          - "wkParams"                                                     = "ID_DISTANT=ID_DISTANT_VALUE|TLG_EVENEMENT=TLG_EVENEMENT_VALUE" -> null
+          - "workspaceId"                                                  = "1851" -> null
+            # (2 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtcmuse.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCMUSE" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCMUSE" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "bHMDalCzoKyNzkFkrEa6j5lMq79uodpFEfDfbwHLEekMYryKLpLKA5dMwFBY"
+              - username = "$CTGWEPPDAZFGTCMUSE"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+        tags                            = {
+            "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+            "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+            "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "bf55e5e9-10f6-471d-b1e8-e18bbbf7e886" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+
+          - cors {
+              - allowed_origins     = [
+                  - "https://portal.azure.com",
+                ] -> null
+              - support_credentials = false -> null
+            }
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app12"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          - "AdapterId"                                     = "CTT_Luwa_1" -> null
+          + "ApplicationsToLogCommandFor"                   = "RMM"
+          - "AssetLinkGroupUrl"                             = "https://ws.citytouch.com" -> null
+          - "AssetStreamApiUrl"                             = "https://ws.citytouch.com" -> null
+          - "AssetStreamTimeOut_Minutes"                    = "45" -> null
+          + "AzureWebJobsSecretStorageType"                 = "Files"
+          - "BatchSizeForSwitchingPoint"                    = "100" -> null
+          - "CTTGroupBatchSize"                             = "250" -> null
+          - "CityTouchAuthenticationUrl"                    = "https://account.identity.lighting.philips.com" -> null
+          - "CityTouchSiteId"                               = "c830a29e-00d9-4f22-892c-103e4a01a741" -> null
+          - "CommandTopicName"                              = "sbt_command_message" -> null
+          - "CommissioningTopicName"                        = "sbt_commissioning_message" -> null
+          - "CommissioningTopicSubscriber"                  = "adapter_ctt_luwa_1_commissioning" -> null
+          - "ContextEventHubMaxBatchSize"                   = "200" -> null
+          - "ContinuousRetrieval"                           = "true" -> null
+          - "ControllinkApiUrl"                             = "https://ws.citytouch.com" -> null
+          - "CttCommandTopicSubscriberName"                 = "adapter_ctt_luwa_1_group" -> null
+          - "CttLuwa1DimmingCommandTopicSubscriber"         = "adapter_ctt_luwa_1_dimming" -> null
+          - "CttLuwa1ResumeCommandTopicSubscriber"          = "adapter_ctt_luwa_1_resume" -> null
+          - "CttLuwa1RtpCommandTopicSubscriber"             = "adapter_ctt_luwa_1_refresh" -> null
+          - "CttLuwa1SyncTopicName"                         = "sbt_ctt_luwa_1_sync_message" -> null
+          - "CttLuwa1TopicSubscriber"                       = "adapter_ctt_luwa_1" -> null
+          - "CttTopicCalendarAssignmentCommandSubscriber"   = "adapter_ctt_luwa_1_calendarassignment" -> null
+          - "DatalakeEventHubMaxBatchSize"                  = "200" -> null
+          - "DbServiceKey"                                  = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig==" -> null
+          - "DbServiceUrl"                                  = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net" -> null
+          - "DelayToRepublishToCommissioningTopicInMinutes" = "60" -> null
+          - "DisableSwitchingPointBatch"                    = "false" -> null
+          - "Disable_AssetStream"                           = "false" -> null
+          - "Disable_EnergyStream"                          = "false" -> null
+          - "Disable_FaultLink"                             = "false" -> null
+          - "Disable_ScheduleCalculator"                    = "true" -> null
+          - "Disable_SwitchingPointLink"                    = "false" -> null
+          - "EnableEncodePublishAssets"                     = "true" -> null
+          - "EnableEncodePublishBurningHours"               = "false" -> null
+          - "EnableEncodePublishSwitchingPoint"             = "true" -> null
+          - "EnableLuminaireIdUsageForCalendarAssignment"   = "true" -> null
+          - "EnergyApiUrl"                                  = "https://ws.citytouch.com" -> null
+          - "EnergyStreamCron"                              = "0 0 9,15 * * *" -> null
+          - "EnergyStreamTimeout_Minutes"                   = "45" -> null
+          - "EquipmentBatchSize"                            = "750" -> null
+          - "ExponentialBackOff"                            = "2" -> null
+          - "ExponentialOffset"                             = "0" -> null
+          - "FaultLinkCron"                                 = "0 */5 0,1,2,3,4,5,6,7,8,9,17,18,19,20,21,22,23 * * *" -> null
+          - "FaultLinkStreamTimeout_Minutes"                = "45" -> null
+          - "FaultPublishMaxBatchSize"                      = "32" -> null
+          - "LinkApiUrl"                                    = "https://ws.citytouch.com" -> null
+          - "ListEquipmentTypeToMap"                        = "ControlGear" -> null
+          - "MeasurementPublishMaxBatchSize"                = "200" -> null
+          - "RefreshMeasurementFilterList"                  = "Requested Dimming Value,Actual Dimming Value,Energy Counter Value,Voltage,Current,Power,Power Factor" -> null
+          - "RetryCount"                                    = "3" -> null
+          - "ServiceBusConnectionString"                    = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets" -> null
+          - "SwitchingPointCron"                            = "0 0 9,15 * * *" -> null
+          - "SwitchingPointEventPublishMaxBatchSize"        = "32" -> null
+          - "SwitchingPointTimeout_Minutes"                 = "45" -> null
+          - "SwitchingPointlinkApiUrl"                      = "https://ws.citytouch.com" -> null
+            # (2 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtcadaptercttluwa1.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCADAPTERCTTLUWA1" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCADAPTERCTTLUWA1" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "wr56RKxYc0fhnW2qXRl0tktFoSNFo7uhYfmupQtqCFPon3seFmoRlS9YrE4i"
+              - username = "$CTGWEPPDAZFGTCADAPTERCTTLUWA1"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+        tags                            = {
+            "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+            "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+            "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "99006024-a54e-4953-bd17-c4e39c00913a" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+
+          - cors {
+              - allowed_origins     = [
+                  - "https://portal.azure.com",
+                ] -> null
+              - support_credentials = false -> null
+            }
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app13"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          - "AckTopicContextSubscriber"                     = "gtc_context" -> null
+          - "AckTopicName"                                  = "sbt_acknowledgement_message" -> null
+          + "ApplicationsToLogCommandFor"                   = "RMM"
+          - "AssetSyncEventHubMaxBatchSize"                 = "200" -> null
+          + "AzureWebJobsSecretStorageType"                 = "Files"
+          - "ConnectTimeOut"                                = "120" -> null
+          - "CounterpartApplicationBatchSize"               = "10" -> null
+          - "CounterpartBatchSize"                          = "10" -> null
+          - "DbServiceKey"                                  = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig==" -> null
+          - "DbServiceUrl"                                  = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net" -> null
+          - "DelayToPublishGroupCommandToProviderInSeconds" = "5" -> null
+          - "EnableSaveEventInDatabase"                     = "false" -> null
+          - "EnableSaveMeasurementInDatabase"               = "false" -> null
+          - "EquipmentBatchSize"                            = "750" -> null
+          - "EquipmentCollectionBatchSize"                  = "10" -> null
+          - "EquipmentTypeBatchSize"                        = "10" -> null
+          - "EventCollectionBatchSize"                      = "10" -> null
+          - "EventHubConnectionString"                      = "Endpoint=sb://ctgweppdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yUuBzcpG/yHrwEc9/lM459Ku8vGF36nAUaRnxw1muM8=;TransportType=AmqpWebSockets" -> null
+          - "EventTopicContextSubscriber"                   = "gtc_context" -> null
+          - "EventTopicName"                                = "sbt_event_message" -> null
+          - "GroupTopicContextSubscriber"                   = "gtc_context" -> null
+          - "GroupTopicName"                                = "sbt_group_message" -> null
+          - "ListEquipmentTypeToSync"                       = "Luminaire;StreetLight;Way;EDSEMBEDDED;CVME3MINI" -> null
+          - "MeasurementCollectionBatchSize"                = "10" -> null
+          - "MeasurementTopicContextSubscriber"             = "gtc_context" -> null
+          - "MeasurementTopicMuseSubscriber"                = "adapter_mus_luwa_1" -> null
+          - "MeasurementTopicName"                          = "sbt_measurement_message" -> null
+          - "ServiceBusConnectionString"                    = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets" -> null
+          - "TranscodeEventHubMaxBatchSize"                 = "200" -> null
+            # (2 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtccontext.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCCONTEXT" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCCONTEXT" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "XmWTuB8g85WM8PHiNsnykM2pGbMAzwjvqN7tSpffa5PyFsZoe62d1SdAbQKv"
+              - username = "$CTGWEPPDAZFGTCCONTEXT"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+      ~ tags                            = {
+          + "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+          + "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+          + "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "85e4aacd-1e7c-4f35-9f1b-003649e0067c" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app2"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          - "AdapterId"                                = "RVB_Luwa_1" -> null
+          + "ApplicationsToLogCommandFor"              = "RMM"
+          - "AzureWebJobs.RVB_ORC_Equipments.Disabled" = "0" -> null
+          - "AzureWebJobs.RVB_ORC_Passages.Disabled"   = "0" -> null
+          - "AzureWebJobs.RVB_ORC_WrongWay.Disabled"   = "0" -> null
+          + "AzureWebJobsSecretStorageType"            = "Files"
+          - "ContextEventHubMaxBatchSize"              = "200" -> null
+          - "DatalakeEventHubMaxBatchSize"             = "200" -> null
+          - "ExponentialBackOff"                       = "2" -> null
+          - "ExponentialOffset"                        = "0" -> null
+          - "MeasurementPublishMaxBatchSize"           = "200" -> null
+          - "RetryCount"                               = "3" -> null
+            # (2 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtcreverberi.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCREVERBERI" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCREVERBERI" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "AoMdvHrgkpolTgbJ8kaujcMifbPWL3yvaibzCaKwSPy6tKwnl4pKZPKM6ktn"
+              - username = "$CTGWEPPDAZFGTCREVERBERI"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+        tags                            = {
+            "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+            "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+            "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "86e673dd-df05-42c1-9084-ae5c61e47b21" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app3"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          - "AdapterId"                          = "CCT_Luwa_1" -> null
+          - "ApiTimeoutInSeconds"                = "10" -> null
+          + "ApplicationsToLogCommandFor"        = "RMM"
+          + "AzureWebJobsSecretStorageType"      = "Files"
+          - "CctCircutor1SyncTopicCctSubscriber" = "adapter_cct_luwa_1" -> null
+          - "CctCircutor1SyncTopicName"          = "sbt_cct_luwa_1_sync_message" -> null
+          - "Circutor_ApiUrlFormat"              = "http://{0}" -> null
+          - "ContextEventHubMaxBatchSize"        = "200" -> null
+          - "DatalakeEventHubMaxBatchSize"       = "200" -> null
+          - "DbServiceKey"                       = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig==" -> null
+          - "DbServiceUrl"                       = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net" -> null
+          - "DeviceInfoCron"                     = "0 0 0 */3 * *" -> null
+          - "Disable_CallGetValuesWithTimeout"   = "false" -> null
+          - "Disable_DeviceData"                 = "false" -> null
+          - "Disable_IPPingTest"                 = "false" -> null
+          - "Disable_InstantVariables"           = "false" -> null
+          - "EnableDeviceDataFullUpdate"         = "false" -> null
+          - "EnableGetValuesOrcTerminate"        = "false" -> null
+          - "EnableSendEventToTelegestion"       = "true" -> null
+          - "EnableSendMeasurementToTelegestion" = "true" -> null
+          - "EquipmentBatchSize"                 = "750" -> null
+          - "EventPublishMaxBatchSize"           = "32" -> null
+          - "ExponentialBackOff"                 = "2" -> null
+          - "ExponentialOffset"                  = "0" -> null
+          - "GetDevicesTimeout_Minutes"          = "45" -> null
+          - "GetValuesTimeout_Minutes"           = "20" -> null
+          - "InstantVariablesCron"               = "0 */5 * * * *" -> null
+          - "ListEquipmentTypeToMap"             = "EDSEMBEDDED" -> null
+          - "MeasurementPublishMaxBatchSize"     = "200" -> null
+          - "RetryCount"                         = "0" -> null
+          - "ServiceBusConnectionString"         = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets" -> null
+          - "Test_Circutor_ApiIps"               = "ctgwedevavaawagtccustommockapi.azurewebsites.net" -> null
+          - "ValuesDI3_0"                        = "EDS.DI3,EDS.DI4,EDS.DI8" -> null
+          - "ValuesDI3_1"                        = "EDS.DI3,EDS.DI4,EDS.DI8,EDS.C1,EDS.C2,EDS.DI1,EDS.DI2,EDS.DI5,EDS.DI6,EDS.DI7,EXT1.DI1,EXT1.DI2,EXT1.DI3,EXT1.DI4,EXT2.DI1,EXT2.DI2,EXT2.DI3,EXT2.DI4,CVM-E3-MINI.AE,CVM-E3-MINI.AE1,CVM-E3-MINI.AE2,CVM-E3-MINI.AE3,CVM-E3-MINI.AI1,CVM-E3-MINI.AI2,CVM-E3-MINI.AI3,CVM-E3-MINI.API,CVM-E3-MINI.API1,CVM-E3-MINI.API2,CVM-E3-MINI.API3,CVM-E3-MINI.ARMV1,CVM-E3-MINI.ARMV2,CVM-E3-MINI.ARMV3,CVM-E3-MINI.COSI,CVM-E3-MINI.COSI1,CVM-E3-MINI.COSI2,CVM-E3-MINI.COSI3,CVM-E3-MINI.DAI1,CVM-E3-MINI.DAI2,CVM-E3-MINI.DAI3,CVM-E3-MINI.DVI1,CVM-E3-MINI.DVI2,CVM-E3-MINI.DVI3,CVM-E3-MINI.NPFI,CVM-E3-MINI.NPFI1,CVM-E3-MINI.NPFI2,CVM-E3-MINI.NPFI3,CVM-E3-MINI.VI1,CVM-E3-MINI.VI2,CVM-E3-MINI.VI3" -> null
+            # (2 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtccircutor.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCCIRCUTOR" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCCIRCUTOR" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "jBA3e8l7iSAKag0SijsajqbkYKe2B7darzaKh02tZtowzpTkYMTQHcwtezev"
+              - username = "$CTGWEPPDAZFGTCCIRCUTOR"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+        tags                            = {
+            "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+            "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+            "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "456289d3-8f7c-4ec0-bd8a-aca25683056e" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app4"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          + "ApplicationsToLogCommandFor"                          = "RMM"
+          + "AzureWebJobsSecretStorageType"                        = "Files"
+          - "CommandLogLeaseTime"                                  = "30" -> null
+          - "CommandLogProtocolnRefreshInHours"                    = "12" -> null
+          - "CommandLogRetryLimit"                                 = "5" -> null
+          - "CommandLogTopicDatalakeSubscriber"                    = "gtc_datalake" -> null
+          - "CommandLogTopicName"                                  = "sbt_log_message" -> null
+          - "DbServiceKey"                                         = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig==" -> null
+          - "DbServiceUrl"                                         = "https://ctgweppdazfgtcdbservice.azurewebsites.net" -> null
+          - "DelayToRepublishCommandLogMessageToDatalakeInSeconds" = "60" -> null
+          - "DelayToRepublishToDatalake"                           = "10" -> null
+          - "EventHubConnectionString"                             = "Endpoint=sb://ctgweppdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yUuBzcpG/yHrwEc9/lM459Ku8vGF36nAUaRnxw1muM8=;TransportType=AmqpWebSockets" -> null
+          - "EventLeaseTime"                                       = "15" -> null
+          - "EventTopicDatalakeSubscriber"                         = "gtc_datalake" -> null
+          - "EventTopicName"                                       = "sbt_event_message" -> null
+          - "MeasurementLeaseTime"                                 = "15" -> null
+          - "MeasurementTopicDatalakeSubscriber"                   = "gtc_datalake" -> null
+          - "MeasurementTopicName"                                 = "sbt_measurement_message" -> null
+          - "RetryEventTopicDatalakeSubscriber"                    = "gtc_datalake" -> null
+          - "RetryEventTopicName"                                  = "sbt_retryevent_message" -> null
+          - "ServiceBusConnectionString"                           = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets" -> null
+            # (2 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtcdatalakeservice.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCDATALAKESERVICE" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCDATALAKESERVICE" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "0mXvLjJnRekcpaNr9ZujuZh20uHxEKeapHH3nb6fslbjAGNLiYB18i5zzAZn"
+              - username = "$CTGWEPPDAZFGTCDATALAKESERVICE"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+        tags                            = {
+            "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+            "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+            "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "f85fd4c0-7353-4132-8c18-a7f273612e9b" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app5"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          - "AdapterId"                      = "MUS_LuwaApi_1" -> null
+          + "ApplicationsToLogCommandFor"    = "RMM"
+            # (3 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfmuseapi.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFMUSEAPI" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFMUSEAPI" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "rtBisjiSuTSoQirnFNhs6JgDbTo0ywrMoc5Do8wJ3wRKnYlxyHs1Cbyysyqc"
+              - username = "$CTGWEPPDAZFMUSEAPI"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+        tags                            = {
+            "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+            "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+            "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "18ce201c-5372-4e7a-958b-7fa7d4f21535" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app6"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          + "ApplicationsToLogCommandFor"    = "RMM"
+          - "DbServiceKey"                   = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig==" -> null
+          - "DbServiceUrl"                   = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net" -> null
+          - "EventHubConnectionString"       = "Endpoint=sb://ctgweppdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yUuBzcpG/yHrwEc9/lM459Ku8vGF36nAUaRnxw1muM8=;TransportType=AmqpWebSockets" -> null
+          - "FeaturesNeedingVendor"          = "*" -> null
+          - "FeaturesToExempt"               = "GroupCalendarAssignment, GroupRefresh" -> null
+          - "ProtocolsNeedingVendor"         = "Talq" -> null
+            # (3 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtctranscoder.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCTRANSCODER" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCTRANSCODER" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "qmDbEGk0pmjdHsu6exnMRKKEvRqMND9Lwa8B0CfHl6aKwSCAuZj0CEWDdCYS"
+              - username = "$CTGWEPPDAZFGTCTRANSCODER"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+      ~ tags                            = {
+          + "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+          + "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+          + "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "ef7e1f76-1952-4275-890b-a7624fc0d0b3" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app7"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          + "ApplicationsToLogCommandFor"                 = "RMM"
+          - "ConnectTimeOut"                              = "60" -> null
+          - "Database"                                    = "gtc-dbs" -> null
+          - "DbRetryLimitEquipment"                       = "3" -> null
+          - "DbRetryLimitTranscode"                       = "3" -> null
+          - "DbServiceKey"                                = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig==" -> null
+          - "DbServiceUrl"                                = "https://ctgweppdazfgtcdbservice.azurewebsites.net" -> null
+          - "DelayToRepublishToRetryDbEquipmentInSeconds" = "300" -> null
+          - "DelayToRepublishToRetryDbTranscodeInSeconds" = "900" -> null
+          - "EquipmentCollectionBatchSize"                = "5" -> null
+          - "EventCollectionBatchSize"                    = "10" -> null
+          - "ExceptionMessagesToIgnoreRetry"              = "E11000;serialize" -> null
+          - "MeasurementCollectionBatchSize"              = "10" -> null
+          - "RetryCount"                                  = "3" -> null
+          - "RetryDbEquipmentEnabled"                     = "true" -> null
+          - "RetryDbPublishMaxBatchSize"                  = "32" -> null
+          - "RetryDbTopicName"                            = "sbt_retrydb_message" -> null
+          - "RetryDbTopicSubscriber"                      = "gtc_dbservice" -> null
+          - "RetryDbTranscodeEnabled"                     = "true" -> null
+          - "RetryWriteEnabled"                           = "true" -> null
+          - "ServiceBusConnectionString"                  = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=" -> null
+          - "SocketTimeout"                               = "70" -> null
+          - "WaitQueueTimeout"                            = "120" -> null
+            # (3 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtcdbservice.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCDBSERVICE" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCDBSERVICE" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "hwuxzFqWSqefczn9Q0sCNp8H96rkGeQ9ofBfrxWcZA43NHjygbyPccbTvT2y"
+              - username = "$CTGWEPPDAZFGTCDBSERVICE"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+        tags                            = {
+            "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+            "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+            "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "2e7f5709-2779-4e2b-bb04-baa69a50e289" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app8"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          - "AckPublishDelayInSeconds"                     = "10" -> null
+          - "AdapterId"                                    = "TLQ_Luwa_1" -> null
+          + "ApplicationsToLogCommandFor"                  = "RMM"
+          + "AzureWebJobsSecretStorageType"                = "Files"
+          - "CommandName"                                  = "CommunicatorDimmingCommand" -> null
+          - "DbServiceKey"                                 = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig==" -> null
+          - "DbServiceUrl"                                 = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net" -> null
+          - "ExponentialBackOff"                           = "2" -> null
+          - "ExponentialOffset"                            = "0" -> null
+          - "RabbitMqConnectionStr-Muse"                   = "amqp://10.0.15.71:5671" -> null
+          - "RetryCount"                                   = "3" -> null
+          - "ServiceBusConnectionString"                   = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets" -> null
+          - "SupportsGroup"                                = "false" -> null
+          - "TalqApiVersion"                               = "2.1" -> null
+          - "TalqCommandTopicName"                         = "sbt_command_message" -> null
+          - "TalqEventQueueName"                           = "LUWA.PP.POLLOW.V10.TALQ2.EVENTREPORTS.C_LUWGTCPP" -> null
+          - "TalqGroupCreateFailQueueName"                 = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.C.ERR_LUWGTCPP" -> null
+          - "TalqGroupCreateSuccessQueueName"              = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.C_LUWGTCPP" -> null
+          - "TalqGroupDeleteFailQueueName"                 = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.D.ERR_LUWGTCPP" -> null
+          - "TalqGroupDeleteSuccessQueueName"              = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.D_LUWGTCPP" -> null
+          - "TalqGroupUpdateFailQueueName"                 = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.U.ERR_LUWGTCPP" -> null
+          - "TalqGroupUpdateSuccessQueueName"              = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.U_LUWGTCPP" -> null
+          - "TalqLevelStateQueueName"                      = "LUWA.PP.POLLOW.V10.TALQ2.LEVELSTATECHANGEREPORTS.C_LUWGTCPP" -> null
+          - "TalqMeasurementQueueName"                     = "LUWA.PP.POLLOW.V10.TALQ2.ATTRIBUTELOGREPORTS.C_LUWGTCPP" -> null
+          - "TalqTopicCalendarAssignmentCommandSubscriber" = "adapter_tlq_luwa_1_calendarassignment" -> null
+          - "TalqTopicDimmingCommandSubscriber"            = "adapter_tlq_luwa_1_dimming" -> null
+          - "TalqTopicGroupEquipmentSubscriber"            = "adapter_tlq_luwa_1_group" -> null
+          - "TalqTopicRefreshCommandSubscriber"            = "adapter_tlq_luwa_1_refresh" -> null
+          - "TalqTopicResumeCommandSubscriber"             = "adapter_tlq_luwa_1_resume" -> null
+          - "TalqUrl"                                      = "https://stage.musesoftware.citegestion.fr/LUWA/PP/talq2middleware/api/v1" -> null
+          - "VirtualHost-Muse"                             = "/" -> null
+            # (2 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtctalq.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCTALQ" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCTALQ" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "GgjDv6ka3ZlexmjaucskSlSTnhd26LTAqfECsukGfRBhpkrl3BxrQJyj6uAQ"
+              - username = "$CTGWEPPDAZFGTCTALQ"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+      ~ tags                            = {
+          + "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+          + "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+          + "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "66ff678b-1fe7-4f03-b59d-6625ad086e24" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.app["app9"].azurerm_function_app.app must be replaced
+-/+ resource "azurerm_function_app" "app" {
+      ~ app_settings                    = {
+          - "AdapterIds"                     = "ctt_luwa_1;cct_luwa_1;lcr_luwa_1" -> null
+          + "ApplicationsToLogCommandFor"    = "RMM"
+          + "AzureWebJobsSecretStorageType"  = "Files"
+          - "DbServiceKey"                   = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig==" -> null
+          - "DbServiceUrl"                   = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net" -> null
+          - "EventHubConnectionString"       = "Endpoint=sb://ctgweppdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yUuBzcpG/yHrwEc9/lM459Ku8vGF36nAUaRnxw1muM8=;TransportType=AmqpWebSockets" -> null
+          - "SyncPublishMaxBatchSize"        = "32" -> null
+            # (2 unchanged elements hidden)
+        }
+      ~ custom_domain_verification_id   = "A3D4B49CCA42DBD016C2A43FBB5A40175733C521F03E30869862882E1141444A" -> (known after apply)
+      - daily_memory_time_quota         = 0 -> null
+      ~ default_hostname                = "ctgweppdazfgtcassetsync.azurewebsites.net" -> (known after apply)
+      ~ id                              = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/sites/CTGWEPPDAZFGTCASSETSYNC" -> (known after apply)
+      ~ key_vault_reference_identity_id = "SystemAssigned" -> (known after apply)
+      ~ kind                            = "functionapp" -> (known after apply)
+      ~ name                            = "CTGWEPPDAZFGTCASSETSYNC" -> "CTGWEPPDAZFGTCAPI" # forces replacement
+      ~ outbound_ip_addresses           = "20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.50.2.22" -> (known after apply)
+      ~ possible_outbound_ip_addresses  = "20.54.233.75,51.138.94.65,20.54.234.79,20.54.234.174,20.54.235.123,20.54.236.6,20.54.236.152,20.54.237.131,20.54.238.23,20.54.238.26,20.54.238.42,51.137.12.245,20.54.238.69,20.54.238.78,20.54.238.100,20.54.238.135,20.54.239.43,20.54.239.111,20.56.184.116,20.56.184.198,20.56.184.212,20.56.185.12,20.56.185.75,20.56.186.5,20.56.186.59,20.56.186.180,20.56.186.209,51.137.13.199,51.137.13.216,51.137.14.36,20.50.2.22" -> (known after apply)
+      ~ site_credential                 = [
+          - {
+              - password = "iyhyqAQCx7PAuZkEzdzkGaCmkunGioxuSNK2HArZAceqXb4pRr3eFqRxGPjB"
+              - username = "$CTGWEPPDAZFGTCASSETSYNC"
+            },
+        ] -> (known after apply)
+      ~ storage_account_access_key      = (sensitive value)
+      ~ tags                            = {
+          + "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+          + "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
+          + "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+        }
+        # (8 unchanged attributes hidden)
+
+      - auth_settings {
+          - additional_login_params        = {} -> null
+          - allowed_external_redirect_urls = [] -> null
+          - enabled                        = false -> null
+          - token_refresh_extension_hours  = 0 -> null
+          - token_store_enabled            = false -> null
+        }
+
+      ~ identity {
+          - identity_ids = [] -> null
+          ~ principal_id = "95b6e2fc-0b5e-42e6-9e43-ee8f5e0abff1" -> (known after apply)
+          ~ tenant_id    = "167d31ee-c7d2-48fa-ad9b-fcf74981b5e0" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      - site_config {
+          - always_on                        = true -> null
+          - app_scale_limit                  = 0 -> null
+          - dotnet_framework_version         = "v4.0" -> null
+          - elastic_instance_minimum         = 1 -> null
+          - ftps_state                       = "AllAllowed" -> null
+          - http2_enabled                    = false -> null
+          - ip_restriction                   = [] -> null
+          - min_tls_version                  = "1.2" -> null
+          - pre_warmed_instance_count        = 0 -> null
+          - runtime_scale_monitoring_enabled = false -> null
+          - scm_ip_restriction               = [] -> null
+          - scm_type                         = "None" -> null
+          - scm_use_main_ip_restriction      = false -> null
+          - use_32_bit_worker_process        = true -> null
+          - vnet_route_all_enabled           = false -> null
+          - websockets_enabled               = false -> null
+        }
+
+      - source_control {
+          - branch             = "main" -> null
+          - manual_integration = false -> null
+          - rollback_enabled   = false -> null
+          - use_mercurial      = false -> null
+        }
+    }
+
+  # module.azure_vm["CTGWEPPDARC001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-ARC/providers/Microsoft.Compute/virtualMachines/CTGWEPPDARC001"
+        name                                                   = "CTGWEPPDARC001"
+        tags                                                   = {}
+        # (27 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDARC002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-ARC/providers/Microsoft.Compute/virtualMachines/CTGWEPPDARC002"
+        name                                                   = "CTGWEPPDARC002"
+        tags                                                   = {}
+        # (27 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDESR001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-ESR/providers/Microsoft.Compute/virtualMachines/CTGWEPPDESR001"
+        name                                                   = "CTGWEPPDESR001"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "ESRI"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDESR002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-ESR/providers/Microsoft.Compute/virtualMachines/CTGWEPPDESR002"
+        name                                                   = "CTGWEPPDESR002"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "ESRI"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAF001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAF01/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAF001"
+        name                                                   = "CTGWEPPDMAF001"
+        tags                                                   = {
+            "Application" = "MUSE PF"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "PF Front"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAF002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAF01/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAF002"
+        name                                                   = "CTGWEPPDMAF002"
+        tags                                                   = {
+            "Application" = "MUSE PF"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "PF Front"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAP001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAP/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAP001"
+        name                                                   = "CTGWEPPDMAP001"
+        tags                                                   = {
+            "Application" = "MUSE GMAO"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "GMAO"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAP002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAP/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAP002"
+        name                                                   = "CTGWEPPDMAP002"
+        tags                                                   = {
+            "Application" = "MUSE GMAO"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "GMAO"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAP003"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAP02/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAP003"
+        name                                                   = "CTGWEPPDMAP003"
+        tags                                                   = {
+            "Application" = "MUSE GMAO"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "GMAO"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAP004"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAP02/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAP004"
+        name                                                   = "CTGWEPPDMAP004"
+        tags                                                   = {
+            "Application" = "MUSE GMAO"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "GMAO"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAP005"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAP03/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAP005"
+        name                                                   = "CTGWEPPDMAP005"
+        tags                                                   = {
+            "Application" = "MUSE GMAO"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "GMAO"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAP006"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAP03/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAP006"
+        name                                                   = "CTGWEPPDMAP006"
+        tags                                                   = {
+            "Application" = "MUSE GMAO"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "GMAO"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAP007"].azurerm_windows_virtual_machine.windows_vm[0] must be replaced
+-/+ resource "azurerm_windows_virtual_machine" "windows_vm" {
+      ~ admin_password                                         = (sensitive value)
+      ~ id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAP04/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAP007" -> (known after apply)
+        name                                                   = "CTGWEPPDMAP007"
+      ~ private_ip_address                                     = "10.0.15.34" -> (known after apply)
+      ~ private_ip_addresses                                   = [
+          - "10.0.15.34",
+        ] -> (known after apply)
+      + public_ip_address                                      = (known after apply)
+      ~ public_ip_addresses                                    = [] -> (known after apply)
+        tags                                                   = {
+            "Application" = "MUSE GMAO"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "GMAO"
+            "Usage"       = "PPD"
+        }
+      ~ virtual_machine_id                                     = "a26823a1-9b0e-47ba-954c-d46e10e61626" -> (known after apply)
+      - vtpm_enabled                                           = false -> null
+        # (22 unchanged attributes hidden)
+
+      ~ os_disk {
+          ~ disk_size_gb              = 127 -> (known after apply)
+            name                      = "CTGWEPPDMAP007-OSDisk"
+            # (3 unchanged attributes hidden)
+        }
+
+      - winrm_listener { # forces replacement
+          - protocol = "http" -> null
+        }
+      + winrm_listener { # forces replacement
+          + protocol = "Http"
+        }
+
+        # (1 unchanged block hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMAP008"].azurerm_windows_virtual_machine.windows_vm[0] must be replaced
+-/+ resource "azurerm_windows_virtual_machine" "windows_vm" {
+      ~ admin_password                                         = (sensitive value)
+      ~ id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MAP04/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMAP008" -> (known after apply)
+        name                                                   = "CTGWEPPDMAP008"
+      ~ private_ip_address                                     = "10.0.15.35" -> (known after apply)
+      ~ private_ip_addresses                                   = [
+          - "10.0.15.35",
+        ] -> (known after apply)
+      + public_ip_address                                      = (known after apply)
+      ~ public_ip_addresses                                    = [] -> (known after apply)
+        tags                                                   = {
+            "Application" = "MUSE GMAO"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "GMAO"
+            "Usage"       = "PPD"
+        }
+      ~ virtual_machine_id                                     = "9b5f763b-c7b4-4abe-9004-5672e3e582cf" -> (known after apply)
+      - vtpm_enabled                                           = false -> null
+        # (22 unchanged attributes hidden)
+
+      ~ os_disk {
+          ~ disk_size_gb              = 127 -> (known after apply)
+            name                      = "CTGWEPPDMAP008-OSDisk"
+            # (3 unchanged attributes hidden)
+        }
+
+      - winrm_listener { # forces replacement
+          - protocol = "http" -> null
+        }
+      + winrm_listener { # forces replacement
+          + protocol = "Http"
+        }
+
+        # (1 unchanged block hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMBA001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MBA/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMBA001"
+        name                                                   = "CTGWEPPDMBA001"
+        tags                                                   = {
+            "Application" = "MUSE PF"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "PF Back"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMBA002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MBA/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMBA002"
+        name                                                   = "CTGWEPPDMBA002"
+        tags                                                   = {
+            "Application" = "MUSE PF"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "PF Back"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMFR001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MFR/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMFR001"
+        name                                                   = "CTGWEPPDMFR001"
+        tags                                                   = {
+            "Application" = "MUSE PF"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "PF Front"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDMFR002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-MFR/providers/Microsoft.Compute/virtualMachines/CTGWEPPDMFR002"
+        name                                                   = "CTGWEPPDMFR002"
+        tags                                                   = {
+            "Application" = "MUSE PF"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "PF Front"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSBS001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SBS/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSBS001"
+        name                                                   = "CTGWEPPDSBS001"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "Tibco-StreamBase"
+            "Usage"       = "PPD"
+        }
+        # (27 unchanged attributes hidden)
+
+      - boot_diagnostics {}
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSBS002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SBS/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSBS002"
+        name                                                   = "CTGWEPPDSBS002"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "Tibco-StreamBase"
+            "Usage"       = "PPD"
+        }
+        # (27 unchanged attributes hidden)
+
+      - boot_diagnostics {}
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSFS001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SFS/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSFS001"
+        name                                                   = "CTGWEPPDSFS001"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "Spotfire"
+            "Usage"       = "PPD"
+        }
+        # (27 unchanged attributes hidden)
+
+      - boot_diagnostics {}
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSFS002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SFS/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSFS002"
+        name                                                   = "CTGWEPPDSFS002"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "Spotfire"
+            "Usage"       = "PPD"
+        }
+        # (27 unchanged attributes hidden)
+
+      - boot_diagnostics {}
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSFW001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SFW/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSFW001"
+        name                                                   = "CTGWEPPDSFW001"
+      ~ tags                                                   = {
+          + "Application" = "MUSE GMAO"
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "Spotfire-web"
+            "Usage"       = "PPD"
+        }
+        # (27 unchanged attributes hidden)
+
+      - boot_diagnostics {}
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSFW002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SFW/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSFW002"
+        name                                                   = "CTGWEPPDSFW002"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "Spotfire_Web"
+            "Usage"       = "PPD"
+        }
+        # (26 unchanged attributes hidden)
+
+      - boot_diagnostics {}
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSQL003"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSQL003"
+        name                                                   = "CTGWEPPDSQL003"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "DATA"
+            "Usage"       = "PPD"
+        }
+        # (27 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSQL004"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSQL004"
+        name                                                   = "CTGWEPPDSQL004"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "DATA"
+            "Usage"       = "PPD"
+        }
+        # (27 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSQL005"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL03/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSQL005"
+        name                                                   = "CTGWEPPDSQL005"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "DATA"
+            "Usage"       = "PPD"
+        }
+        # (27 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSQL006"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL03/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSQL006"
+        name                                                   = "CTGWEPPDSQL006"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "DATA"
+            "Usage"       = "PPD"
+        }
+        # (27 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSSR001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SSR/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSSR001"
+        name                                                   = "CTGWEPPDSSR001"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "PF Back"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDSSR002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SSR/providers/Microsoft.Compute/virtualMachines/CTGWEPPDSSR002"
+        name                                                   = "CTGWEPPDSSR002"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "PF Back"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDTLQ001"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-TLQ/providers/Microsoft.Compute/virtualMachines/CTGWEPPDTLQ001"
+        name                                                   = "CTGWEPPDTLQ001"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "TLG"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.azure_vm["CTGWEPPDTLQ002"].azurerm_windows_virtual_machine.windows_vm[0] will be updated in-place
+  ~ resource "azurerm_windows_virtual_machine" "windows_vm" {
+        id                                                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-TLQ/providers/Microsoft.Compute/virtualMachines/CTGWEPPDTLQ002"
+        name                                                   = "CTGWEPPDTLQ002"
+        tags                                                   = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "TLG"
+            "Usage"       = "PPD"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (2 unchanged blocks hidden)
+    }
+
+  # module.lb["CTGWEPPDILB-SQL02"].azurerm_lb.lb will be updated in-place
+  ~ resource "azurerm_lb" "lb" {
+        id                   = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02"
+        name                 = "CTGWEPPDILB-SQL02"
+        tags                 = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "DATA"
+            "Usage"       = "PPD"
+        }
+        # (6 unchanged attributes hidden)
+
+      ~ frontend_ip_configuration {
+            id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/frontendIPConfigurations/SQLAlwaysOnEndPointListener"
+          ~ name                          = "SQLAlwaysOnEndPointListener" -> "LB_IP"
+            # (8 unchanged attributes hidden)
+        }
+      - frontend_ip_configuration {
+          - id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/frontendIPConfigurations/WSFCEndPoint" -> null
+          - inbound_nat_rules             = [] -> null
+          - load_balancer_rules           = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/loadBalancingRules/DCM",
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/loadBalancingRules/WSFCEndPoint",
+            ] -> null
+          - name                          = "WSFCEndPoint" -> null
+          - outbound_rules                = [] -> null
+          - private_ip_address            = "10.0.16.32" -> null
+          - private_ip_address_allocation = "Static" -> null
+          - private_ip_address_version    = "IPv4" -> null
+          - subnet_id                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Network/providers/Microsoft.Network/virtualNetworks/CTGWEPRDVNT001/subnets/CTGWEPPDSNT016-PPD_Data" -> null
+          - zones                         = [] -> null
+        }
+    }
+
+  # module.lb["CTGWEPPDILB-SQL03"].azurerm_lb.lb will be updated in-place
+  ~ resource "azurerm_lb" "lb" {
+        id                   = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL03"
+        name                 = "CTGWEPPDILB-SQL03"
+        tags                 = {
+            "Platform"    = "PRODUCTION"
+            "Responsible" = "CTG"
+            "Role"        = "DATA"
+            "Usage"       = "PPD"
+        }
+        # (6 unchanged attributes hidden)
+
+      - frontend_ip_configuration {
+          - id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL03/frontendIPConfigurations/WSFCEndPoint" -> null
+          - inbound_nat_rules             = [] -> null
+          - load_balancer_rules           = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL03/loadBalancingRules/DCM",
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL03/loadBalancingRules/WSFCEndPoint",
+            ] -> null
+          - name                          = "WSFCEndPoint" -> null
+          - outbound_rules                = [] -> null
+          - private_ip_address            = "10.0.16.34" -> null
+          - private_ip_address_allocation = "Static" -> null
+          - private_ip_address_version    = "IPv4" -> null
+          - subnet_id                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Network/providers/Microsoft.Network/virtualNetworks/CTGWEPRDVNT001/subnets/CTGWEPPDSNT016-PPD_Data" -> null
+          - zones                         = [] -> null
+        }
+
+        # (1 unchanged block hidden)
+    }
+
+  # module.log_search_alerts["rule1"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      + description             = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+      ~ enabled                 = false -> true
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/Alerte API SOAP Citytouch indisponible" -> (known after apply)
+      ~ name                    = "Alerte API SOAP Citytouch indisponible" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - // Erreur sur l'API SOAP AssetLink de Citytouch
+          -
+          - let targetUrl = "ws.citytouch.com";
+          - dependencies
+          - | where target == targetUrl
+          -     and type == "WCF Service"
+          -     and success == false
+          + test
+        EOT
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+        # (6 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group  = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/mail_exploitation",
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          ~ email_subject = "[GTC Alert] PRC_SUP | Le service SOAP AssetLink de Citytouch est indisponible" -> "Log Search Alert Rule Notification"
+        }
+
+      ~ trigger {
+          ~ threshold = 0 -> 5
+            # (1 unchanged attribute hidden)
+        }
+    }
+
+  # module.log_search_alerts["rule10"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      ~ description             = "Alerte lorsque le retraitement de clôture SP3 a dépassé le nombre maximum de retry" -> "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/Echec Retraitement Cloture SP3" -> (known after apply)
+      ~ name                    = "Echec Retraitement Cloture SP3" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - traces
+          - | where severityLevel != 1
+          - | where message contains "MUS_SBT_EventTopicSubscriber" and message contains "exceeded fault retry limit"
+          - | order by timestamp asc
+          + test
+        EOT
+      ~ query_type              = "Number" -> "ResultCount"
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      ~ severity                = 3 -> 4
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+        # (5 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group  = [
+              - "/subscriptions/2DD0A1B8-B6F4-4036-AEDD-036BD50B6E23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Alert_Preprod",
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          + email_subject = "Log Search Alert Rule Notification"
+        }
+
+      ~ trigger {
+          ~ operator  = "GreaterThanOrEqual" -> "GreaterThan"
+          ~ threshold = 1 -> 5
+
+          - metric_trigger {
+              - metric_trigger_type = "Total" -> null
+              - operator            = "GreaterThanOrEqual" -> null
+              - threshold           = 1 -> null
+            }
+        }
+    }
+
+  # module.log_search_alerts["rule2"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      + description             = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+      ~ enabled                 = false -> true
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/Alerte déclenchement energy stream" -> (known after apply)
+      ~ name                    = "Alerte déclenchement energy stream" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - // Quand la requête s'exécute moins de 10 fois par heure
+          -
+          - traces
+          - | where operation_Name contains "EnergyStream"
+          -     and message contains "Executed"
+          + test
+        EOT
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      ~ severity                = 3 -> 4
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+      ~ time_window             = 60 -> 5
+        # (4 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group  = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/mail_exploitation",
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          ~ email_subject = "[GTC Alert] PRC_GTC_001 | Problème de déclenchement EnergyStream" -> "Log Search Alert Rule Notification"
+        }
+
+      ~ trigger {
+          ~ operator  = "LessThan" -> "GreaterThan"
+          ~ threshold = 10 -> 5
+        }
+    }
+
+  # module.log_search_alerts["rule3"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      + description             = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+      ~ enabled                 = false -> true
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/Alerte déclenchement sur GetFaults" -> (known after apply)
+      ~ name                    = "Alerte déclenchement sur GetFaults" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - // La fonction AssetLinkGetFaults s'est exécuté moins de 10 fois lors de la dernière heure
+          -
+          - traces
+          - | where operation_Name contains "AssetLinkGetFaults"
+          -     and message contains "Executed"
+          + test
+        EOT
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+      ~ time_window             = 60 -> 5
+        # (5 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group  = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/mail_exploitation",
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          ~ email_subject = "[GTC Alert] PRC_GTC_001 | La fonction de collecte de faute ne se déclenche pas correctement " -> "Log Search Alert Rule Notification"
+        }
+
+      ~ trigger {
+          ~ operator  = "LessThan" -> "GreaterThan"
+          ~ threshold = 10 -> 5
+        }
+    }
+
+  # module.log_search_alerts["rule4"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      + description             = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+      ~ enabled                 = false -> true
+      ~ frequency               = 60 -> 5
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/Alerte déclenchement SwitchingPointLink" -> (known after apply)
+      ~ name                    = "Alerte déclenchement SwitchingPointLink" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - // Quand la requête s'exécute moins de 10 fois par jour
+          -
+          - traces
+          - | where operation_Name contains "SwitchingPointLink"
+          -     and message contains "Executed"
+          + test
+        EOT
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      ~ severity                = 3 -> 4
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+      ~ time_window             = 1440 -> 5
+        # (3 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group  = [
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          ~ email_subject = "[GTC Alert] PRC_GTC_001 | Problème de déclenchement de requête SwitchingPointLink" -> "Log Search Alert Rule Notification"
+        }
+
+      ~ trigger {
+          ~ operator  = "LessThan" -> "GreaterThan"
+          ~ threshold = 10 -> 5
+        }
+    }
+
+  # module.log_search_alerts["rule5"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      + description             = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+      ~ enabled                 = false -> true
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/Alerte envoie MUSE TlgGenerique" -> (known after apply)
+      ~ name                    = "Alerte envoie MUSE TlgGenerique" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - // A chaque erreur d'envoie de données à MUSE
+          -
+          - traces
+          - | where operation_Name contains "MUS_CTX_HTTP"
+          - | project timestamp, operation_Id, message, severityLevel, customDimensions, operation_Name, appName
+          - | join kind= inner (
+          -    dependencies
+          -    | project operation_Id, target, name, success, resultCode
+          -    | where target contains "citegestion.fr" // and success == false
+          -    ) on operation_Id
+          + test
+        EOT
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+        # (6 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group           = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/mail_exploitation",
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          - custom_webhook_payload = jsonencode(
+                {
+                  - "Cas de déclenchement"  = "Erreur HTTP sur un appel sur l'un des endpoint de citytouch"
+                  - "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  - "Fin de recherche"      = "#searchintervalendtimeutc"
+                  - "Lien vers la requête"  = "#linktosearchresults"
+                  - "Nombre d'erreurs"      = "#searchresultcount"
+                  - Procédure               = "PRC_GTC_001"
+                  - "Titre Alerte"          = "Erreur HTTP Citytouch"
+                }
+            ) -> null
+          ~ email_subject          = "[GTC Alert] PRC_GTC_001 | Erreur lors d'envoi de données à MUSE API TlgGenerique" -> "Log Search Alert Rule Notification"
+        }
+
+      ~ trigger {
+          ~ threshold = 0 -> 5
+            # (1 unchanged attribute hidden)
+        }
+    }
+
+  # module.log_search_alerts["rule6"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      ~ description             = "Alert to monitor hanging of circutor get values puller" -> "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+      ~ enabled                 = false -> true
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/Circutor - GetValues TimerStart Error" -> (known after apply)
+      ~ name                    = "Circutor - GetValues TimerStart Error" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - traces
+          - | where operation_Name == "CCT_TMR_InstantVariablesTimerStart" and message contains "Started"
+          + test
+        EOT
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      ~ severity                = 2 -> 4
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+        # (5 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group           = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/ctgweprdrsg-gtc/providers/microsoft.insights/actionGroups/mail_support_l2",
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          - custom_webhook_payload = jsonencode(
+                {
+                  - Message = "GetValues Timer did not trigger in the last 5 mnutes"
+                }
+            ) -> null
+          ~ email_subject          = "[PREPROD] [Circutor] GetValues timer start error" -> "Log Search Alert Rule Notification"
+        }
+
+      ~ trigger {
+          ~ operator  = "LessThan" -> "GreaterThan"
+          ~ threshold = 1 -> 5
+        }
+    }
+
+  # module.log_search_alerts["rule7"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      + description             = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+      ~ enabled                 = false -> true
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/ColInfEqpCtt_1.0.0_ConGtc_Ina" -> (known after apply)
+      ~ name                    = "ColInfEqpCtt_1.0.0_ConGtc_Ina" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - // Service AssetStream inactif
+          -
+          - traces
+          - | where operation_Name contains "AssetStream"
+          -     and message contains "Succeeded"
+          + test
+        EOT
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      ~ severity                = 2 -> 4
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+      ~ time_window             = 60 -> 5
+        # (4 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group  = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/mail_exploitation",
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          ~ email_subject = "[GTC Alert] PRC_GTC_001 | La fonction de collection AssetStream ne s'est pas déclenchée" -> "Log Search Alert Rule Notification"
+        }
+
+      ~ trigger {
+          ~ operator  = "LessThan" -> "GreaterThan"
+          ~ threshold = 10 -> 5
+        }
+    }
+
+  # module.log_search_alerts["rule8"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      ~ description             = <<-EOT
+          - Erreur HTTP lors d'un appel aux API de Citytouch.
+          - Code 400 : erreur de curseur (assetstream / energystream)
+          - Code 401 : mauvais credentials
+          - Code 403 : non autorisé
+          - Code 500 : resource indisponible
+          - Code 503 : service indisponible
+          + Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action
+        EOT
+      ~ enabled                 = false -> true
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/CTT_HTTP_Error" -> (known after apply)
+      ~ name                    = "CTT_HTTP_Error" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - // A chaque erreur HTTP surun service Citytouch
+          - let errorCodes = dynamic([400,401,403,500,503]);
+          - let targetNames = dynamic(['assets.citytouch.com','energy.citytouch.com','account.identity.lighting.philips.com','ws.citytouch.com','controllink.citytouch.com']);
+          -
+          - dependencies
+          - | where target in (targetNames)
+          -     and resultCode in (errorCodes)
+          - | join kind= inner (traces) on operation_Id
+          + test
+        EOT
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      ~ severity                = 3 -> 4
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+        # (5 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group           = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/mail_exploitation",
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          - custom_webhook_payload = jsonencode(
+                {
+                  - "Cas de déclenchement"  = "Erreur HTTP sur un appel sur l'un des endpoint de citytouch"
+                  - "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  - "Fin de recherche"      = "#searchintervalendtimeutc"
+                  - "Lien vers la requête"  = "#linktosearchresults"
+                  - "Nombre d'erreurs"      = "#searchresultcount"
+                  - Procédure               = "PRC_GTC_001"
+                  - "Titre Alerte"          = "Erreur HTTP Citytouch"
+                }
+            ) -> null
+          ~ email_subject          = "[GTC Alert] PRC_GTC_001 | Erreur HTTP Citytouch" -> "Log Search Alert Rule Notification"
+        }
+
+        # (1 unchanged block hidden)
+    }
+
+  # module.log_search_alerts["rule9"].azurerm_monitor_scheduled_query_rules_alert.this must be replaced
+-/+ resource "azurerm_monitor_scheduled_query_rules_alert" "this" {
+      - authorized_resource_ids = [] -> null
+      ~ data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+      ~ description             = "erreur lors de l'identification au service citytouch." -> "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+      ~ enabled                 = false -> true
+      ~ id                      = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Insights/scheduledQueryRules/CTT_invalid_credentials" -> (known after apply)
+      ~ name                    = "CTT_invalid_credentials" -> "SequencedStartStop_Parent" # forces replacement
+      ~ query                   = <<-EOT
+          - // Erreur d'authentication sur le service identity de citytouch
+          -
+          - let targetUrl = "account.identity.lighting.philips.com";
+          - let httpCode = 400;
+          - dependencies
+          - | where (target == targetUrl) and resultCode == httpCode
+          + test
+        EOT
+      ~ resource_group_name     = "CTGWEPPDRSG-GTC" -> "CTGWEPRDRSG-Operations" # forces replacement
+      ~ severity                = 3 -> 4
+      - tags                    = {} -> null
+      - throttling              = 0 -> null
+        # (5 unchanged attributes hidden)
+
+      ~ action {
+          ~ action_group  = [
+              - "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/mail_exploitation",
+              + "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production",
+            ]
+          ~ email_subject = "[GTC Alerte] PRC_GTC_002 | Erreur paramétrage GTC" -> "Log Search Alert Rule Notification"
+        }
+
+      ~ trigger {
+          ~ threshold = 0 -> 5
+            # (1 unchanged attribute hidden)
+        }
+    }
+
+  # module.managed_disk["CTGWEPPDSQL003-FSDisk001"].azurerm_managed_disk.this will be updated in-place
+  ~ resource "azurerm_managed_disk" "this" {
+      ~ disk_size_gb                  = 1024 -> 512
+        id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Compute/disks/CTGWEPPDSQL003-FSDisk001"
+        name                          = "CTGWEPPDSQL003-FSDisk001"
+        tags                          = {
+            "Environment" = "PreProduction"
+            "Role"        = "SQLServer"
+        }
+        # (14 unchanged attributes hidden)
+    }
+
+  # module.managed_disk["CTGWEPPDSQL003-FSDisk002"].azurerm_managed_disk.this will be updated in-place
+  ~ resource "azurerm_managed_disk" "this" {
+      ~ disk_size_gb                  = 1024 -> 512
+        id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Compute/disks/CTGWEPPDSQL003-FSDisk002"
+        name                          = "CTGWEPPDSQL003-FSDisk002"
+        tags                          = {
+            "Environment" = "PreProduction"
+            "Role"        = "SQLServer"
+        }
+        # (14 unchanged attributes hidden)
+    }
+
+  # module.managed_disk["CTGWEPPDSQL004-DataDisk001"].azurerm_managed_disk.this will be updated in-place
+  ~ resource "azurerm_managed_disk" "this" {
+      ~ disk_size_gb                  = 1024 -> 512
+        id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Compute/disks/CTGWEPPDSQL004-DataDisk001"
+        name                          = "CTGWEPPDSQL004-DataDisk001"
+        tags                          = {
+            "Environment" = "PreProduction"
+            "Role"        = "SQLServer"
+        }
+        # (14 unchanged attributes hidden)
+    }
+
+  # module.managed_disk["CTGWEPPDSQL004-DataDisk002"].azurerm_managed_disk.this will be updated in-place
+  ~ resource "azurerm_managed_disk" "this" {
+      ~ disk_size_gb                  = 1024 -> 512
+        id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Compute/disks/CTGWEPPDSQL004-DataDisk002"
+        name                          = "CTGWEPPDSQL004-DataDisk002"
+        tags                          = {
+            "Environment" = "PreProduction"
+            "Role"        = "SQLServer"
+        }
+        # (14 unchanged attributes hidden)
+    }
+
+  # module.managed_disk["CTGWEPPDSQL004-LogDisk001"].azurerm_managed_disk.this will be updated in-place
+  ~ resource "azurerm_managed_disk" "this" {
+      ~ disk_size_gb                  = 512 -> 1024
+        id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Compute/disks/CTGWEPPDSQL004-LogDisk001"
+        name                          = "CTGWEPPDSQL004-LogDisk001"
+        tags                          = {
+            "Environment" = "PreProduction"
+            "Role"        = "SQLServer"
+        }
+        # (14 unchanged attributes hidden)
+    }
+
+  # module.managed_disk["CTGWEPPDSQL004-LogDisk002"].azurerm_managed_disk.this will be updated in-place
+  ~ resource "azurerm_managed_disk" "this" {
+      ~ disk_size_gb                  = 512 -> 1024
+        id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Compute/disks/CTGWEPPDSQL004-LogDisk002"
+        name                          = "CTGWEPPDSQL004-LogDisk002"
+        tags                          = {
+            "Environment" = "PreProduction"
+            "Role"        = "SQLServer"
+        }
+        # (14 unchanged attributes hidden)
+    }
+
+Plan: 24 to add, 39 to change, 24 to destroy.
+
+Changes to Outputs:
+  ~ zzz                            = (sensitive value)
+╷
+│ Warning: Deprecated Resource
+│
+│   with module.app.azurerm_function_app.app,
+│   on ..\modules\function_app\main.tf line 1, in resource "azurerm_function_app" "app":
+│    1: resource "azurerm_function_app" "app" {
+│
+│ The `azurerm_function_app` resource has been superseded by the `azurerm_linux_function_app` and `azurerm_windows_function_app` resources. Whilst this
+│ resource will continue to be available in the 2.x and 3.x releases it is feature-frozen for compatibility purposes, will no longer receive any updates
+│ and will be removed in a future major release of the Azure Provider.
+│
+│ (and 13 more similar warnings elsewhere)
+╵
+
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
