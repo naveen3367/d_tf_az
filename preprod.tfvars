@@ -3284,23 +3284,24 @@ function_apps = {
 
   "app10" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCLACROIXBLUEVIA"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
   storage_account_access_key = "test"
   tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+     
   }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
+      "AdapterId"                          = "LCR_Luwa_1"
+      "ContextEventHubMaxBatchSize"        = "200"
         "AzureWebJobsSecretStorageType"  = "Files"
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+
+  site_config = {
+    
   }
   "app11" = {
     
