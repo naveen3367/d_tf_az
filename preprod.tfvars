@@ -3284,7 +3284,7 @@ function_apps = {
 
   "app10" = {
     
-  function_app_name = "CTGWEPPDAZFGTCLACROIXBLUEVIA"
+  function_app_name = "CTGWEPPDAZFGTCAPI"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3295,14 +3295,62 @@ function_apps = {
   app_settings =  {
       "AdapterId"                          = "LCR_Luwa_1"
       "ContextEventHubMaxBatchSize"        = "200"
-        "AzureWebJobsSecretStorageType"  = "Files"
+      "DatalakeEventHubMaxBatchSize"       = "200"
+      "Disable_Sensor"                     = "false"
+      "Disable_Tpi"                        = "true"
+      "Disable_TrafficDensity"             = "false"
+      "Disable_TrafficDensityLevel"        = "false"
+      "Disable_TravelTime"                 = "false"
+      "Disable_Way"                        = "false"
+      "EquipmentBatchSize"                 = "750"
+      "ExponentialBackOff"                 = "2"
+      "ExponentialOffset"                  = "0"
+      "GetSensorTimeout_Minutes"           = "45"
+      "GetWaysTimeout_Minutes"             = "45"
+      "IndividualTravelTimesCron"          = "0 0 0 * * *"
+      "LacroixUrl"                         = "https://api.webvia.lx-connect.com"
+      "LcrWebvia1SyncTopicLcrSubscriber"   = "adapter_lcr_luwa_1"
+      "LcrWebvia1SyncTopicName"            = "sbt_lcr_luwa_1_sync_message"
+      "ListEquipmentTypeToMap"             = ""
+      "MeasurementPublishMaxBatchSize"     = "200"
+      "RetryCount"                         = "3"
+      "SegmentProcessMaxBatchSize"         = "50"
+      "ServiceBusConnectionString"         = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets"
+      "TrafficDensityCron"                 = "0 * * * * *"
+      "TrafficDensityLevelCron"            = "0 */10 * * * *"
+      "TrafficDensityLevelTimeout_Minutes" = "45"
+      "TrafficDensityTimeout_Minutes"      = "15"
+      "TravelTimesCron"                    = "0 * * * * *"
+      "TravelTimesTimeout_Minutes"         = "15"
+
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+           {
+               password = "9YGubDjGs5mxHd6Blfavnu7DdGtL0fgWpYgb1s4cQszBigtfBgzMk7yhpYFy"
+               username = "$CTGWEPPDAZFGTCLACROIXBLUEVIA"
+            }
+        ]
+  auth_settings {
+           additional_login_params        = {}
+           allowed_external_redirect_urls = []
+           enabled                        = false
+           token_refresh_extension_hours  = 0
+           token_store_enabled            = false
+        }
 
   site_config = {
     
   }
+  source_control {
+           branch             = "main"  
+           manual_integration = false
+           rollback_enabled   = false
+           use_mercurial      = false
+        }
+}
   "app11" = {
     
   function_app_name = "CTGWEPPDAZFGTCAPI"
