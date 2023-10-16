@@ -767,7 +767,27 @@ lb = {
     resource_group                = "CTGWEPPDRSG-SQL02"
     private_ip_address            = "10.0.16.33"
     private_ip_address_allocation = "Static"
+    name                          = "WSFCEndPoint"
+    outbound_rules                = []
+    private_ip_address            = "10.0.16.32"
+    private_ip_address_allocation = "Static"
+    private_ip_address_version    = "IPv4"
+    subnet_id                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Network/providers/Microsoft.Network/virtualNetworks/CTGWEPRDVNT001/subnets/CTGWEPPDSNT016-PPD_Data"
+    zones                         = []  
+    frontend_ip_configuration {
+            id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/frontendIPConfigurations/SQLAlwaysOnEndPointListener"
+            name                          = "SQLAlwaysOnEndPointListener"
 
+        }  
+    frontend_ip_configuration {
+      id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/frontendIPConfigurations/WSFCEndPoint"
+      inbound_nat_rules             = []
+      load_balancer_rules           = [
+        "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/loadBalancingRules/DCM",
+        "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/loadBalancingRules/WSFCEndPoint",
+            ]
+
+        }
     load_balancer_rules = [
       "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/loadBalancingRules/SQLAlwaysOnEndPointListener",
       "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPPDILB-SQL02/loadBalancingRules/SQLAlwaysOnEndPointListener-SSAS",
@@ -2380,9 +2400,10 @@ servers = {
     network_interface_id  = "CTGWEPPDMAP008-nic"
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "CTGWEPPDMAP008-OSDisk"
+    vtpm_enabled          = false
     winrm_listener = [
       {
-        protocol        = "Http"
+        protocol        = "http"
         certificate_url = null
       }
     ]
@@ -2568,6 +2589,7 @@ servers = {
     network_interface_id  = "CTGWEPPDSBS001-nic"
     patch_assessment_mode = "AutomaticByPlatform"
     timezone              = null
+    boot_diagnostics {}
     os_disk_name          = "CTGWEPPDSBS001_OsDisk_1_bf7d523a53ea454ab2ef7ef7aedd7d9d"
     sku                   = "2016-datacenter-gensecond"
     windows_image_reference = {
@@ -2685,7 +2707,6 @@ servers = {
       version   = "latest"
     }
     tags = {
-      "Application" = "MUSE GMAO"
       "Platform"    = "PRODUCTION"
       "Responsible" = "CTG"
       "Role"        = "Spotfire-web"
@@ -3095,7 +3116,7 @@ log_search_alerts = {
 function_apps = {
   "app1" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCMUSE"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3116,7 +3137,7 @@ function_apps = {
 
   "app2" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCREVERBERI"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3128,16 +3149,44 @@ function_apps = {
   }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "AdapterId"                                = "RVB_Luwa_1"
+    "AzureWebJobs.RVB_ORC_Equipments.Disabled" = "0"
+    "AzureWebJobs.RVB_ORC_Passages.Disabled"   = "0"
+    "AzureWebJobs.RVB_ORC_WrongWay.Disabled"   = "0"
+    "ContextEventHubMaxBatchSize"              = "200"
+    "DatalakeEventHubMaxBatchSize"             = "200"
+    "ExponentialBackOff"                       = "2"
+    "ExponentialOffset"                        = "0"
+    "MeasurementPublishMaxBatchSize"           = "200"
+    "RetryCount"                               = "3"
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+         {
+             password = "AoMdvHrgkpolTgbJ8kaujcMifbPWL3yvaibzCaKwSPy6tKwnl4pKZPKM6ktn"
+             username = "$CTGWEPPDAZFGTCREVERBERI"
+            },
+        ]
+ auth_settings {
+         additional_login_params        = {}
+         allowed_external_redirect_urls = []
+         enabled                        = false
+         token_refresh_extension_hours  = 0
+         token_store_enabled            = false
+        }
+source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
   }
 
   "app3" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCCIRCUTOR"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3149,16 +3198,65 @@ function_apps = {
   }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
-
+    "AdapterId"                          = "CCT_Luwa_1"
+    "ApiTimeoutInSeconds"                = "10"
+    "CctCircutor1SyncTopicCctSubscriber" = "adapter_cct_luwa_1"
+    "CctCircutor1SyncTopicName"          = "sbt_cct_luwa_1_sync_message"
+    "Circutor_ApiUrlFormat"              = "http://{0}"
+    "ContextEventHubMaxBatchSize"        = "200"
+    "DatalakeEventHubMaxBatchSize"       = "200"
+    "DbServiceKey"                       = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig=="
+    "DbServiceUrl"                       = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net"
+    "DeviceInfoCron"                     = "0 0 0 */3 * *"
+    "Disable_CallGetValuesWithTimeout"   = "false"
+    "Disable_DeviceData"                 = "false"
+    "Disable_IPPingTest"                 = "false"
+    "Disable_InstantVariables"           = "false"
+    "EnableDeviceDataFullUpdate"         = "false"
+    "EnableGetValuesOrcTerminate"        = "false"
+    "EnableSendEventToTelegestion"       = "true"
+    "EnableSendMeasurementToTelegestion" = "true"
+    "EquipmentBatchSize"                 = "750"
+    "EventPublishMaxBatchSize"           = "32"
+    "ExponentialBackOff"                 = "2"
+    "ExponentialOffset"                  = "0"
+    "GetDevicesTimeout_Minutes"          = "45"
+    "GetValuesTimeout_Minutes"           = "20"
+    "InstantVariablesCron"               = "0 */5 * * * *"
+    "ListEquipmentTypeToMap"             = "EDSEMBEDDED"
+    "MeasurementPublishMaxBatchSize"     = "200"
+    "RetryCount"                         = "0"
+    "ServiceBusConnectionString"         = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets"
+    "Test_Circutor_ApiIps"               = "ctgwedevavaawagtccustommockapi.azurewebsites.net"
+    "ValuesDI3_0"                        = "EDS.DI3,EDS.DI4,EDS.DI8"
+    "ValuesDI3_1"                        = "EDS.DI3,EDS.DI4,EDS.DI8,EDS.C1,EDS.C2,EDS.DI1,EDS.DI2,EDS.DI5,EDS.DI6,EDS.DI7,EXT1.DI1,EXT1.DI2,EXT1.DI3,EXT1.DI4,EXT2.DI1,EXT2.DI2,EXT2.DI3,EXT2.DI4,CVM-E3-MINI.AE,CVM-E3-MINI.AE1,CVM-E3-MINI.AE2,CVM-E3-MINI.AE3,CVM-E3-MINI.AI1,CVM-E3-MINI.AI2,CVM-E3-MINI.AI3,CVM-E3-MINI.API,CVM-E3-MINI.API1,CVM-E3-MINI.API2,CVM-E3-MINI.API3,CVM-E3-MINI.ARMV1,CVM-E3-MINI.ARMV2,CVM-E3-MINI.ARMV3,CVM-E3-MINI.COSI,CVM-E3-MINI.COSI1,CVM-E3-MINI.COSI2,CVM-E3-MINI.COSI3,CVM-E3-MINI.DAI1,CVM-E3-MINI.DAI2,CVM-E3-MINI.DAI3,CVM-E3-MINI.DVI1,CVM-E3-MINI.DVI2,CVM-E3-MINI.DVI3,CVM-E3-MINI.NPFI,CVM-E3-MINI.NPFI1,CVM-E3-MINI.NPFI2,CVM-E3-MINI.NPFI3,CVM-E3-MINI.VI1,CVM-E3-MINI.VI2,CVM-E3-MINI.VI3"
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+daily_memory_time_quota         = 0
+site_credential                 = [
+          {
+              password = "jBA3e8l7iSAKag0SijsajqbkYKe2B7darzaKh02tZtowzpTkYMTQHcwtezev"
+              username = "$CTGWEPPDAZFGTCCIRCUTOR"
+            },
+        ]
+auth_settings {
+    additional_login_params        = {}
+    allowed_external_redirect_urls = []
+    enabled                        = false
+    token_refresh_extension_hours  = 0
+    token_store_enabled            = false
+        }
+source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
   }
 
   "app4" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCDATALAKESERVICE"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3170,16 +3268,52 @@ function_apps = {
   }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "CommandLogLeaseTime"                                  = "30"
+    "CommandLogProtocolnRefreshInHours"                    = "12"
+    "CommandLogRetryLimit"                                 = "5"
+    "CommandLogTopicDatalakeSubscriber"                    = "gtc_datalake"
+    "CommandLogTopicName"                                  = "sbt_log_message"
+    "DbServiceKey"                                         = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig=="
+    "DbServiceUrl"                                         = "https://ctgweppdazfgtcdbservice.azurewebsites.net"
+    "DelayToRepublishCommandLogMessageToDatalakeInSeconds" = "60"
+    "DelayToRepublishToDatalake"                           = "10"
+    "EventHubConnectionString"                             = "Endpoint=sb://ctgweppdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yUuBzcpG/yHrwEc9/lM459Ku8vGF36nAUaRnxw1muM8=;TransportType=AmqpWebSockets"
+    "EventLeaseTime"                                       = "15"
+    "EventTopicDatalakeSubscriber"                         = "gtc_datalake"
+    "EventTopicName"                                       = "sbt_event_message"
+    "MeasurementLeaseTime"                                 = "15"
+    "MeasurementTopicDatalakeSubscriber"                   = "gtc_datalake"
+    "MeasurementTopicName"                                 = "sbt_measurement_message"
+    "RetryEventTopicDatalakeSubscriber"                    = "gtc_datalake"
+    "RetryEventTopicName"                                  = "sbt_retryevent_message"
+    "ServiceBusConnectionString"                           = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets"
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  site_credential                 = [
+    {
+        password = "0mXvLjJnRekcpaNr9ZujuZh20uHxEKeapHH3nb6fslbjAGNLiYB18i5zzAZn"
+        username = "$CTGWEPPDAZFGTCDATALAKESERVICE"
+            },
+        ]
+  auth_settings {
+    additional_login_params        = {}
+    allowed_external_redirect_urls = []
+    enabled                        = false
+    token_refresh_extension_hours  = 0
+    token_store_enabled            = false
+        }
+  source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
   }
 
   "app5" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFMUSEAPI"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3191,37 +3325,78 @@ function_apps = {
   }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
-
+    "AdapterId"                      = "MUS_LuwaApi_1"
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0 
+  site_credential                 = [
+          {
+              password = "rtBisjiSuTSoQirnFNhs6JgDbTo0ywrMoc5Do8wJ3wRKnYlxyHs1Cbyysyqc"
+              username = "$CTGWEPPDAZFMUSEAPI"
+            },
+        ]
+  auth_settings {
+          additional_login_params        = {}
+          allowed_external_redirect_urls = []
+          enabled                        = false
+          token_refresh_extension_hours  = 0
+          token_store_enabled            = false
+        }
+  source_control {
+          branch             = "main"
+          manual_integration = false
+          rollback_enabled   = false
+          use_mercurial      = false
+        }
+
+
   }
 
   "app6" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCMUSE"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "AzureWebJobsSecretStorageType"  = "Files"
+    "DbServiceKey"                   = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig=="
+    "DbServiceUrl"                   = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net"
+    "EventHubConnectionString"       = "Endpoint=sb://ctgweppdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yUuBzcpG/yHrwEc9/lM459Ku8vGF36nAUaRnxw1muM8=;TransportType=AmqpWebSockets"
+    "FeaturesNeedingVendor"          = "*"
+    "FeaturesToExempt"               = "GroupCalendarAssignment, GroupRefresh"
+    "ProtocolsNeedingVendor"         = "Talq"
+
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+          {
+              password = "qmDbEGk0pmjdHsu6exnMRKKEvRqMND9Lwa8B0CfHl6aKwSCAuZj0CEWDdCYS"
+              username = "$CTGWEPPDAZFGTCTRANSCODER"
+            },
+        ]
+  auth_settings {
+          additional_login_params        = {}
+          allowed_external_redirect_urls = []
+          enabled                        = false
+          token_refresh_extension_hours  = 0
+          token_store_enabled            = false
+        }
+  source_control {
+          branch             = "main"
+          manual_integration = false
+          rollback_enabled   = false
+          use_mercurial      = false
+        }
   }
 
   "app7" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCDBSERVICE"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3233,79 +3408,229 @@ function_apps = {
   }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "AzureWebJobsSecretStorageType"  = "Files"
+    "ConnectTimeOut"                              = "60"
+    "Database"                                    = "gtc-dbs"
+    "DbRetryLimitEquipment"                       = "3"
+    "DbRetryLimitTranscode"                       = "3"
+    "DbServiceKey"                                = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig=="
+    "DbServiceUrl"                                = "https://ctgweppdazfgtcdbservice.azurewebsites.net"
+    "DelayToRepublishToRetryDbEquipmentInSeconds" = "300"
+    "DelayToRepublishToRetryDbTranscodeInSeconds" = "900"
+    "EquipmentCollectionBatchSize"                = "5"
+    "EventCollectionBatchSize"                    = "10"
+    "ExceptionMessagesToIgnoreRetry"              = "E11000;serialize"
+    "MeasurementCollectionBatchSize"              = "10"
+    "RetryCount"                                  = "3"
+    "RetryDbEquipmentEnabled"                     = "true"
+    "RetryDbPublishMaxBatchSize"                  = "32"
+    "RetryDbTopicName"                            = "sbt_retrydb_message"
+    "RetryDbTopicSubscriber"                      = "gtc_dbservice"
+    "RetryDbTranscodeEnabled"                     = "true"
+    "RetryWriteEnabled"                           = "true"
+    "ServiceBusConnectionString"                  = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ="
+    "SocketTimeout"                               = "70"
+    "WaitQueueTimeout"                            = "120"
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+    {
+        password = "hwuxzFqWSqefczn9Q0sCNp8H96rkGeQ9ofBfrxWcZA43NHjygbyPccbTvT2y"
+        username = "$CTGWEPPDAZFGTCDBSERVICE"
+            },
+        ]
+  auth_settings {
+    additional_login_params        = {}
+    allowed_external_redirect_urls = []
+    enabled                        = false
+    token_refresh_extension_hours  = 0
+    token_store_enabled            = false
+        }
+  source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
+  
   }
 
   "app8" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCTALQ"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "AckPublishDelayInSeconds"                     = "10"
+    "AdapterId"                                    = "TLQ_Luwa_1"
+    "CommandName"                                  = "CommunicatorDimmingCommand"
+    "DbServiceKey"                                 = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig=="
+    "DbServiceUrl"                                 = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net"
+    "ExponentialBackOff"                           = "2"
+    "ExponentialOffset"                            = "0"
+    "RabbitMqConnectionStr-Muse"                   = "amqp://10.0.15.71:5671"
+    "RetryCount"                                   = "3"
+    "ServiceBusConnectionString"                   = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets"
+    "SupportsGroup"                                = "false"
+    "TalqApiVersion"                               = "2.1"
+    "TalqCommandTopicName"                         = "sbt_command_message"
+    "TalqEventQueueName"                           = "LUWA.PP.POLLOW.V10.TALQ2.EVENTREPORTS.C_LUWGTCPP"
+    "TalqGroupCreateFailQueueName"                 = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.C.ERR_LUWGTCPP"
+    "TalqGroupCreateSuccessQueueName"              = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.C_LUWGTCPP"
+    "TalqGroupDeleteFailQueueName"                 = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.D.ERR_LUWGTCPP"
+    "TalqGroupDeleteSuccessQueueName"              = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.D_LUWGTCPP"
+    "TalqGroupUpdateFailQueueName"                 = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.U.ERR_LUWGTCPP"
+    "TalqGroupUpdateSuccessQueueName"              = "LUWA.PP.POLLOW.V10.TALQ2.GROUP.U_LUWGTCPP"
+    "TalqLevelStateQueueName"                      = "LUWA.PP.POLLOW.V10.TALQ2.LEVELSTATECHANGEREPORTS.C_LUWGTCPP"
+    "TalqMeasurementQueueName"                     = "LUWA.PP.POLLOW.V10.TALQ2.ATTRIBUTELOGREPORTS.C_LUWGTCPP"
+    "TalqTopicCalendarAssignmentCommandSubscriber" = "adapter_tlq_luwa_1_calendarassignment"
+    "TalqTopicDimmingCommandSubscriber"            = "adapter_tlq_luwa_1_dimming"
+    "TalqTopicGroupEquipmentSubscriber"            = "adapter_tlq_luwa_1_group"
+    "TalqTopicRefreshCommandSubscriber"            = "adapter_tlq_luwa_1_refresh"
+    "TalqTopicResumeCommandSubscriber"             = "adapter_tlq_luwa_1_resume"
+    "TalqUrl"                                      = "https://stage.musesoftware.citegestion.fr/LUWA/PP/talq2middleware/api/v1"
+    "VirtualHost-Muse"                             = "/"
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+    {
+        password = "GgjDv6ka3ZlexmjaucskSlSTnhd26LTAqfECsukGfRBhpkrl3BxrQJyj6uAQ"
+        username = "$CTGWEPPDAZFGTCTALQ"
+            },
+        ]
+  auth_settings {
+    additional_login_params        = {}
+    allowed_external_redirect_urls = []
+    enabled                        = false
+    token_refresh_extension_hours  = 0
+    token_store_enabled            = false
+        }
+  source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
+  
   }
 
   "app9" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCASSETSYNC"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "AdapterIds"                     = "ctt_luwa_1;cct_luwa_1;lcr_luwa_1"    "DbServiceKey"                   = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig=="
+    "DbServiceUrl"                   = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net"
+    "EventHubConnectionString"       = "Endpoint=sb://ctgweppdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yUuBzcpG/yHrwEc9/lM459Ku8vGF36nAUaRnxw1muM8=;TransportType=AmqpWebSockets"
+    "SyncPublishMaxBatchSize"        = "32"
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  site_credential                 = [
+    {
+        password = "iyhyqAQCx7PAuZkEzdzkGaCmkunGioxuSNK2HArZAceqXb4pRr3eFqRxGPjB"
+        username = "$CTGWEPPDAZFGTCASSETSYNC"
+            },
+        ]
+  auth_settings {
+    additional_login_params        = {}
+    allowed_external_redirect_urls = []
+    enabled                        = false
+    token_refresh_extension_hours  = 0
+    token_store_enabled            = false
+        }
+  source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
   }
 
   "app10" = {
     
-  function_app_name = "CTGWEPPDAZFGTCLACROIXBLUEVIA"
+  function_app_name = "CTGWEPPDAZFGTCMUSE"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
   storage_account_access_key = "test"
   tags = {
-     
+  
   }
   app_settings =  {
+      "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
       "AdapterId"                          = "LCR_Luwa_1"
       "ContextEventHubMaxBatchSize"        = "200"
-        "AzureWebJobsSecretStorageType"  = "Files"
+      "DatalakeEventHubMaxBatchSize"       = "200"
+      "Disable_Sensor"                     = "false"
+      "Disable_Tpi"                        = "true"
+      "Disable_TrafficDensity"             = "false"
+      "Disable_TrafficDensityLevel"        = "false"
+      "Disable_TravelTime"                 = "false"
+      "Disable_Way"                        = "false"
+      "EquipmentBatchSize"                 = "750"
+      "ExponentialBackOff"                 = "2"
+      "ExponentialOffset"                  = "0"
+      "GetSensorTimeout_Minutes"           = "45"
+      "GetWaysTimeout_Minutes"             = "45"
+      "IndividualTravelTimesCron"          = "0 0 0 * * *"
+      "LacroixUrl"                         = "https://api.webvia.lx-connect.com"
+      "LcrWebvia1SyncTopicLcrSubscriber"   = "adapter_lcr_luwa_1"
+      "LcrWebvia1SyncTopicName"            = "sbt_lcr_luwa_1_sync_message"
+      "ListEquipmentTypeToMap"             = ""
+      "MeasurementPublishMaxBatchSize"     = "200"
+      "RetryCount"                         = "3"
+      "SegmentProcessMaxBatchSize"         = "50"
+      "ServiceBusConnectionString"         = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets"
+      "TrafficDensityCron"                 = "0 * * * * *"
+      "TrafficDensityLevelCron"            = "0 */10 * * * *"
+      "TrafficDensityLevelTimeout_Minutes" = "45"
+      "TrafficDensityTimeout_Minutes"      = "15"
+      "TravelTimesCron"                    = "0 * * * * *"
+      "TravelTimesTimeout_Minutes"         = "15"
+
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+           {
+               password = "9YGubDjGs5mxHd6Blfavnu7DdGtL0fgWpYgb1s4cQszBigtfBgzMk7yhpYFy"
+               username = "$CTGWEPPDAZFGTCLACROIXBLUEVIA"
+            },
+        ]
+  auth_settings {
+           additional_login_params        = {}
+           allowed_external_redirect_urls = []
+           enabled                        = false
+           token_refresh_extension_hours  = 0
+           token_store_enabled            = false
+        }
 
   site_config = {
     
   }
+  source_control {
+           branch             = "main"  
+           manual_integration = false
+           rollback_enabled   = false
+           use_mercurial      = false
+        }
+}
   "app11" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCMUSE"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3317,15 +3642,132 @@ function_apps = {
   }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "AckTopicMuseSubscriber"  = "adapter_mus_luwa_1"
+    "AckTopicName"                                                 = "sbt_acknowledgement_message"
+    "AdapterId"                                                    = "MUS_Luwa_1"
+    "AzureWebJobs.MUS_RMQ_CommissioningMessageSubscriber.Disabled" = "0"
+    "AzureWebJobs.MUS_TMR_ODataPatrimoineAssetTimerStart.Disabled" = "0"
+    "CctCircutor1SyncTopicName"                                    = "sbt_cct_luwa_1_sync_message"
+    "ContextEventHubMaxBatchSize"                                  = "200"
+    "CttLuwa1SyncTopicName"                                        = "sbt_ctt_luwa_1_sync_message"
+    "DatalakeEventHubMaxBatchSize"                                 = "200"
+    "DbServiceKey"                                                 = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig=="
+    "DbServiceUrl"                                                 = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net"
+    "DeltaLightOff"                                                = "-15"  
+    "DeltaLightOn"                                                 = "16"  
+    "DisableMuseProcessMeasurementsBatch"                          = "false"  
+    "Disable_FMEServiceFaultGrouping"                              = "true"  
+    "Disable_OdataPatrimoinePuller"                                = "false"  
+    "EnablePublishPassageMeasureToRabbit"                          = "false"  
+    "EnablePublishTrafficDensityLevelMeasureToRabbit"              = "true"  
+    "EnablePublishWrongWayEventToRabbit"                           = "true"  
+    "EnablePublishWrongWayMeasureToRabbit"                         = "false"  
+    "EquipmentMessageCron"                                         = "0 0 */1 * * *"  
+    "EventTopicCircutorEventName"                                  = "sbt_event_circutorevents_message"  
+    "EventTopicMuseSubscriber"                                     = "adapter_mus_luwa_1"  
+    "EventTopicName"                                               = "sbt_event_message"  
+    "EventTopicSwitchingPointName"                                 = "sbt_event_switchingpoints_message"  
+    "EventTopicWrongWayName"                                       = "sbt_event_wrongways_message"  
+    "ExponentialBackOff"                                           = "2"  
+    "ExponentialOffset"                                            = "0"  
+    "FMEServiceFaultFilterList"                                    = "HasNotCommunicatedSince,LampOutage"  
+    "FUNCTIONS_WORKER_RUNTIME"                                     = "dotnet"  
+    "FaultBatchSize"                                               = "100"  
+    "FaultRetryDelayInSeconds"                                     = "60"  
+    "FaultRetryLimit"                                              = "3"  
+    "FmeAuthBaseAddress"                                           = "https://fme2.citegestion.fr"  
+    "FmeUserOrdersBaseAddress"                                     = "https://fme2.citegestion.fr"  
+    "ListProtocolToMap"                                            = "Citytouch, circutor"  
+    "MeasurementTopicMuseSubscriber"                               = "adapter_mus_luwa_1"  
+    "MeasurementTopicName"                                         = "sbt_measurement_message"  
+    "MuseCalendarAssignmentExchange"                               = "LUWA.PP.V10.EXC.RMT.CMD"  
+    "MuseCalendarAssignmentKey"                                    = "EVT.RMT.CMD_ASSIGN.SNT"  
+    "MuseCalendarAssignmentType"                                   = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.GTC.RmtAssignCommandSent:Citegestion.MUSE.EventMessaging.Contracts"  
+    "MuseCommissioningQueueName"                                   = "LUWA.PP.POLLOW.V10.RMT.DEVICE.CHD"  
+    "MuseDimmingExchange"                                          = "LUWA.PP.V10.EXC.RMT.CMD"  
+    "MuseDimmingKey"                                               = "EVT.RMT.CMD_DIMMING.SNT"  
+    "MuseDimmingType"                                              = "Citegestion.MUSE.EventMessaging.Contracts.V10.RMT.RmtDimmingCommandSent:Citegestion.MUSE.EventMessaging.Contracts"  
+    "MuseGmaoApiUri"                                               = "https://stage.musesoftware.citegestion.fr/LUWA/PP/TlgGenerique"  
+    "MuseGmaoGetElementTypesApiUrl"                                = "https://stage.musesoftware.citegestion.fr/LUWA/PP"  
+    "MuseGroupAcknowledgementExchange"                             = "LUWA.PP.V10.EXC.GRP.CMD"  
+    "MuseGroupAcknowledgementKey"                                  = "EVT.GRP.CMD.SNT"  
+    "MuseGroupAcknowledgementType"                                 = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.GRP.GtcGroupAcknowledge:Citegestion.MUSE.EventMessaging.Contracts"  
+    "MuseGroupContentChangeQueueName"                              = "LUWA.PP.POLLOW.V10.GRP.GRP_ITM.UPD_LUWGTCPP"  
+    "MuseGroupCreationQueueName"                                   = "LUWA.PP.POLLOW.V10.GRP.GRP.CRD_LUWGTCPP"  
+    "MuseGroupDeleteQueueName"                                     = "LUWA.PP.POLLOW.V10.GRP.GRP.DLD_LUWGTCPP"  
+    "MuseGroupMessageBaseUri"                                      = "https://stage.musesoftware.citegestion.fr/pf/luwa/grp/api/v1"  
+    "MuseGroupMessageGrantType"                                    = "client_credentials"  
+    "MuseGroupMessageScope"                                        = "api://05f98b1f-712f-4463-8f9e-0b1206490cf7/.default"  
+    "MuseGroupMessageSysCode"                                      = "GTC"  
+    "MuseGroupUpdateQueueName"                                     = "LUWA.PP.POLLOW.V10.GRP.GRP.UPD_LUWGTCPP"  
+    "MuseMeasurePassageExchange"                                   = "V10.EXC.SENSOR.TRAFFIC"  
+    "MuseMeasurePassageKey"                                        = "EVT.SENSOR.PASSAGEFLOW.RCV"  
+    "MuseMeasurePassageType"                                       = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.Sensor.PasssageFlowChanged:Citegestion.MUSE.EventMessaging.Contracts"  
+    "MuseMeasureTrafficDensityLevelExchange"                       = "LUWA.PP.V10.EXC.SENSOR.TRAFFICDENSITY"  
+    "MuseMeasureTrafficDensityLevelKey"                            = "EVT.SENSOR.DENSITYLEVEL.MES"  
+    "MuseMeasureTrafficDensityLevelType"                           = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.Sensor.TrafficDensityFlowChangeed:Citegestion.MUSE.EventMessaging.Contracts"  
+    "MuseOAuthTokenUrl"                                            = "https://login.microsoftonline.com/56c66bcb-80c6-4246-a185-3e2c772359e2"  
+    "MuseOdataAssetApiUrl"                                         = "https://stage.musesoftware.citegestion.fr/LUWA/PP"  
+    "MuseProcessMeasurementsBatchSize"                             = "200"  
+    "MuseProcessMeasurementsBatchSizeForBlobStorage"               = "10"  
+    "MuseProcessSwitchingPointEventsBatchSize"                     = "100"  
+    "MuseProcessSwitchingPointEventsBatchSizeForBlobStorage"       = "10"  
+    "MuseResumeExchange"                                           = "LUWA.PP.V10.EXC.RMT.CMD"  
+    "MuseResumeKey"                                                = "EVT.RMT.CMD_RESUME.SNT"  
+    "MuseResumeType"                                               = "Citegestion.MUSE.EventMessaging.Contracts.V10.RMT.RmtResumeCommandSent:Citegestion.MUSE.EventMessaging.Contracts"  
+    "MuseVendorsWithChildren"                                      = "signify"  
+    "MuseWrongWayEventExchange"                                    = "LUWA.PP.V10.EXC.SENSOR.EVENT"  
+    "MuseWrongWayEventKey"                                         = "EVT.SENSOR.WRONGWAY.EVT"  
+    "MuseWrongWayEventType"                                        = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.Sensor.WrongWayDetected:Citegestion.MUSE.EventMessaging.Contracts"  
+    "MuseWrongWayMeasureExchange"                                  = "musemeasureexchange"  
+    "MuseWrongWayMeasureKey"                                       = "musemeasureexchange_key"  
+    "MuseWrongWayMeasureType"                                      = "WrongWay"  
+    "Muse_OdataAsset_MaxCount"                                     = "10000"  
+    "Muse_OdataAsset_ToPaginate"                                   = "false"  
+    "NumberOfMessagesToPublish"                                    = "1"  
+    "Paginate"                                                     = "25"  
+    "RabbitMqConnectionStr-Muse"                                   = "amqp://10.0.15.71:5671"  
+    "RetryCount"                                                   = "3"  
+    "Server"                                                       = "Muse"  
+    "ServiceBusConnectionString"                                   = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets"  
+    "TimeDifferenceToUTCInMinutes"                                 = "-120"  
+    "UnavailibiltyWorkspaceId"                                     = "1916"  
+    "VirtualHost-Muse"                                             = "/"  
+    "duration"                                                     = "60"  
+    "emailOptionId"                                                = "2"  
+    "orderDate"                                                    = ""  
+    "priorityId"                                                   = "1"  
+    "wkParams"                                                     = "ID_DISTANT=ID_DISTANT_VALUE|TLG_EVENEMENT=TLG_EVENEMENT_VALUE"  
+    "workspaceId"                                                  = "1851"
+    "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
+    
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+    {
+            password = "bHMDalCzoKyNzkFkrEa6j5lMq79uodpFEfDfbwHLEekMYryKLpLKA5dMwFBY"
+            username = "$CTGWEPPDAZFGTCMUSE"
+    },
+      ]
+  auth_settings {
+          additional_login_params        = {}
+          allowed_external_redirect_urls = []
+          enabled                        = false
+          token_refresh_extension_hours  = 0
+          token_store_enabled            = false
+        }      
+  source_control {
+          branch             = "main"
+          manual_integration = false
+          rollback_enabled   = false
+          use_mercurial      = false
+        }
+
   }
   "app12" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCADAPTERCTTLUWA1"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3337,15 +3779,79 @@ function_apps = {
   }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
-
+    "AdapterId"                                     = "CTT_Luwa_1"
+    "AssetLinkGroupUrl"                             = "https://ws.citytouch.com"
+    "AssetStreamApiUrl"                             = "https://ws.citytouch.com"
+    "AssetStreamTimeOut_Minutes"                    = "45"
+    "BatchSizeForSwitchingPoint"                    = "100"
+    "CTTGroupBatchSize"                             = "250"
+    "CityTouchAuthenticationUrl"                    = "https://account.identity.lighting.philips.com"
+    "CityTouchSiteId"                               = "c830a29e-00d9-4f22-892c-103e4a01a741"
+    "CommandTopicName"                              = "sbt_command_message"
+    "CommissioningTopicName"                        = "sbt_commissioning_message"
+    "CommissioningTopicSubscriber"                  = "adapter_ctt_luwa_1_commissioning"
+    "ContextEventHubMaxBatchSize"                   = "200"
+    "ContinuousRetrieval"                           = "true"
+    "ControllinkApiUrl"                             = "https://ws.citytouch.com"
+    "CttCommandTopicSubscriberName"                 = "adapter_ctt_luwa_1_group"
+    "CttLuwa1DimmingCommandTopicSubscriber"         = "adapter_ctt_luwa_1_dimming"
+    "CttLuwa1ResumeCommandTopicSubscriber"          = "adapter_ctt_luwa_1_resume"
+    "CttLuwa1RtpCommandTopicSubscriber"             = "adapter_ctt_luwa_1_refresh"
+    "CttLuwa1SyncTopicName"                         = "sbt_ctt_luwa_1_sync_message"
+    "CttLuwa1TopicSubscriber"                       = "adapter_ctt_luwa_1"
+    "CttTopicCalendarAssignmentCommandSubscriber"   = "adapter_ctt_luwa_1_calendarassignment"
+    "DatalakeEventHubMaxBatchSize"                  = "200"
+    "DbServiceKey"                                  = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig=="
+    "DbServiceUrl"                                  = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net"
+    "DelayToRepublishToCommissioningTopicInMinutes" = "60"
+    "DisableSwitchingPointBatch"                    = "false"
+    "Disable_AssetStream"                           = "false"
+    "Disable_EnergyStream"                          = "false"
+    "Disable_FaultLink"                             = "false"
+    "Disable_ScheduleCalculator"                    = "true"
+    "Disable_SwitchingPointLink"                    = "false"
+    "EnableEncodePublishAssets"                     = "true"
+    "EnableEncodePublishBurningHours"               = "false"
+    "EnableEncodePublishSwitchingPoint"             = "true"
+    "EnableLuminaireIdUsageForCalendarAssignment"   = "true"
+    "EnergyApiUrl"                                  = "https://ws.citytouch.com"
+    "EnergyStreamCron"                              = "0 0 9,15 * * *"
+    "EnergyStreamTimeout_Minutes"                   = "45"
+    "EquipmentBatchSize"                            = "750"
+    "ExponentialBackOff"                            = "2"
+    "ExponentialOffset"                             = "0"
+    "FaultLinkCron"                                 = "0 */5 0,1,2,3,4,5,6,7,8,9,17,18,19,20,21,22,23 * * *"
+    "FaultLinkStreamTimeout_Minutes"                = "45"
+    "FaultPublishMaxBatchSize"                      = "32"
+    "LinkApiUrl"                                    = "https://ws.citytouch.com"
+    "ListEquipmentTypeToMap"                        = "ControlGear"
+    "MeasurementPublishMaxBatchSize"                = "200"
+    "RefreshMeasurementFilterList"                  = "Requested Dimming Value,Actual Dimming Value,Energy Counter Value,Voltage,Current,Power,Power Factor"
+    "RetryCount"                                    = "3"
+    "ServiceBusConnectionString"                    = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets"
+    "SwitchingPointCron"                            = "0 0 9,15 * * *"
+    "SwitchingPointEventPublishMaxBatchSize"        = "32"
+    "SwitchingPointTimeout_Minutes"                 = "45"
+    "SwitchingPointlinkApiUrl"                      = "https://ws.citytouch.com"
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+  {
+  password = "wr56RKxYc0fhnW2qXRl0tktFoSNFo7uhYfmupQtqCFPon3seFmoRlS9YrE4i"
+  username = "$CTGWEPPDAZFGTCADAPTERCTTLUWA1"
+			   },
+			   ]
+  source_control {
+          branch             = "main"
+          manual_integration = false
+          rollback_enabled   = false
+          use_mercurial      = false
+        }
   }
   "app13" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
+  function_app_name = "CTGWEPPDAZFGTCMUSE"
   resource_group_name = "CTGWEPPDRSG-GTC"
   app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
   storage_account_name = "ctgweppdazsgtc"
@@ -3357,11 +3863,52 @@ function_apps = {
   }
   app_settings =  {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "AckTopicContextSubscriber"                     = "gtc_context"
+    "AckTopicName"                                  = "sbt_acknowledgement_message"
+    "AssetSyncEventHubMaxBatchSize"                 = "200"
+    "ConnectTimeOut"                                = "120"
+    "CounterpartApplicationBatchSize"               = "10"
+    "CounterpartBatchSize"                          = "10"
+    "DbServiceKey"                                  = "bwjd/Cjq9vEiKtwWjQtAlBTFRiQ1YRp0Lmubq9n7gCCQCg7bO/CGig=="
+    "DbServiceUrl"                                  = "https://CTGWEPPDAZFGTCDBSERVICE.azurewebsites.net"
+    "DelayToPublishGroupCommandToProviderInSeconds" = "5"
+    "EnableSaveEventInDatabase"                     = "false"
+    "EnableSaveMeasurementInDatabase"               = "false"
+    "EquipmentBatchSize"                            = "750"
+    "EquipmentCollectionBatchSize"                  = "10"
+    "EquipmentTypeBatchSize"                        = "10"
+    "EventCollectionBatchSize"                      = "10"
+    "EventHubConnectionString"                      = "Endpoint=sb://ctgweppdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yUuBzcpG/yHrwEc9/lM459Ku8vGF36nAUaRnxw1muM8=;TransportType=AmqpWebSockets"
+    "EventTopicContextSubscriber"                   = "gtc_context"
+    "EventTopicName"                                = "sbt_event_message"
+    "GroupTopicContextSubscriber"                   = "gtc_context"
+    "GroupTopicName"                                = "sbt_group_message"
+    "ListEquipmentTypeToSync"                       = "Luminaire;StreetLight;Way;EDSEMBEDDED;CVME3MINI"
+    "MeasurementCollectionBatchSize"                = "10"
+    "MeasurementTopicContextSubscriber"             = "gtc_context"
+    "MeasurementTopicMuseSubscriber"                = "adapter_mus_luwa_1"
+    "MeasurementTopicName"                          = "sbt_measurement_message"
+    "ServiceBusConnectionString"                    = "Endpoint=sb://ctgweppdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Ojd5+3rwyj3mZxoZ/E51EBGkacDA4r5gedQ85TtAuuQ=;TransportType=AmqpWebSockets"
+    "TranscodeEventHubMaxBatchSize"                 = "200"
 
        "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+    {
+        password = "XmWTuB8g85WM8PHiNsnykM2pGbMAzwjvqN7tSpffa5PyFsZoe62d1SdAbQKv"
+        username = "$CTGWEPPDAZFGTCCONTEXT"
+    },
+        ]
+  auth_settings {
+         additional_login_params        = {}
+         allowed_external_redirect_urls = []
+         enabled                        = false
+         token_refresh_extension_hours  = 0
+         token_store_enabled            = false
+        }
+
+
   }
 }
 

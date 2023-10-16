@@ -794,498 +794,999 @@ recovery_services_vault = {
 
 log_search_alerts = {
   "rule1" = {
-    name              = "SequencedStartStop_Parent"
+
+    authorized_resource_ids = []
+    name              = "Circutor Erreur déclenchement de requête GetDevice"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"    
     description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"CCT_ORC_Device\" and message contains \"Succeeded\""
+    frequency         = 1440
+    time_window       = 2880
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                   "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                   "Debut de recherche"    = "#searchintervalstarttimeutc"
+                   "Fin de recherche"      = "#searchintervalendtimeutc"
+                   "Lien vers la requête"  = "#linktosearchresults"
+                   "Nombre d'erreurs"      = "#searchresultcount"
+                   Procédure               = "PRC_GTC_001"
+                   "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Circutor] Problème de déclenchement puller GetDevice"
   }
   "rule2" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Circutor Erreur déclenchement de requête GetValues"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetValues ne s`est pas déclenchée la dernière demi-heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
+    query             = "traces | where operation_Name == \"CCT_ORC_MainInstantVariables\" and message contains \"Succeeded\""
+    frequency         = 15
+    time_window       = 15
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Circutor] Problème de déclenchement puller GetValues"
+
+  } 
   "rule3" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Citytouch Erreur déclenchement de requête AssetStream"
+    authorized_resource_ids = []
     location          = "west europe"
     resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La fonction de collecte s'est déclenchée moins d'une fois dans la dernière heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"CTT_ORC_AssetStream\" and message contains \"Succeeded\""
+    frequency         = 15
+    time_window       = 30
+    severity          = 2
+    tags                    = {}
+    throttling              = 0
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+     custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [Signify] Problème de déclenchement puller AssetStream"
   }
   "rule4" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur déclenchement de requête EnergyStream"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête EnergyStream ne s'est pas déclenchée dans la dernière demi-heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"CTT_ORC_EnergyStream\" and message contains \"Succeeded\""
+    frequency         = 15
+    time_window       = 30
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+  email_subject          = "[GTC Alert] [Signify] Problème de déclenchement puller EnergyStream"         
   }
   "rule5" = {
-    name              = "CTGWEHAD002"
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur déclenchement de requête GetFaults"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Alerting CPU"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête Get Faults ne s'est pas déclenchée dans la dernière demi-heure."
     enabled           = true
     query             = <<-EOT
-          // Chart CPU usage trends by computer
-          // Calculate CPU usage patterns over the last hour, chart by percentiles.
-          InsightsMetrics
-          | where TimeGenerated > ago(1h)
-          | where Origin == "vm.azm.ms"
-          | where Computer startswith "CTGWEPRDHAD00"
-          | where Namespace == "Processor"
-          | where Name == "UtilizationPercentage"
-          | summarize avg(Val) by bin(TimeGenerated, 5m), Computer //split up by computer
-          | render timechart
+         traces | where operation_Name == "CTT_ORC_FaultLink" and message contains "Succeeded"
+        EOT
+    frequency         = 15
+    time_window       = 30
+    severity          = 2
+    trigger_operator  = "GLessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Signify] Problème de déclenchement puller GetFaults"
+  }
+  "rule6" = {
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur déclenchement de requête SwitchingPoint"
+    location          = "west europe"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La fonction de collecte ne s'est pas déclenchée pour le jour."
+    enabled           = true
+    query             = "traces | where operation_Name == \"CTT_ORC_SwitchingPointlinkPuller\" and message contains \"Succeeded\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+     throttling              = 0
+     custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+  email_subject          = "[GTC Alert] [Signify] Problème de déclenchement puller SwitchingPoint"
+  }
+  "rule7" = {
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur déclenchement requête AssetStream"
+    location          = "west europe"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/ctgweprdrsg-gtc/providers/microsoft.insights/actionGroups/mail_support_l2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La fonction de collecte s'est déclenchée moins de 10 fois dans la dernière heure."
+    enabled           = false
+    query                   = <<-EOT
+         // Compteur d'exécution d'assetstream
+          
+         traces
+         | where operation_Name == "CTT_ORC_AssetStream"
+             and message contains "Succeeded"
+        EOT
+    frequency         = 15
+    time_window       = 5
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+     throttling              = 0
+     custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "La fonction de collecte s'est déclenchée moins de 10 fois dans la dernière heure"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Erreur de déclenchement de la collecte d'AssetStream"
+                }
+            )
+    email_subject          = "[GTC Alert] PRC_GTC_001 | La fonction de collection AssetStream ne se déclenche pas correctement"
+  }
+  "rule8" = {
+    name              = "Citytouch Erreur déclenchement SwitchingPoint"
+    authorized_resource_ids = []
+    location          = "west europe"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/ctgweprdrsg-gtc/providers/microsoft.insights/actiongroups/mail_support_l2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Moins de 10 requête en 24 heures."
+    enabled           = false
+    query                   = <<-EOT
+         // Compteur d'exécution de switchingpointlink
+         // A affiner avec les plages d'appels et les groupes d'appels
+          
+         traces
+         | where operation_Name contains "SwitchingPointLink"
+             and message contains "Executed"
+        EOT
+    frequency         = 60
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 10
+    tags                    = {}
+     throttling              = 0
+      custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Moins de 10 appels dans les dernières 24 heures"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Citytouch Erreur déclenchement SwitchingPoint"
+                }
+            ) 
+            email_subject          = "[GTC Alert] PRC_GTC_001 | Problème de déclenchement de requête SwitchingPointLink"
+  }
+  "rule9" = {
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur HTTP"
+    location          = "west europe"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/ctgweprdrsg-gtc/providers/microsoft.insights/actiongroups/mail_support_l2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Erreur HTTP sur l'un des endpoints de citytouch"
+    enabled           = false
+    query                   = <<-EOT
+         // Liste des erreurs HTTP sur les endpoints citytouch
+        
+         let errorCodes = dynamic([400,401,403,500,503]);
+         let targetNames = dynamic(['assets.citytouch.com','energy.citytouch.com','account.identity.lighting.philips.com','ws.citytouch.com','controllink.citytouch.com']);
+        
+         dependencies
+         | where target in (targetNames)
+             and resultCode in (errorCodes)
+         | project timestamp, operation_Id, operation_Name, target, name, resultCode, success,customDimensions,  appName
+         | join kind= inner (
+             traces
+             | project operation_Id, message, severityLevel
+             ) on operation_Id
         EOT
     frequency         = 5
     time_window       = 5
     severity          = 4
     trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-    tags = {
-      "PRDHAD00" = "AlertingHAD2"
-    }
-  }
-  "rule6" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
-  "rule7" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
-  "rule8" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
-  "rule9" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    trigger_threshold = 0
+    tags                    = {}
+    throttling              = 0
+   custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Erreur HTTP sur un appel sur l'un des endpoint de citytouch"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Erreur HTTP Citytouch"
+                }
+            )
+    email_subject          = "[GTC Alert] PRC_GTC_001 | Erreur HTTP Citytouch"
   }
   "rule10" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Echec Retraitement Cloture SP3"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2DD0A1B8-B6F4-4036-AEDD-036BD50B6E23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Alert_Prod"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
     enabled           = true
-    query             = "test"
+    query_type              = "Number"
+    query                   = <<-EOT
+           traces
+           | where severityLevel != 1
+           | where message contains "MUS_SBT_EventTopicSubscriber" and message contains "exceeded fault retry limit"
+           | order by timestamp asc
+        EOT
+    tags                    = {}
+    throttling              = 0
     frequency         = 5
     time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    severity          = 3
+    trigger_operator  = "GreaterThanOrEqual"
+    trigger_threshold = 1
+    metric_trigger {
+               metric_trigger_type = "Total"
+               operator            = "GreaterThanOrEqual"
+               threshold           = 1
+            }
   }
   "rule11" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Erreur de recuperation d'EventHub Context"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Pas de messages recupérés depuis l'EventHub Context pour le dernier jour."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
+    query             = "traces | where message contains \"GTC_EVT_ContextMsg\" and message contains \"START\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
     trigger_operator  = "GreaterThan"
     trigger_threshold = 5
-  }
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                   "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                   "Debut de recherche"    = "#searchintervalstarttimeutc"
+                   "Fin de recherche"      = "#searchintervalendtimeutc"
+                   "Lien vers la requête"  = "#linktosearchresults"
+                   "Nombre d'erreurs"      = "#searchresultcount"
+                   Procédure               = "PRC_GTC_001"
+                   "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Context] Problème de recuperations des messages"
+        }
+  
   "rule12" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Erreur de recuperation des Mesures sur le datalake"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Pas de mesures recupérés depuis le datalake pour les dernières quatres heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
+    query             = "traces | where message contains \"GTC_SBT_DatalakeMeasurementTopicSubscriber\" and message contains \"START\""
+    frequency         = 240
+    time_window       = 240
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Datalake] Problème de recuperations des mesures"
+        }
+  
   "rule13" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Erreur de recuperation des événements sur le datalake" 
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Pas d'événements recupérés depuis le datalake pour les dernières quatres heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
+    query             = "traces | where message contains \"GTC_SBT_DatalakeEventTopicSubscriber\" and message contains \"START\""
+    frequency         = 240
+    time_window       = 240
+    severity          = 2
     trigger_operator  = "GreaterThan"
     trigger_threshold = 5
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+  email_subject          = "[GTC Alert] [Datalake] Problème de recuperations des événements"
   }
   "rule14" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Erreur reliée à la RabbitMQ"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Des erreurs reliées à la RabbitMQ ont été remontées pendant les cinq dernières minutes."
     enabled           = true
-    query             = "test"
+    query             = "exceptions | where problemId == \"RabbitMQ\""
     frequency         = 5
     time_window       = 5
-    severity          = 4
+    severity          = 2
     trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [RabbitMQ] Erreur reliée à la RabbitMQ"
+
   }
   "rule15" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "GTC Exception"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Une exception est levée par la GTC"
     enabled           = true
-    query             = "test"
-    frequency         = 5
+    query                   = <<-EOT
+          exceptions
+          | project timestamp , operation_Id , operation_Name , problemId , outerType , outerMessage , outerMethod , details
+          | join kind= inner (
+             traces
+             | project operation_Id , message , customDimensions
+          ) on operation_Id
+          | where problemId !contains "System.Net.Sockets.SocketException" and problemId !contains "GTC.Adapters.Circutor.Services.CircutorHttpHandler+<SendAsync>" and operation_Name !contains "TravelTimes"
+        EOT
+    frequency         = 15
     time_window       = 5
     severity          = 4
     trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    trigger_threshold = 0
+    custom_webhook_payload = jsonencode(
+                {
+                  "Cas de déclenchement"  = "une exception a été levée par la GTC"
+                  "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  "Fin de recherche"      = "#searchintervalendtimeutc"
+                  "Lien vers la requête"  = "#linktosearchresults"
+                  "Nombre d'erreurs"      = "#searchresultcount"
+                  Procédure               = "PRC_GTC_001"
+                  "Titre Alerte"          = "Exception GTC"
+                }
+            )
+           email_subject          = "[GTC Alert] PRC_GTC_001 | Exception GTC"
+    tags                    = {}
+    throttling              = 0 
+
   }
   "rule16" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetSensors"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetSensors ne s'est pas déclenchée pour le jour précédent."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"LCR_ORC_GetSensors\" and message contains \"Succeeded\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+      throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                  "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                  "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  "Fin de recherche"      = "#searchintervalendtimeutc"
+                  "Lien vers la requête"  = "#linktosearchresults"
+                  "Nombre d'erreurs"      = "#searchresultcount"
+                  Procédure               = "PRC_GTC_001"
+                  "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+          email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetSensors"
+
   }
   "rule17" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetTraffiCDensity"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetTraffiCDensity ne s'est pas déclenchée pendant les dix dernières minutes."
     enabled           = true
-    query             = "test"
+    query             = "traces | where operation_Name == \"LCR_ORC_TrafficDensity\" and message contains \"Succeeded\""
     frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    time_window       = 10
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                "Debut de recherche"    = "#searchintervalstarttimeutc"
+                "Fin de recherche"      = "#searchintervalendtimeutc"
+                "Lien vers la requête"  = "#linktosearchresults"
+                "Nombre d'erreurs"      = "#searchresultcount"
+                Procédure               = "PRC_GTC_001"
+                "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetTraffiCDensity"
+
   }
   "rule18" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetTraffiCDensityLevel"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetTraffiCDensityLevel ne s'est pas déclenchée pendant la dernière demi-heure."
     enabled           = true
-    query             = "test"
+    query             = "traces | where operation_Name == \"LCR_ORC_TrafficDensityLevel\" and message contains \"Succeeded\""
     frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    time_window       = 30
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                "Debut de recherche"    = "#searchintervalstarttimeutc"
+                "Fin de recherche"      = "#searchintervalendtimeutc"
+                "Lien vers la requête"  = "#linktosearchresults"
+                "Nombre d'erreurs"      = "#searchresultcount"
+                Procédure               = "PRC_GTC_001"
+                "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetTraffiCDensityLevel"
+
   }
   "rule19" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetTravelTimes"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetTravelTimes ne s'est pas déclenchée pendant les dix dernières minutes."
     enabled           = true
-    query             = "test"
+    query             = "traces | where operation_Name == \"LCR_ORC_TravelTimes\" and message contains \"Succeeded\""
     frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    time_window       = 10
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                "Debut de recherche"    = "#searchintervalstarttimeutc"
+                "Fin de recherche"      = "#searchintervalendtimeutc"
+                "Lien vers la requête"  = "#linktosearchresults"
+                "Nombre d'erreurs"      = "#searchresultcount"
+                Procédure               = "PRC_GTC_001"
+                "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetTravelTimes"
+
   }
   "rule20" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetWays"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetWays ne s'est pas déclenchée pour le jour précédent."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"LCR_ORC_GetWays\" and message contains \"Succeeded\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetWays"
+
   }
   "rule21" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Muse Envoie de mesures Burning Hours vers endpoint AddValues"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint AddValues pour la transmission de mesures Burning hours n`a pas été appelé dans la dernière heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_MeasurementTopicSubscriber\" and message contains \"Measures to be sent\" and message contains '\"Burning Hours\"'"
+    frequency         = 60
+    time_window       = 120
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Muse] [BurningHours-AddValues] Problème d`envoie des mesures"
+
   }
   "rule22" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Muse Envoie de mesures Energy vers endpoint AddValues"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint AddValues pour la transmission de mesures Energie n`a pas été appelé dans la dernière demi-heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_MeasurementTopicSubscriber\" and message contains \"Measures to be sent\" and message contains '\"Energy\"'"
+    frequency         = 60
+    time_window       = 120
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Muse] [Energy-AddValues] Problème d`envoie des mesures"
+
   }
   "rule23" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = [] 
+    name              = "Muse Envoie des évènements de Circutor vers endpoint SendImmediateEvent"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint SendImmediateEvent pour la transmission d'évènements de Circutor n`a pas été appelé dans les dernières trois heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_EventTopicSubscriber\" and message !contains \"SendImmediateEventsForFaults\" and message contains \" Response received from Muse after sendImmediateEvent\""
+    frequency         = 180
+    time_window       = 180
+    severity          = 2
+    tags                    = {}
+    throttling              = 0
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Muse] [Circutor-SendImmediateEvents] Problème d`envoie des événements"
+
   }
   "rule24" = {
+    authorized_resource_ids = []
     name              = "SequencedStartStop_Parent"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint SendImmediateEvent pour la transmission de fautes n`a pas été appelé dans les dernières trois heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_EventTopicSubscriber\" and message contains \"SendImmediateEventsForFaults\" and message contains \" Response received from Muse after sendImmediateEvent\""
+    frequency         = 180
+    time_window       = 180
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Muse] [Fautes-SendImmediateEvents] Problème d`envoie des événements"
+
   }
   "rule25" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Muse Envoie des évènements de SwitchingPoint vers endpoint AddLightStates"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint AddLightStates pour la transmission des evennemments SwitchingPoint n`a pas été appelé dans le dernier jour."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_EventTopicSubscriber\" and message contains \"AddLightStatesValue Result\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    tags                    = {}
+    throttling              = 0
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+     email_subject          = "[GTC Alert] [Muse] [SwitchingPoint-AddLightStates] Problème d`envoie des événements"
   }
   "rule26" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "MUSE Erreur déclenchement de requête ODataPatrimoine"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête ODataPatrimoine ne s'est pas déclenchée pour les 2 dernières heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"MUS_ORC_ODataPatrimoineAssetPuller\" and message contains \"Succeeded\""
+    frequency         = 60
+    time_window       = 120
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+      throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                  "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                  "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  "Fin de recherche"      = "#searchintervalendtimeutc"
+                  "Lien vers la requête"  = "#linktosearchresults"
+                  "Nombre d'erreurs"      = "#searchresultcount"
+                  Procédure               = "PRC_GTC_001"
+                  "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [MUSE] Problème de déclenchement puller ODataPatrimoine"
   }
   "rule27" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "MUSE Erreur HTTP"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/mail_exploitation"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Erreur HTTP lors de l'envoi de données dans MUSE"
+    enabled           = false
+    query                   = <<-EOT
+          traces
+          | where operation_Name contains "MUS_CTX_HTTP"
+          | project timestamp, operation_Id, message, severityLevel, customDimensions, operation_Name, appName
+          | join kind= inner ( dependencies
+          | project operation_Id, target, name, success, resultCode
+          | where target contains "citegestion.fr" and success == false ) on operation_Id
+        EOT
     frequency         = 5
     time_window       = 5
     severity          = 4
     trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    trigger_threshold = 0
+    tags                    = {}
+      throttling              = 0
+      custom_webhook_payload = jsonencode(
+                {
+                  "Cas de déclenchement"  = "Erreur HTTP lors de l'envoi de données dans MUSE"
+                  "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  "Fin de recherche"      = "#searchintervalendtimeutc"
+                  "Lien vers la requête"  = "#linktosearchresults"
+                  "Nombre d'erreurs"      = "#searchresultcount"
+                  Procédure               = "PRC_GTC_001"
+                  "Titre Alerte"          = "Erreur HTTP MUSE"
+                }
+            )
+    email_subject          = "[GTC Alert] PRC_GTC_001 | Erreur dans la transmission d'information à MUSE"
   }
   "rule28" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Muse Publications de mesures Circutor sur le RabbitMQ"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint AddValues pour la transmission de mesures Circutor n`a pas été appelé dans la dernière demi-heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
+    query             = "traces | where message contains \"MUS_SBT_MeasurementTopicSubscriber\" and message contains \"Publish\" and message contains '\"Circutor\"'"
+    frequency         = 10
+    time_window       = 30
+    severity          = 2
     trigger_operator  = "GreaterThan"
     trigger_threshold = 5
+    tags = {
+    }
+    throttling = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [Muse] [Circutor-AddValues] Problème de publications des mesures"
   }
   "rule29" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Muse Publications de mesures Passages sur le RabbitMQ"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Les mesures Passages n`ont pas été publiées sur le RabbitMQ pour pour le dernier jour."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_MeasurementTopicSubscriber\" and message contains \"Publish\" and message contains '\"Passage\"'"
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    tags                    = {}
+     throttling              = 0
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [Muse] [Passages-RabbitMQ] Problème de publications des mesures"
   }
   "rule30" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Muse Publications de mesures TrafficDensityLevel sur le RabbitMQ"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Les mesures TrafficDensityLevel n`ont pas été publiées sur le RabbitMQ pour la dernière demi-heure."
     enabled           = true
     query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    frequency         = 30
+    time_window       = 30
+    severity          = 2
+    tags                    = {}
+    throttling              = 0 
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [Muse] [TrafficDensityLevel-RabbitMQ] Problème de publications des mesures"
   }
-  "rule31" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
+  "rule31" = {}
   "rule32" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "ReverberiTraffic Endpoint passage pas appeler par le terrain"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/ctgweprdrsg-gtc/providers/microsoft.insights/actiongroups/mail_support_l2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint passage n`a pas été convoqué pour le  jour précédent"
     enabled           = true
     query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    query                   = <<-EOT
+         traces
+         | where message contains "RVB_ORC_Passages"
+         and message contains "Succeeded"
+        EOT
+        tags                    = {}
+     throttling              = 0
+      custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "L`endpoint passage n`a pas été convoqué pour le  jour précédent"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Pas d`appel de l`endpoint passage"
+                }
+            )
+            email_subject          = "[GTC Alert [ReverberiTraffic] Endpoint passage pas appeler par le terrain"
   }
 }
 
@@ -1351,9 +1852,9 @@ servers = {
 CTGWEPRDHAP001 = {
     vm_type               = "linux"
     location              = "West Europe"
-    resource_group_name   = "ctgweprdrsg-arc"
+    resource_group_name   = "CTGWEPRDRSG-HAP"
     vm_size               = "Standard_D16ds_v4"
-    admin_username        = "CTGADMAZ"
+    admin_username        = "ctgadmaz"
     admin_password        = "Password1234A!"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
     availability_set_name = "CTGWEPRDAVS-ARC"
@@ -1361,25 +1862,35 @@ CTGWEPRDHAP001 = {
     network_interface_id  = "CTGWEPRDMAP001-nic"
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "test"
+    vtpm_enabled                                           = false
+    disable_password_authentication                        = false
+    network_interface_ids                                  = [
+           "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-HAP/providers/Microsoft.Network/networkInterfaces/CTGWEPRDHAP001VMNic",
+        ]
+    os_disk {
+           disk_size_gb              = 32
+           name                      = "CTGWEPRDHAP001-OSDisk"
+           storage_account_type      = "Premium_LRS"
+        }
     linux_image_reference = {
       publisher = "RedHat"
       offer     = "RHEL"
       sku       = "8"
       version   = "latest"
     }
-    tags = {
-      "Application" = "MUSE GMAO"
-      "Platform"    = "Production"
-      "Responsible" = "CTG"
-      "Role"        = "GMAO"
-      "Usage"       = "PRD"
-    }
+   source_image_reference {
+           offer     = "0001-com-ubuntu-server-focal"
+           publisher = "Canonical"
+           sku       = "20_04-lts-gen2"
+        }
+
   }
-  CTGWEPRDHAP002 = { vm_type = "linux"
+  CTGWEPRDHAP002 = { 
+    vm_type = "linux"
     location              = "West Europe"
     resource_group_name   = "ctgweprdrsg-arc"
     vm_size               = "Standard_D16ds_v4"
-    admin_username        = "CTGADMAZ"
+    admin_username        = "ctgadmaz"
     admin_password        = "Password1234A!"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
     availability_set_name = "CTGWEPRDAVS-ARC"
@@ -1387,19 +1898,30 @@ CTGWEPRDHAP001 = {
     network_interface_id  = "CTGWEPRDMAP001-nic"
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "test"
+    disable_password_authentication                        = false
+    vtpm_enabled                                           = false
+
+    network_interface_ids                                  = [
+           "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-HAP/providers/Microsoft.Network/networkInterfaces/CTGWEPRDHAP002VMNic",
+        ]
+    os_disk {
+          ~ disk_size_gb              = 32
+          ~ name                      = "CTGWEPRDHAP002-OSDisk"
+          ~ storage_account_type      = "Premium_LRS"
+        }
+    source_image_reference {
+          ~ offer     = "0001-com-ubuntu-server-focal" 
+          ~ publisher = "Canonical"
+          ~ sku       = "20_04-lts-gen2"
+        }
+
     linux_image_reference = {
       publisher = "RedHat"
       offer     = "RHEL"
       sku       = "8"
       version   = "latest"
     }
-    tags = {
-      "Application" = "MUSE GMAO"
-      "Platform"    = "Production"
-      "Responsible" = "CTG"
-      "Role"        = "GMAO"
-      "Usage"       = "PRD"
-    }
+
   }
 
 ################################################################################
@@ -1556,10 +2078,13 @@ CTGWEPRDHAP001 = {
   #   }
   # }
   
-  CTGWEPRDLOG001 = { vm_type = "linux"
+  CTGWEPRDLOG001 = { 
+    vm_type = "linux"
+    disable_password_authentication                        = false
+    availability_set_id                                    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-LOG/providers/Microsoft.Compute/availabilitySets/CTGWEPRDAVS-LOG"
     location              = "West Europe"
-    resource_group_name   = "ctgweprdrsg-arc"
-    vm_size               = "Standard_D16ds_v4"
+    resource_group_name   = "CTGWEPRDRSG-LOG"
+    vm_size               = "Standard_B2ms"
     admin_username        = "CTGADMAZ"
     admin_password        = "Password1234A!"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
@@ -1568,19 +2093,28 @@ CTGWEPRDHAP001 = {
     network_interface_id  = "CTGWEPRDMAP001-nic"
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "test"
+    vtpm_enabled                                           = false
     linux_image_reference = {
       publisher = "RedHat"
       offer     = "RHEL"
       sku       = "8"
       version   = "latest"
     }
+    network_interface_ids                                  = [
+          "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-LOG/providers/Microsoft.Network/networkInterfaces/CTGWEPRDLOG001-nic",
+        ]
     tags = {
-      "Application" = "MUSE GMAO"
       "Platform"    = "Production"
       "Responsible" = "CTG"
       "Role"        = "GMAO"
       "Usage"       = "PRD"
     }
+           source_image_reference {
+           offer     = "0001-com-ubuntu-server-focal-daily" 
+           publisher = "Canonical"
+           sku       = "20_04-daily-lts-gen2"
+           version   = "20.04.202110010"
+        }
   }
 
   "CTGWEPRDMAP001" = {
@@ -1743,9 +2277,11 @@ CTGWEPRDHAP001 = {
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "CTGWEPRDMAP007-OSDisk"
     disk_size_gb          = 127
+    vtpm_enabled                                           = false
+    private_ip_address                                     = "10.0.10.34"
     winrm_listener = [
       {
-        protocol        = "Http"
+        protocol        = "http"
         certificate_url = null
       }
     ]
@@ -1762,7 +2298,8 @@ CTGWEPRDHAP001 = {
       "Role"        = "GMAO"
       "Usage"       = "PRD"
   } }
-  CTGWEPRDMAP008 = { vm_type = "windows"
+  CTGWEPRDMAP008 = { 
+    vm_type = "windows"
     location              = "West Europe"
     resource_group_name   = "CTGWEPRDRSG-MAP04"
     vm_size               = "Standard_D8ds_v4"
@@ -1773,9 +2310,11 @@ CTGWEPRDHAP001 = {
     network_interface_id  = "CTGWEPRDMAP008-nic"
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "CTGWEPRDMAP008-OSDisk"
+     vtpm_enabled                                           = false
+    private_ip_address                                     = "10.0.10.35"
     winrm_listener = [
       {
-        protocol        = "Http"
+        protocol        = "http"
         certificate_url = null
       }
     ]
@@ -1889,6 +2428,7 @@ CTGWEPRDHAP001 = {
       "Usage"       = "PRD"
   } }
   CTGWEPRDMYS001 = { 
+    disable_password_authentication                        = false
     vm_type = "linux"
     location              = "West Europe"
     resource_group_name   = "CTGWEPRDRSG-MYS"
@@ -1901,24 +2441,31 @@ CTGWEPRDHAP001 = {
     patch_assessment_mode = "AutomaticByPlatform"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
     os_disk_name          = "test"
+    vtpm_enabled                                           = false
+    private_ip_address                                     = "10.0.11.51"
     linux_image_reference = {
       publisher = "RedHat"
       offer     = "RHEL"
       sku       = "7.6"
       version   = "latest"
     }
+    network_interface_ids                                  = [
+          "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-MYS/providers/Microsoft.Network/networkInterfaces/CTGWEPRDMYS001-nic",
+        ]
     tags = {
-      "Application" = "MUSE GMAO"
       "Platform"    = "Production"
       "Responsible" = "CTG"
-      "Role"        = "GMAO"
+      "Role"        = "Monitoring"
       "Usage"       = "PRD"
   } 
   }
-  CTGWEPRDRMQ001 = { vm_type = "linux"
+  CTGWEPRDRMQ001 = {
+    vtpm_enabled                                           = false 
+    private_ip_address                                     = "10.0.10.71"
+    vm_type = "linux"
     location              = "West Europe"
     resource_group_name   = "CTGWEPRDRSG-RMQ"
-    vm_size               = "Standard_D16ds_v4"
+    vm_size               = "Standard_B2ms"
     admin_username        = "CTGADMAZ"
     admin_password        = "Password1234A!"
     availability_set_name = "CTGWEPRDAVS-RMQ"
@@ -1927,22 +2474,30 @@ CTGWEPRDHAP001 = {
     patch_assessment_mode = "AutomaticByPlatform"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
     os_disk_name          = "CTGWEPRDRMQ001-OSDisk"
+    disable_password_authentication                        = false
     linux_image_reference = {
       publisher = "RedHat"
       offer     = "RHEL"
       sku       = "8"
       version   = "latest"
     }
+    network_interface_ids                                  = [
+          "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-RMQ/providers/Microsoft.Network/networkInterfaces/CTGWEPRDRMQ001-nic",
+        ]
     tags = {
       "Platform"    = "Production"
       "Responsible" = "CTG"
       "Role"        = "Broker"
       "Usage"       = "PRD"
   } }
-  CTGWEPRDRMQ002 = { vm_type = "linux"
+  CTGWEPRDRMQ002 = { 
+    vtpm_enabled                                           = false
+    private_ip_address                                     = "10.0.10.72"
+    disable_password_authentication                        = false
+    vm_type = "linux"
     location              = "West Europe"
     resource_group_name   = "CTGWEPRDRSG-RMQ"
-    vm_size               = "Standard_D16ds_v4"
+    vm_size               = "Standard_B2ms"
     admin_username        = "CTGADMAZ"
     admin_password        = "Password1234A!"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
@@ -1958,10 +2513,9 @@ CTGWEPRDHAP001 = {
       version   = "latest"
     }
     tags = {
-      "Application" = "MUSE GMAO"
       "Platform"    = "Production"
       "Responsible" = "CTG"
-      "Role"        = "GMAO"
+      "Role"        = "Broker"
       "Usage"       = "PRD"
   } }
   CTGWEPRDSBS001 = { vm_type = "windows"
@@ -4482,6 +5036,20 @@ lb = {
     private_ip_address_allocation = "Static"
     load_balancer_rules           = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-ARC/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-ARC/frontendIPConfigurations/lb-IP"
     subnet_id                     = ""
+    frontend_ip_configuration {
+         id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL/providers/Microsoft.Network/loadBalancers/CTGWEPRDSQL-LB/frontendIPConfigurations/WSFCEndPoint"
+         inbound_nat_rules             = []
+         load_balancer_rules           = [
+             "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL/providers/Microsoft.Network/loadBalancers/CTGWEPRDSQL-LB/loadBalancingRules/WSFCEndPoint",
+            ]
+         name                          = "WSFCEndPoint"
+         outbound_rules                = []
+         private_ip_address            = "10.0.11.30"
+         private_ip_address_allocation = "Static"
+         private_ip_address_version    = "IPv4"
+         subnet_id                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Network/providers/Microsoft.Network/virtualNetworks/CTGWEPRDVNT001/subnets/CTGWEPRDSNT011-PRD_Data"
+         zones                         = []
+        }
     tags = {
       "Platform"    = "Production"
       "Responsible" = "CTG"
@@ -4496,6 +5064,21 @@ lb = {
     private_ip_address_allocation = "Static"
     load_balancer_rules           = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-ARC/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-ARC/frontendIPConfigurations/lb-IP"
     subnet_id                     = ""
+    frontend_ip_configuration {
+          id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL02/frontendIPConfigurations/WSFCEndPoint"
+          inbound_nat_rules             = []
+          load_balancer_rules           = [
+              "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL02/loadBalancingRules/DCM",
+              "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL02/loadBalancingRules/WSFCEndPoint",
+            ]
+          name                          = "WSFCEndPoint"
+          outbound_rules                = []
+          private_ip_address            = "10.0.11.32"
+          private_ip_address_allocation = "Static"
+          private_ip_address_version    = "IPv4"
+          subnet_id                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Network/providers/Microsoft.Network/virtualNetworks/CTGWEPRDVNT001/subnets/CTGWEPRDSNT011-PRD_Data"
+          zones                         = []
+        }
     tags = {
       "Platform"    = "Production"
       "Responsible" = "CTG"
@@ -4505,11 +5088,26 @@ lb = {
   CTGWEPRDILB-SQL03 = { lb_name = "CTGWEPRDILB-SQL03"
     location                      = "westeurope"
     resource_group                = "CTGWEPRDRSG-SQL03"
-    private_ip_address            = "10.0.10.100"
+    private_ip_address            = "10.0.11.35"
     private_ip_address_allocation = "Static"
     name                          = "SQLAlwaysOnEndPointListener"
     load_balancer_rules           = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-ARC/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-ARC/frontendIPConfigurations/lb-IP"
     subnet_id                     = ""
+    frontend_ip_configuration {
+         id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL03/frontendIPConfigurations/WSFCEndPoint"
+         inbound_nat_rules             = []
+         load_balancer_rules           = [
+             "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL03/loadBalancingRules/DCM",
+             "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL03/loadBalancingRules/WSFCEndPoint",
+            ]
+         name                          = "WSFCEndPoint"
+         outbound_rules                = []
+         private_ip_address            = "10.0.11.34"
+         private_ip_address_allocation = "Static"
+         private_ip_address_version    = "IPv4"
+         subnet_id                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Network/providers/Microsoft.Network/virtualNetworks/CTGWEPRDVNT001/subnets/CTGWEPRDSNT011-PRD_Data"
+         zones                         = []
+        }
     tags = {
       "Platform"    = "Production"
       "Responsible" = "CTG"
@@ -4542,270 +5140,848 @@ function_apps = {
   "app1" = {
     
   function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+    "AdapterId"                      = "RVB_Luwa_1"
+    "ContextEventHubMaxBatchSize"    = "200"
+    "DatalakeEventHubMaxBatchSize"   = "200"
+    "ExponentialBackOff"             = "2"
+    "ExponentialOffset"              = "0"
+    "MeasurementPublishMaxBatchSize" = "32"
+    "RetryCount"                     = "3"
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
+       "KeyVaultUri"                    = "https://CTGWEPRDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+           {
+               password = "jhhTrEpdMTlCQQTZAtsY84Qulwdm0NLCGwRNGtKCLNQm433PYmEf7jXG1jHq"
+               username = "$CTGWEPRDAZFGTCREVERBERI"
+            },
+        ]
+  auth_settings {
+        additional_login_params        = {}
+        allowed_external_redirect_urls = []
+        enabled                        = false
+        token_refresh_extension_hours  = 0
+        token_store_enabled            = false
+        }
+  source_control {
+           branch             = "main"
+           manual_integration = false
+           rollback_enabled   = false
+           use_mercurial      = false
+        }
   }
 
   "app2" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCCONTEXT"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
+  tags                            = {
+           "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+           "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+           "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+        }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
-
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+    "AckTopicContextSubscriber"                                = "gtc_context"
+    "AckTopicName"                                             = "sbt_acknowledgement_message"
+    "AssetSyncEventHubMaxBatchSize"                            = "200"
+    "AzureWebJobs.GTC_SBT_AckTopicSubscriber.Disabled"         = "0"
+    "AzureWebJobs.GTC_SBT_EventTopicSubscriber.Disabled"       = "0"
+    "AzureWebJobs.GTC_SBT_MeasurementTopicSubscriber.Disabled" = "0"
+    "ConnectTimeOut"                                           = "120"
+    "CounterpartApplicationBatchSize"                          = "10"
+    "CounterpartBatchSize"                                     = "10"
+    "DbServiceKey"                                             = "R9jTTtr5Q4oKZMQ3wBGHLGVKr7dPZ7IHSD2XcyN5g8en5T7ZUHM8OQ=="
+    "DbServiceUrl"                                             = "https://CTGWEPRDAZFGTCDBSERVICE.azurewebsites.net"
+    "DelayToPublishGroupCommandToProviderInSeconds"            = "5"
+    "EnableSaveEventInDatabase"                                = "false"
+    "EnableSaveMeasurementInDatabase"                          = "false"
+    "EquipmentBatchSize"                                       = "750"
+    "EquipmentCollectionBatchSize"                             = "10"
+    "EquipmentTypeBatchSize"                                   = "10"
+    "EventCollectionBatchSize"                                 = "10"
+    "EventHubConnectionString"                                 = "Endpoint=sb://ctgweprdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bS7dggoGnnWFCWvN9NBB/7bv6cmsG6hajSC7Rv6+uRw=;TransportType=AmqpWebSockets"
+    "EventTopicContextSubscriber"                              = "gtc_context"
+    "EventTopicName"                                           = "sbt_event_message"
+    "GroupTopicContextSubscriber"                              = "gtc_context"
+    "GroupTopicName"                                           = "sbt_group_message"
+    "KeyVaultUri"                                              = "https://CTGWEPRDKEYGTC.vault.azure.net/"
+    "ListEquipmentTypeToSync"                                  = "Luminaire;StreetLight;Way;EDSEMBEDDED;CVME3MINI"
+    "MeasurementCollectionBatchSize"                           = "10"
+    "MeasurementTopicContextSubscriber"                        = "gtc_context"
+    "MeasurementTopicMuseSubscriber"                           = "adapter_mus_luwa_1"
+    "MeasurementTopicName"                                     = "sbt_measurement_message"
+    "ServiceBusConnectionString"                               = "Endpoint=sb://ctgweprdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0DohNfrAlShq9Yb0mEDUQGE52r7MqXnrreM2L9xC0HE=;TransportType=AmqpWebSockets"
+    "TranscodeEventHubMaxBatchSize"                            = "200"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+    {
+        password = "zv1vGDxMF4EZYxxWCTemJwnrLDENXGdk4RfToFCWp6nQjbu3dRrfBJgtjQYz"
+        username = "$CTGWEPRDAZFGTCCONTEXT"
+            },
+  ]
+  auth_settings {
+    additional_login_params        = {}
+    allowed_external_redirect_urls = []
+    enabled                        = false
+    token_refresh_extension_hours  = 0
+    token_store_enabled            = false
+        }
+  source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
   }
 
   "app3" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFMUSEAPI"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
+  tags                            = {
+           "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+           "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+           "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+        }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
-
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+    "AdapterId"                      = "MUS_LuwaApi_1"
+    "AzureWebJobsSecretStorageType"  = "Files"
+    "KeyVaultUri"                    = "https://CTGWEPRDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+        {
+            password = "q7Qp3x9BoJ3RMN4ZnusAfDN4P5tw1rexij15tuM1qqaq4CdpWzljcMrWddnL"
+            username = "$CTGWEPRDAZFMUSEAPI"
+            },
+        ]
+  auth_settings {
+        additional_login_params        = {}
+        allowed_external_redirect_urls = []
+        enabled                        = false
+        token_refresh_extension_hours  = 0
+        token_store_enabled            = false
+        }
+  source_control {
+        branch             = "main"
+        manual_integration = false
+        rollback_enabled   = false
+        use_mercurial      = false
+        }
   }
 
   "app4" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCADAPTERCTTLUWA1"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
+  tags                            = {
+           "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+           "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+           "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC" 
+        }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
-
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
+          "APPINSIGHTS_INSTRUMENTATIONKEY"                                         = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+        "AdapterId"                                                              = "CTT_Luwa_1"
+        "AssetLinkGroupUrl"                                                      = "https://ws.citytouch.com"
+        "AssetStreamApiUrl"                                                      = "https://ws.citytouch.com"
+        "AssetStreamTimeOut_Minutes"                                             = "45"
+        "AzureWebJobs.CTT_SBT_CalendarAssignmentCommandTopicSubscriber.Disabled" = "0"
+        "AzureWebJobs.CTT_SBT_CommandTopicSubscriber.Disabled"                   = "0"
+        "AzureWebJobs.CTT_SBT_CommissioningMessageSubscriber.Disabled"           = "0"
+        "AzureWebJobs.CTT_SBT_DimmingCommandTopicSubscriber.Disabled"            = "0"
+        "AzureWebJobs.CTT_SBT_ResumeCommandTopicSubscriber.Disabled"             = "0"
+        "AzureWebJobs.CTT_SBT_RtpCommandTopicSubscriber.Disabled"                = "0"
+        "AzureWebJobs.CTT_SBT_RtpQueueSubscriber.Disabled"                       = "0"
+        "AzureWebJobs.CTT_SBT_SyncMessageTopicSubscriber.Disabled"               = "0"
+        "BatchSizeForSwitchingPoint"                                             = "100"
+        "CTTGroupBatchSize"                                                      = "250"
+        "CityTouchAuthenticationUrl"                                             = "https://account.identity.lighting.philips.com"
+        "CityTouchSiteId"                                                        = "c830a29e-00d9-4f22-892c-103e4a01a741"
+        "CommandTopicName"                                                       = "sbt_command_message"
+        "CommissioningTopicName"                                                 = "sbt_commissioning_message"
+        "CommissioningTopicSubscriber"                                           = "adapter_ctt_luwa_1_commissioning"
+        "ContextEventHubMaxBatchSize"                                            = "200"
+        "ContinuousRetrieval"                                                    = "true"
+        "ControllinkApiUrl"                                                      = "https://ws.citytouch.com"
+        "CttCommandTopicSubscriberName"                                          = "adapter_ctt_luwa_1_group"
+        "CttLuwa1DimmingCommandTopicSubscriber"                                  = "adapter_ctt_luwa_1_dimming"
+        "CttLuwa1ResumeCommandTopicSubscriber"                                   = "adapter_ctt_luwa_1_resume"
+        "CttLuwa1RtpCommandTopicSubscriber"                                      = "adapter_ctt_luwa_1_refresh"
+        "CttLuwa1SyncTopicName"                                                  = "sbt_ctt_luwa_1_sync_message"
+        "CttLuwa1TopicSubscriber"                                                = "adapter_ctt_luwa_1"
+        "CttTopicCalendarAssignmentCommandSubscriber"                            = "adapter_ctt_luwa_1_calendarassignment"
+        "DatalakeEventHubMaxBatchSize"                                           = "200"
+        "DbServiceKey"                                                           = "R9jTTtr5Q4oKZMQ3wBGHLGVKr7dPZ7IHSD2XcyN5g8en5T7ZUHM8OQ=="
+        "DbServiceUrl"                                                           = "https://CTGWEPRDAZFGTCDBSERVICE.azurewebsites.net"
+        "DelayToRepublishToCommissioningTopicInMinutes"                          = "60"
+        "DisableSwitchingPointBatch"                                             = "true"
+        "Disable_AssetStream"                                                    = "false"
+        "Disable_EnergyStream"                                                   = "false"
+        "Disable_FaultLink"                                                      = "false"
+        "Disable_ScheduleCalculator"                                             = "true"
+        "Disable_SwitchingPointLink"                                             = "false"
+        "EnableEncodePublishAssets"                                              = "true"
+        "EnableEncodePublishBurningHours"                                        = "false"
+        "EnableEncodePublishSwitchingPoint"                                      = "true"
+        "EnableLuminaireIdUsageForCalendarAssignment"                            = "false"
+        "EnergyApiUrl"                                                           = "https://ws.citytouch.com"
+        "EnergyStreamCron"                                                       = "0 0 9,15 * * *"
+        "EnergyStreamTimeout_Minutes"                                            = "45"
+        "EquipmentBatchSize"                                                     = "750"
+        "ExponentialBackOff"                                                     = "2"
+        "ExponentialOffset"                                                      = "0"
+        "FaultLinkCron"                                                          = "0 */5 0,1,2,3,4,5,6,7,8,9,17,18,19,20,21,22,23 * * *"
+        "FaultLinkStreamTimeout_Minutes"                                         = "45"
+        "FaultPublishMaxBatchSize"                                               = "32"
+        "KeyVaultUri"                                                            = "https://CTGWEPRDKEYGTC.vault.azure.net/"
+        "LinkApiUrl"                                                             = "https://ws.citytouch.com"
+        "ListEquipmentTypeToMap"                                                 = "ControlGear"
+        "MeasurementPublishMaxBatchSize"                                         = "200"
+        "RefreshMeasurementFilterList"                                           = "Requested Dimming Value,Actual Dimming Value,Energy Counter Value,Voltage,Current,Power,Power Factor"
+        "RetryCount"                                                             = "3"
+        "ServiceBusConnectionString"                                             = "Endpoint=sb://ctgweprdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0DohNfrAlShq9Yb0mEDUQGE52r7MqXnrreM2L9xC0HE=;TransportType=AmqpWebSockets"
+        "SwitchingPointCron"                                                     = "0 0 9,15 * * *"
+        "SwitchingPointEventPublishMaxBatchSize"                                 = "32"
+        "SwitchingPointTimeout_Minutes"                                          = "45"
+        "SwitchingPointlinkApiUrl"                                               = "https://ws.citytouch.com"
+        "streetLightToMapFlag"                                                   = "false"
   }
+  daily_memory_time_quota         = 0
+  auth_settings {
+        additional_login_params        = {}
+        allowed_external_redirect_urls = []
+        enabled                        = false
+        token_refresh_extension_hours  = 0
+        token_store_enabled            = false
+        }
+  source_control {
+        branch             = "main"
+        manual_integration = false
+        rollback_enabled   = false
+        use_mercurial      = false
+        }
   }
 
   "app5" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCAPI"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
+  tags                            = {
+          "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+          "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+          "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+        }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+       "AzureWebJobsSecretStorageType"  = "Files"
+       "APPINSIGHTS_INSTRUMENTATIONKEY" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+       "KeyVaultUri"                    = "https://CTGWEPRDKEYGTC.vault.azure.net/"
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+          {
+              password = "fKYqJX98K2LywMXvFbHEJ75jPbe4ecy2c0C3yxwBCTHRB4kR6RuZAx2LQwHe"
+              username = "$CTGWEPRDAZFGTCAPI"
+            },
+        ]
+  auth_settings {
+          additional_login_params        = {}
+          allowed_external_redirect_urls = []
+          enabled                        = false
+          token_refresh_extension_hours  = 0
+          token_store_enabled            = false
+        }
+  source_control {
+          branch             = "main"
+          manual_integration = false
+          rollback_enabled   = false
+          use_mercurial      = false
+        }
   }
 
   "app6" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCLACROIXBLUEVIA"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
+  tags                            = {
+          "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+          "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+          "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+        }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+          "APPINSIGHTS_INSTRUMENTATIONKEY"                           = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+          "AdapterId"                                                = "LCR_Luwa_1"
+          "AzureWebJobs.LCR_ORC_TravelTimes.Disabled"                = "0"
+          "AzureWebJobs.LCR_SBT_SyncMessageTopicSubscriber.Disabled" = "0"
+          "ContextEventHubMaxBatchSize"                              = "200"
+          "DatalakeEventHubMaxBatchSize"                             = "200"
+          "Disable_Sensor"                                           = "false"
+          "Disable_Tpi"                                              = "true"
+          "Disable_TrafficDensity"                                   = "false"
+          "Disable_TrafficDensityLevel"                              = "false"
+          "Disable_TravelTime"                                       = "false"
+          "Disable_Way"                                              = "false"
+          "EquipmentBatchSize"                                       = "750"
+          "ExponentialBackOff"                                       = "2"
+          "ExponentialOffset"                                        = "0"
+          "GetSensorTimeout_Minutes"                                 = "45"
+          "GetWaysTimeout_Minutes"                                   = "45"
+          "IndividualTravelTimesCron"                                = "0 0 0 * * *"
+           "KeyVaultUri"                                              = "https://CTGWEPRDKEYGTC.vault.azure.net/"
+          "LacroixUrl"                                               = "https://api.webvia.lx-connect.com"
+          "LcrWebvia1SyncTopicLcrSubscriber"                         = "adapter_lcr_luwa_1"
+          "LcrWebvia1SyncTopicName"                                  = "sbt_lcr_luwa_1_sync_message"
+          "ListEquipmentTypeToMap"                                   = ""
+          "MeasurementPublishMaxBatchSize"                           = "200"
+          "RetryCount"                                               = "3"
+          "SegmentProcessMaxBatchSize"                               = "50"
+          "ServiceBusConnectionString"                               = "Endpoint=sb://ctgweprdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0DohNfrAlShq9Yb0mEDUQGE52r7MqXnrreM2L9xC0HE=;TransportType=AmqpWebSockets"
+          "TrafficDensityCron"                                       = "0 * * * * *"
+          "TrafficDensityLevelCron"                                  = "0 */10 * * * *"
+          "TrafficDensityLevelTimeout_Minutes"                       = "45"
+          "TrafficDensityTimeout_Minutes"                            = "15"
+          "TravelTimesCron"                                          = "0 * * * * *"
+          "TravelTimesTimeout_Minutes"                               = "15"
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+          {
+              password = "7kbBapDTTzsnvYH6NivD2Xdck1fQfelJPnAYTaaY9ST1blcC8nKjRmhk27jp"
+              username = "$CTGWEPRDAZFGTCLACROIXBLUEVIA"
+            },
+        ]
+  auth_settings {
+          additional_login_params        = {}
+          allowed_external_redirect_urls = []
+          enabled                        = false
+          token_refresh_extension_hours  = 0
+          token_store_enabled            = false
+        }
+  source_control {
+          branch             = "main"
+          manual_integration = false
+          rollback_enabled   = false
+          use_mercurial      = false
+        }
   }
 
   "app7" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCASSETSYNC"
+  resource_group_name = "CTGWEPDRRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
+  tags                            = {
+         "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+         "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+         "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+        }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+           "APPINSIGHTS_INSTRUMENTATIONKEY" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+         "AdapterIds"                     = "ctt_luwa_1;cct_luwa_1;lcr_luwa_1"
+         "DbServiceKey"                   = "R9jTTtr5Q4oKZMQ3wBGHLGVKr7dPZ7IHSD2XcyN5g8en5T7ZUHM8OQ=="
+         "DbServiceUrl"                   = "https://CTGWEPRDAZFGTCDBSERVICE.azurewebsites.net"
+         "EventHubConnectionString"       = "Endpoint=sb://ctgweprdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bS7dggoGnnWFCWvN9NBB/7bv6cmsG6hajSC7Rv6+uRw=;TransportType=AmqpWebSockets"
+         "KeyVaultUri"                    = "https://CTGWEPRDKEYGTC.vault.azure.net/"
+         "SyncPublishMaxBatchSize"        = "32"
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
-  }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+         {
+             password = "npeZnN00xDktaPmeWMPBq0Qzjm4nHvP9PjWs0CWJkEex8CKPJkMdjw9kHFbt"
+             username = "$CTGWEPRDAZFGTCASSETSYNC"
+            },
+        ]
+  auth_settings {
+         additional_login_params        = {}
+         allowed_external_redirect_urls = []
+         enabled                        = false
+         token_refresh_extension_hours  = 0
+         token_store_enabled            = false
+        }
+  source_control {
+         branch             = "main"
+         manual_integration = false
+         rollback_enabled   = false
+         use_mercurial      = false
+        }
+
+}
 
   "app8" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCDATALAKESERVICE"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
+  tags                            = {
+         "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+         "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+         "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+        }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+        "APPINSIGHTS_INSTRUMENTATIONKEY"                                   = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+         "AzureWebJobs.GTC_SBT_DatalakeEventTopicSubscriber.Disabled"       = "0"
+         "AzureWebJobs.GTC_SBT_DatalakeMeasurementTopicSubscriber.Disabled" = "0"
+         "CommandLogLeaseTime"                                              = "30"
+         "CommandLogProtocolnRefreshInHours"                                = "12"
+         "CommandLogRetryLimit"                                             = "5"
+         "CommandLogTopicDatalakeSubscriber"                                = "gtc_datalake"
+         "CommandLogTopicName"                                              = "sbt_log_message"
+         "DbServiceKey"                                                     = "R9jTTtr5Q4oKZMQ3wBGHLGVKr7dPZ7IHSD2XcyN5g8en5T7ZUHM8OQ=="
+         "DbServiceUrl"                                                     = "https://ctgweprdazfgtcdbservice.azurewebsites.net"
+         "DelayToRepublishCommandLogMessageToDatalakeInSeconds"             = "60"
+         "DelayToRepublishToDatalake"                                       = "10"
+         "EventHubConnectionString"                                         = "Endpoint=sb://ctgweprdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bS7dggoGnnWFCWvN9NBB/7bv6cmsG6hajSC7Rv6+uRw=;TransportType=AmqpWebSockets"
+         "EventLeaseTime"                                                   = "15"
+         "EventTopicDatalakeSubscriber"                                     = "gtc_datalake"
+         "EventTopicName"                                                   = "sbt_event_message"
+         "KeyVaultUri"                                                      = "https://CTGWEPRDKEYGTC.vault.azure.net/"
+         "MeasurementLeaseTime"                                             = "15"
+         "MeasurementTopicDatalakeSubscriber"                               = "gtc_datalake"
+         "MeasurementTopicName"                                             = "sbt_measurement_message"
+         "RetryEventTopicDatalakeSubscriber"                                = "gtc_datalake"
+         "RetryEventTopicName"                                              = "sbt_retryevent_message"
+         "ServiceBusConnectionString"                                       = "Endpoint=sb://ctgweprdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0DohNfrAlShq9Yb0mEDUQGE52r7MqXnrreM2L9xC0HE=;TransportType=AmqpWebSockets"
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  source_control {
+         branch             = "main"
+         manual_integration = false
+         rollback_enabled   = false
+         use_mercurial      = false
+        }
+  auth_settings {
+         additional_login_params        = {}
+         allowed_external_redirect_urls = []
+         enabled                        = false
+         token_refresh_extension_hours  = 0
+         token_store_enabled            = false
+        }
+   daily_memory_time_quota         = 0
+  site_credential                 = [
+         {
+             password = "RZXeqJ178YsXQx1Jjpmmq0XyNTnxKhSAhnTidfXXrgobbGC1khb1Jw28cT2w"
+             username = "$CTGWEPRDAZFGTCDATALAKESERVICE"
+            },
+        ]
   }
-
   "app9" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCMUSE"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
+  tags                            = {
+         "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+         "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a" 
+         "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+        }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
-
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
+         "APPINSIGHTS_INSTRUMENTATIONKEY"                               = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+        "AckTopicMuseSubscriber"                                       = "adapter_mus_luwa_1"
+        "AckTopicName"                                                 = "sbt_acknowledgement_message"
+        "AdapterId"                                                    = "MUS_Luwa_1"
+        "AzureWebJobs.MUS_RMQ_CommissioningMessageSubscriber.Disabled" = "0"
+        "AzureWebJobs.MUS_SBT_AckTopicSubscriber.Disabled"             = "0"
+        "AzureWebJobs.MUS_SBT_EventTopicSubscriber.Disabled"           = "0"
+        "AzureWebJobs.MUS_SBT_MeasurementTopicSubscriber.Disabled"     = "0"
+        "CctCircutor1SyncTopicName"                                    = "sbt_cct_luwa_1_sync_message"
+        "ContextEventHubMaxBatchSize"                                  = "200"
+        "CttLuwa1SyncTopicName"                                        = "sbt_ctt_luwa_1_sync_message"
+        "DatalakeEventHubMaxBatchSize"                                 = "200"
+        "DbServiceKey"                                                 = "R9jTTtr5Q4oKZMQ3wBGHLGVKr7dPZ7IHSD2XcyN5g8en5T7ZUHM8OQ=="
+        "DbServiceUrl"                                                 = "https://CTGWEPRDAZFGTCDBSERVICE.azurewebsites.net"
+        "DeltaLightOff"                                                = "-15"
+        "DeltaLightOn"                                                 = "16"
+        "DisableMuseProcessMeasurementsBatch"                          = "false"
+        "Disable_FMEServiceFaultGrouping"                              = "true"
+        "Disable_OdataPatrimoinePuller"                                = "false"
+        "EnablePublishPassageMeasureToRabbit"                          = "false"
+        "EnablePublishTrafficDensityLevelMeasureToRabbit"              = "true"
+        "EnablePublishWrongWayEventToRabbit"                           = "true"
+        "EnablePublishWrongWayMeasureToRabbit"                         = "false"
+        "EquipmentMessageCron"                                         = "0 0 */1 * * *"
+        "EventTopicCircutorEventName"                                  = "sbt_event_circutorevents_message"
+        "EventTopicMuseSubscriber"                                     = "adapter_mus_luwa_1"
+        "EventTopicName"                                               = "sbt_event_message"
+        "EventTopicSwitchingPointName"                                 = "sbt_event_switchingpoints_message"
+        "EventTopicWrongWayName"                                       = "sbt_event_wrongways_message"
+        "ExponentialBackOff"                                           = "2"
+        "ExponentialOffset"                                            = "0"
+        "FMEServiceFaultFilterList"                                    = "HasNotCommunicatedSince,LampOutage"
+        "FaultBatchSize"                                               = "100"
+        "FaultRetryDelayInSeconds"                                     = "60"
+        "FaultRetryLimit"                                              = "3"
+        "FmeAuthBaseAddress"                                           = "https://fme2.citegestion.fr"
+        "FmeUserOrdersBaseAddress"                                     = "https://fme2.citegestion.fr"
+         "KeyVaultUri"                                                  = "https://CTGWEPRDKEYGTC.vault.azure.net/" 
+        "ListProtocolToMap"                                            = "Citytouch, circutor"
+        "MeasurementTopicMuseSubscriber"                               = "adapter_mus_luwa_1"
+        "MeasurementTopicName"                                         = "sbt_measurement_message"
+        "MuseCalendarAssignmentExchange"                               = "LUWA.PRD.V10.EXC.RMT.CMD"
+        "MuseCalendarAssignmentKey"                                    = "EVT.RMT.CMD_ASSIGN.SNT"
+        "MuseCalendarAssignmentType"                                   = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.GTC.RmtAssignCommandSent:Citegestion.MUSE.EventMessaging.Contracts"
+        "MuseCommissioningQueueName"                                   = "LUWA.PRD.POLLOW.V10.RMT.DEVICE.CHD"
+        "MuseDimmingExchange"                                          = "LUWA.PRD.V10.EXC.RMT.CMD"
+        "MuseDimmingKey"                                               = "EVT.RMT.CMD_DIMMING.SNT"
+        "MuseDimmingType"                                              = "Citegestion.MUSE.EventMessaging.Contracts.V10.RMT.RmtDimmingCommandSent:Citegestion.MUSE.EventMessaging.Contracts"
+        "MuseGmaoApiUri"                                               = "https://prod.musesoftware.citegestion.fr/LUWA/PRD/TlgGenerique"
+        "MuseGmaoGetElementTypesApiUrl"                                = "https://prod.musesoftware.citegestion.fr/LUWA/PRD"
+        "MuseGroupAcknowledgementExchange"                             = "LUWA.PRD.V10.EXC.GRP.CMD"
+        "MuseGroupAcknowledgementKey"                                  = "EVT.GRP.CMD.SNT"
+        "MuseGroupAcknowledgementType"                                 = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.GRP.GtcGroupAcknowledge:Citegestion.MUSE.EventMessaging.Contracts"
+        "MuseGroupContentChangeQueueName"                              = "LUWA.PRD.POLLOW.V10.GRP.GRP_ITM.UPD_LUWGTCPRD"
+        "MuseGroupCreationQueueName"                                   = "LUWA.PRD.POLLOW.V10.GRP.GRP.CRD_LUWGTCPRD"
+        "MuseGroupDeleteQueueName"                                     = "LUWA.PRD.POLLOW.V10.GRP.GRP.DLD_LUWGTCPRD"
+        "MuseGroupMessageBaseUri"                                      = "https://prod.musesoftware.citegestion.fr/pf/luwa/grp/api/v1/"
+        "MuseGroupMessageGrantType"                                    = "client_credentials"
+        "MuseGroupMessageScope"                                        = "api://05f98b1f-712f-4463-8f9e-0b1206490cf7/.default"
+        "MuseGroupMessageSysCode"                                      = "GTC"
+        "MuseGroupUpdateQueueName"                                     = "LUWA.PRD.POLLOW.V10.GRP.GRP.UPD_LUWGTCPRD"
+        "MuseMeasurePassageExchange"                                   = "LUWA.PRD.V10.EXC.SENSOR.EVENT"
+        "MuseMeasurePassageKey"                                        = "EVT.SENSOR.PASSAGEFLOW.MES"
+        "MuseMeasurePassageType"                                       = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.Sensor.PasssageFlowChanged:Citegestion.MUSE.EventMessaging.Contracts"
+        "MuseMeasureTrafficDensityLevelExchange"                       = "LUWA.PRD.V10.EXC.SENSOR.TRAFFICDENSITY"
+        "MuseMeasureTrafficDensityLevelKey"                            = "EVT.SENSOR.DENSITYLEVEL.MES"
+        "MuseMeasureTrafficDensityLevelType"                           = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.Sensor.TrafficDensityFlowChangeed:Citegestion.MUSE.EventMessaging.Contracts"
+        "MuseOAuthTokenUrl"                                            = "https://login.microsoftonline.com/56c66bcb-80c6-4246-a185-3e2c772359e2"
+        "MuseOdataAssetApiUrl"                                         = "https://prod.musesoftware.citegestion.fr/LUWA/PRD"
+        "MuseProcessMeasurementsBatchSize"                             = "100"
+        "MuseProcessMeasurementsBatchSizeForBlobStorage"               = "10"
+        "MuseProcessSwitchingPointEventsBatchSize"                     = "100"
+        "MuseProcessSwitchingPointEventsBatchSizeForBlobStorage"       = "100"
+        "MuseResumeExchange"                                           = "LUWA.PRD.V10.EXC.RMT.CMD"
+        "MuseResumeKey"                                                = "EVT.RMT.CMD_RESUME.SNT"
+        "MuseResumeType"                                               = "Citegestion.MUSE.EventMessaging.Contracts.V10.RMT.RmtResumeCommandSent:Citegestion.MUSE.EventMessaging.Contracts"
+        "MuseVendorsWithChildren"                                      = "signify"
+        "MuseWrongWayEventExchange"                                    = "LUWA.PRD.V10.EXC.SENSOR.EVENT"
+        "MuseWrongWayEventKey"                                         = "EVT.SENSOR.WRONGWAY.EVT"
+        "MuseWrongWayEventType"                                        = "Citegestion.MUSE.EventMessaging.Contracts.V10.CTG.Sensor.WrongWayDetected:Citegestion.MUSE.EventMessaging.Contracts"
+        "MuseWrongWayMeasureExchange"                                  = "musemeasureexchange"
+        "MuseWrongWayMeasureKey"                                       = "musemeasureexchange_key"
+        "MuseWrongWayMeasureType"                                      = "WrongWay"
+        "Muse_OdataAsset_MaxCount"                                     = "10000"
+        "Muse_OdataAsset_ToPaginate"                                   = "false"
+        "NumberOfMessagesToPublish"                                    = "1"
+        "Paginate"                                                     = "25"
+        "RabbitMqConnectionStr-Muse"                                   = "amqp://10.0.10.71:5671,amqp://10.0.10.72:5671"
+        "RetryCount"                                                   = "3"
+        "Server"                                                       = "Muse"
+        "ServiceBusConnectionString"                                   = "Endpoint=sb://ctgweprdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0DohNfrAlShq9Yb0mEDUQGE52r7MqXnrreM2L9xC0HE=;TransportType=AmqpWebSockets"
+        "TimeDifferenceToUTCInMinutes"                                 = "-120"
+        "UnavailibiltyWorkspaceId"                                     = "1916"
+        "VirtualHost-Muse"                                             = "/"
+        "duration"                                                     = "60"
+        "emailOptionId"                                                = "2"
+        "orderDate"                                                    = ""
+        "priorityId"                                                   = "1"
+        "wkParams"                                                     = "ID_DISTANT=ID_DISTANT_VALUE|TLG_EVENEMENT=TLG_EVENEMENT_VALUE"
+        "workspaceId"                                                  = "1851"
   }
+  site_credential                 = [
+         {
+             password = "XWFlE95W5oPsld14m495S1rtJQJDQtamxaYNRHK6FBF4K2qdDbeDeo87Bcr5"
+             username = "$CTGWEPRDAZFGTCMUSE"
+            },
+        ]
+  auth_settings {
+         additional_login_params        = {}
+         allowed_external_redirect_urls = []
+         enabled                        = false
+         token_refresh_extension_hours  = 0
+         token_store_enabled            = false
+        }
+  source_control {
+         branch             = "main"
+         manual_integration = false
+         rollback_enabled   = false
+         use_mercurial      = false
+        }
   }
 
   "app10" = {
     
   function_app_name = "CTGWEPPDAZFGTCAPI"
   resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
   tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+      "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+      "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a" 
+      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
   }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+    "AzureWebJobsSecretStorageType"  = "Files"
+    "DbServiceKey"                   = "R9jTTtr5Q4oKZMQ3wBGHLGVKr7dPZ7IHSD2XcyN5g8en5T7ZUHM8OQ=="
+    "DbServiceUrl"                   = "https://CTGWEPRDAZFGTCDBSERVICE.azurewebsites.net"
+    "EventHubConnectionString"       = "Endpoint=sb://ctgweprdevhgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bS7dggoGnnWFCWvN9NBB/7bv6cmsG6hajSC7Rv6+uRw=;TransportType=AmqpWebSockets"
+    "FeaturesNeedingVendor"          = "*"
+    "FeaturesToExempt"               = "GroupCalendarAssignment, GroupRefresh"
+    "ProtocolsNeedingVendor"         = "Talq"
+    "KeyVaultUri"                    = "https://CTGWEPRDKEYGTC.vault.azure.net/"
+  }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+    {
+        password = "wFKaR6XQFlknjHWwu4wNGtHTlRpPnMbry03mYeRZxnJl6uMfeSGShsSZ4Gvt"
+        username = "$CTGWEPRDAZFGTCTRANSCODER"
+            },
+        ]
+  source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
+  auth_settings {
+    additional_login_params        = {}
+    allowed_external_redirect_urls = []
+    enabled                        = false
+    token_refresh_extension_hours  = 0
+    token_store_enabled            = false
+        }
+  }
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
-  }
-  }
+
   "app11" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCTALQ"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
   tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+      "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a" 
+      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
   }
-  app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
+  app_settings =  {
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+    "AckPublishDelayInSeconds"                                               = "10"
+    "AdapterId"                                                              = "TLQ_Luwa_1"
+    "AzureWebJobs.TAL_SBT_CalendarAssignmentCommandTopicSubscriber.Disabled" = "0"
+    "AzureWebJobs.TAL_SBT_DimmingCommandTopicSubscriber.Disabled"            = "0"
+    "AzureWebJobs.TAL_SBT_EquipmentGroupTopicSubscriber.Disabled"            = "0"
+    "AzureWebJobs.TAL_SBT_RefreshCommandTopicSubscriber.Disabled"            = "0"
+    "AzureWebJobs.TAL_SBT_ResumeCommandTopicSubscriber.Disabled"             = "0"
+    "CommandName"                                                            = "CommunicatorDimmingCommand"
+    "DbServiceKey"                                                           = "R9jTTtr5Q4oKZMQ3wBGHLGVKr7dPZ7IHSD2XcyN5g8en5T7ZUHM8OQ=="
+    "DbServiceUrl"                                                           = "https://CTGWEPRDAZFGTCDBSERVICE.azurewebsites.net"
+    "ExponentialBackOff"                                                     = "2"
+    "ExponentialOffset"                                                      = "0"
+    "KeyVaultUri"                                                            = "https://CTGWEPRDKEYGTC.vault.azure.net/"
+    "RabbitMqConnectionStr-Muse"                                             = "amqp://10.0.10.71:5671,amqp://10.0.10.72:5671"
+    "RetryCount"                                                             = "3"
+    "ServiceBusConnectionString"                                             = "Endpoint=sb://ctgweprdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0DohNfrAlShq9Yb0mEDUQGE52r7MqXnrreM2L9xC0HE=;TransportType=AmqpWebSockets"
+    "SupportsGroup"                                                          = "false"
+    "TalqApiVersion"                                                         = "2.1"
+    "TalqCommandTopicName"                                                   = "sbt_command_message"
+    "TalqEventQueueName"                                                     = "LUWA.PRD.POLLOW.V10.TALQ2.EVENTREPORTS.C_LUWGTCPRD"
+    "TalqGroupCreateFailQueueName"                                           = "LUWA.PRD.POLLOW.V10.TALQ2.GROUP.C.ERR_LUWGTCPRD"
+    "TalqGroupCreateSuccessQueueName"                                        = "LUWA.PRD.POLLOW.V10.TALQ2.GROUP.C_LUWGTCPRD"
+    "TalqGroupDeleteFailQueueName"                                           = "LUWA.PRD.POLLOW.V10.TALQ2.GROUP.D.ERR_LUWGTCPRD"
+    "TalqGroupDeleteSuccessQueueName"                                        = "LUWA.PRD.POLLOW.V10.TALQ2.GROUP.D_LUWGTCPRD"
+    "TalqGroupUpdateFailQueueName"                                           = "LUWA.PRD.POLLOW.V10.TALQ2.GROUP.U.ERR_LUWGTCPRD"
+    "TalqGroupUpdateSuccessQueueName"                                        = "LUWA.PRD.POLLOW.V10.TALQ2.GROUP.U_LUWGTCPRD"
+    "TalqLevelStateQueueName"                                                = "LUWA.PRD.POLLOW.V10.TALQ2.LEVELSTATECHANGEREPORTS.C_LUWGTCPRD"
+    "TalqMeasurementQueueName"                                               = "LUWA.PRD.POLLOW.V10.TALQ2.ATTRIBUTELOGREPORTS.C_LUWGTCPRD"
+    "TalqTopicCalendarAssignmentCommandSubscriber"                           = "adapter_tlq_luwa_1_calendarassignment"
+    "TalqTopicDimmingCommandSubscriber"                                      = "adapter_tlq_luwa_1_dimming"
+    "TalqTopicGroupEquipmentSubscriber"                                      = "adapter_tlq_luwa_1_group"
+    "TalqTopicRefreshCommandSubscriber"                                      = "adapter_tlq_luwa_1_refresh"
+    "TalqTopicResumeCommandSubscriber"                                       = "adapter_tlq_luwa_1_resume"
+    "TalqUrl"                                                                = "https://prod.musesoftware.citegestion.fr/LUWA/PRD/talq2middleware"
+    "VirtualHost-Muse"                                                       = "/"
+
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+    {
+        password = "9RqvikErN0ew9kT1d5ux4pqbrreFkuQCpPkT3crxYlb4g7wkcGvCdA50qrMp"
+        username = "$CTGWEPRDAZFGTCTALQ"
+            },
+        ]
+  source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
+  auth_settings {
+    additional_login_params        = {}
+    allowed_external_redirect_urls = []
+    enabled                        = false
+    token_refresh_extension_hours  = 0
+    token_store_enabled            = false
+        }
   }
+  
   "app12" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCCIRCUTOR"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+  tags                            = {
+          "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+          "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+          "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
   }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
-        "AzureWebJobsSecretStorageType"  = "Files"
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "964f2a0-f623-4cda-833b-ae1fe431611a"
+    "AdapterId"                                                = "CCT_Luwa_1"
+    "ApiTimeoutInSeconds"                                      = "10"
+    "AzureWebJobs.CCT_SBT_SyncMessageTopicSubscriber.Disabled" = "0"
+    "CctCircutor1SyncTopicCctSubscriber"                       = "adapter_cct_luwa_1"
+    "CctCircutor1SyncTopicName"                                = "sbt_cct_luwa_1_sync_message"
+    "Circutor_ApiUrlFormat"                                    = "http://{0}"
+    "ContextEventHubMaxBatchSize"                              = "200"
+    "DatalakeEventHubMaxBatchSize"                             = "200"
+    "DbServiceKey"                                             = "R9jTTtr5Q4oKZMQ3wBGHLGVKr7dPZ7IHSD2XcyN5g8en5T7ZUHM8OQ=="
+    "DbServiceUrl"                                             = "https://CTGWEPRDAZFGTCDBSERVICE.azurewebsites.net"
+    "DeviceInfoCron"                                           = "0 0 0 */3 * *"
+    "Disable_CallGetValuesWithTimeout"                         = "false"
+    "Disable_DeviceData"                                       = "false"
+    "Disable_IPPingTest"                                       = "false"
+    "Disable_InstantVariables"                                 = "false"
+    "EnableDeviceDataFullUpdate"                               = "false"
+    "EnableGetValuesOrcTerminate"                              = "false"
+    "EnableSendEventToTelegestion"                             = "true"
+    "EnableSendMeasurementToTelegestion"                       = "true"
+    "EquipmentBatchSize"                                       = "750"
+    "EventPublishMaxBatchSize"                                 = "32"
+    "ExponentialBackOff"                                       = "2"
+    "ExponentialOffset"                                        = "0"
+    "GetDevicesTimeout_Minutes"                                = "45"
+    "GetValuesTimeout_Minutes"                                 = "20"
+    "InstantVariablesCron"                                     = "0 */15 * * * *"
+          "KeyVaultUri"                                              = "https://CTGWEPRDKEYGTC.vault.azure.net/"
+    "ListEquipmentTypeToMap"                                   = ""
+    "MeasurementPublishMaxBatchSize"                           = "200"
+    "RetryCount"                                               = "0"
+    "ServiceBusConnectionString"                               = "Endpoint=sb://ctgweprdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0DohNfrAlShq9Yb0mEDUQGE52r7MqXnrreM2L9xC0HE=;TransportType=AmqpWebSockets"
+    "Test_Circutor_ApiIps"                                     = "10.101.220.145:1010"
+    "ValuesDI3_0"                                              = "EDS.DI3,EDS.DI4,EDS.DI8"
+    "ValuesDI3_1"                                              = "EDS.DI3,EDS.DI4,EDS.DI8,EDS.C1,EDS.C2,EDS.DI1,EDS.DI2,EDS.DI5,EDS.DI6,EDS.DI7,EXT1.DI1,EXT1.DI2,EXT1.DI3,EXT1.DI4,EXT2.DI1,EXT2.DI2,EXT2.DI3,EXT2.DI4,CVM-E3-MINI.AE,CVM-E3-MINI.AE1,CVM-E3-MINI.AE2,CVM-E3-MINI.AE3,CVM-E3-MINI.AI1,CVM-E3-MINI.AI2,CVM-E3-MINI.AI3,CVM-E3-MINI.API,CVM-E3-MINI.API1,CVM-E3-MINI.API2,CVM-E3-MINI.API3,CVM-E3-MINI.ARMV1,CVM-E3-MINI.ARMV2,CVM-E3-MINI.ARMV3,CVM-E3-MINI.COSI,CVM-E3-MINI.COSI1,CVM-E3-MINI.COSI2,CVM-E3-MINI.COSI3,CVM-E3-MINI.DAI1,CVM-E3-MINI.DAI2,CVM-E3-MINI.DAI3,CVM-E3-MINI.DVI1,CVM-E3-MINI.DVI2,CVM-E3-MINI.DVI3,CVM-E3-MINI.NPFI,CVM-E3-MINI.NPFI1,CVM-E3-MINI.NPFI2,CVM-E3-MINI.NPFI3,CVM-E3-MINI.VI1,CVM-E3-MINI.VI2,CVM-E3-MINI.VI3"
+  }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+    {
+        password = "oHkTZxlSxkcNB63EsS4chkDG8jppFSsgD7hJay0ETnG2n0hmhEmpfWF4kDdo"
+        username = "$CTGWEPRDAZFGTCCIRCUTOR"
+            },
+        ]
+  auth_settings {
+    additional_login_params        = {}
+    allowed_external_redirect_urls = []
+    enabled                        = false
+    token_refresh_extension_hours  = 0
+    token_store_enabled            = false
+        }
+  source_control {
+    branch             = "main"
+    manual_integration = false
+    rollback_enabled   = false
+    use_mercurial      = false
+        }
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
+
   }
-  }
+  
   "app13" = {
     
-  function_app_name = "CTGWEPPDAZFGTCAPI"
-  resource_group_name = "CTGWEPPDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweppdazsgtc"
+  function_app_name = "CTGWEPRDAZFGTCDBSERVICE"
+  resource_group_name = "CTGWEPRDRSG-GTC"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
+  storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
-  tags = {
-     "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-      "hidden-link: /app-insights-instrumentation-key" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376" 
-      "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
-  }
+  tags                            = {
+           "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/" 
+           "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+           "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC" 
+        }
   app_settings =  {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "ApplicationsToLogCommandFor"    = "RMM"
         "AzureWebJobsSecretStorageType"  = "Files"
+        "APPINSIGHTS_INSTRUMENTATIONKEY"              = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+        "ConnectTimeOut"                              = "60"
+        "Database"                                    = "gtc-dbs"
+        "DbRetryLimitEquipment"                       = "3"
+        "DbRetryLimitTranscode"                       = "3"
+        "DbServiceKey"                                = "R9jTTtr5Q4oKZMQ3wBGHLGVKr7dPZ7IHSD2XcyN5g8en5T7ZUHM8OQ=="
+        "DbServiceUrl"                                = "https://ctgweprdazfgtcdbservice.azurewebsites.net"
+        "DelayToRepublishToRetryDbEquipmentInSeconds" = "300"
+        "DelayToRepublishToRetryDbTranscodeInSeconds" = "900"
+        "EquipmentCollectionBatchSize"                = "10"
+        "EventCollectionBatchSize"                    = "10"
+        "ExceptionMessagesToIgnoreRetry"              = "E11000;serialize"
+        "KeyVaultUri"                                 = "https://CTGWEPRDKEYGTC.vault.azure.net/"
+        "MeasurementCollectionBatchSize"              = "10"
+        "RetryCount"                                  = "2"
+        "RetryDbEquipmentEnabled"                     = "true"
+        "RetryDbPublishMaxBatchSize"                  = "32"
+        "RetryDbTopicName"                            = "sbt_retrydb_message"
+        "RetryDbTopicSubscriber"                      = "gtc_dbservice"
+        "RetryDbTranscodeEnabled"                     = "true"
+        "RetryWriteEnabled"                           = "true"
+        "ServiceBusConnectionString"                  = "Endpoint=sb://ctgweprdasbgtc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0DohNfrAlShq9Yb0mEDUQGE52r7MqXnrreM2L9xC0HE="
+        "SocketTimeout"                               = "70"
+        "WaitQueueTimeout"                            = "120"
 
-       "KeyVaultUri"                    = "https://CTGWEPPDKEYGTC.vault.azure.net/"
   }
+  daily_memory_time_quota         = 0
+  site_credential                 = [
+        {
+            password = "tzMyXjnqpjRgXt2iys0dYHP9DEHto51ZDNWCnxk5H2n3prCBKQ1pTzj3su6v"
+            username = "$CTGWEPRDAZFGTCDBSERVICE"
+            },
+        ]
+  auth_settings {
+        additional_login_params        = {}
+        allowed_external_redirect_urls = []
+        enabled                        = false
+        token_refresh_extension_hours  = 0
+        token_store_enabled            = false
+        }
+  source_control {
+        branch             = "main"
+        manual_integration = false
+        rollback_enabled   = false
+        use_mercurial      = false
+        }
+    }
+  
   }
-}
