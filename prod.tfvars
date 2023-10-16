@@ -794,498 +794,999 @@ recovery_services_vault = {
 
 log_search_alerts = {
   "rule1" = {
-    name              = "SequencedStartStop_Parent"
+
+    authorized_resource_ids = []
+    name              = "Circutor Erreur déclenchement de requête GetDevice"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id          = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"    
     description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"CCT_ORC_Device\" and message contains \"Succeeded\""
+    frequency         = 1440
+    time_window       = 2880
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                   "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                   "Debut de recherche"    = "#searchintervalstarttimeutc"
+                   "Fin de recherche"      = "#searchintervalendtimeutc"
+                   "Lien vers la requête"  = "#linktosearchresults"
+                   "Nombre d'erreurs"      = "#searchresultcount"
+                   Procédure               = "PRC_GTC_001"
+                   "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Circutor] Problème de déclenchement puller GetDevice"
   }
   "rule2" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Circutor Erreur déclenchement de requête GetValues"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetValues ne s`est pas déclenchée la dernière demi-heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
+    query             = "traces | where operation_Name == \"CCT_ORC_MainInstantVariables\" and message contains \"Succeeded\""
+    frequency         = 15
+    time_window       = 15
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Circutor] Problème de déclenchement puller GetValues"
+
+  } 
   "rule3" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Citytouch Erreur déclenchement de requête AssetStream"
+    authorized_resource_ids = []
     location          = "west europe"
     resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La fonction de collecte s'est déclenchée moins d'une fois dans la dernière heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"CTT_ORC_AssetStream\" and message contains \"Succeeded\""
+    frequency         = 15
+    time_window       = 30
+    severity          = 2
+    tags                    = {}
+    throttling              = 0
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+     custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [Signify] Problème de déclenchement puller AssetStream"
   }
   "rule4" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur déclenchement de requête EnergyStream"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête EnergyStream ne s'est pas déclenchée dans la dernière demi-heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"CTT_ORC_EnergyStream\" and message contains \"Succeeded\""
+    frequency         = 15
+    time_window       = 30
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+  email_subject          = "[GTC Alert] [Signify] Problème de déclenchement puller EnergyStream"         
   }
   "rule5" = {
-    name              = "CTGWEHAD002"
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur déclenchement de requête GetFaults"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Alerting CPU"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête Get Faults ne s'est pas déclenchée dans la dernière demi-heure."
     enabled           = true
     query             = <<-EOT
-          // Chart CPU usage trends by computer
-          // Calculate CPU usage patterns over the last hour, chart by percentiles.
-          InsightsMetrics
-          | where TimeGenerated > ago(1h)
-          | where Origin == "vm.azm.ms"
-          | where Computer startswith "CTGWEPRDHAD00"
-          | where Namespace == "Processor"
-          | where Name == "UtilizationPercentage"
-          | summarize avg(Val) by bin(TimeGenerated, 5m), Computer //split up by computer
-          | render timechart
+         traces | where operation_Name == "CTT_ORC_FaultLink" and message contains "Succeeded"
+        EOT
+    frequency         = 15
+    time_window       = 30
+    severity          = 2
+    trigger_operator  = "GLessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Signify] Problème de déclenchement puller GetFaults"
+  }
+  "rule6" = {
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur déclenchement de requête SwitchingPoint"
+    location          = "west europe"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La fonction de collecte ne s'est pas déclenchée pour le jour."
+    enabled           = true
+    query             = "traces | where operation_Name == \"CTT_ORC_SwitchingPointlinkPuller\" and message contains \"Succeeded\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+     throttling              = 0
+     custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+  email_subject          = "[GTC Alert] [Signify] Problème de déclenchement puller SwitchingPoint"
+  }
+  "rule7" = {
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur déclenchement requête AssetStream"
+    location          = "west europe"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/ctgweprdrsg-gtc/providers/microsoft.insights/actionGroups/mail_support_l2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La fonction de collecte s'est déclenchée moins de 10 fois dans la dernière heure."
+    enabled           = false
+    query                   = <<-EOT
+         // Compteur d'exécution d'assetstream
+          
+         traces
+         | where operation_Name == "CTT_ORC_AssetStream"
+             and message contains "Succeeded"
+        EOT
+    frequency         = 15
+    time_window       = 5
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+     throttling              = 0
+     custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "La fonction de collecte s'est déclenchée moins de 10 fois dans la dernière heure"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Erreur de déclenchement de la collecte d'AssetStream"
+                }
+            )
+    email_subject          = "[GTC Alert] PRC_GTC_001 | La fonction de collection AssetStream ne se déclenche pas correctement"
+  }
+  "rule8" = {
+    name              = "Citytouch Erreur déclenchement SwitchingPoint"
+    authorized_resource_ids = []
+    location          = "west europe"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/ctgweprdrsg-gtc/providers/microsoft.insights/actiongroups/mail_support_l2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Moins de 10 requête en 24 heures."
+    enabled           = false
+    query                   = <<-EOT
+         // Compteur d'exécution de switchingpointlink
+         // A affiner avec les plages d'appels et les groupes d'appels
+          
+         traces
+         | where operation_Name contains "SwitchingPointLink"
+             and message contains "Executed"
+        EOT
+    frequency         = 60
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 10
+    tags                    = {}
+     throttling              = 0
+      custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Moins de 10 appels dans les dernières 24 heures"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Citytouch Erreur déclenchement SwitchingPoint"
+                }
+            ) 
+            email_subject          = "[GTC Alert] PRC_GTC_001 | Problème de déclenchement de requête SwitchingPointLink"
+  }
+  "rule9" = {
+    authorized_resource_ids = []
+    name              = "Citytouch Erreur HTTP"
+    location          = "west europe"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/ctgweprdrsg-gtc/providers/microsoft.insights/actiongroups/mail_support_l2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Erreur HTTP sur l'un des endpoints de citytouch"
+    enabled           = false
+    query                   = <<-EOT
+         // Liste des erreurs HTTP sur les endpoints citytouch
+        
+         let errorCodes = dynamic([400,401,403,500,503]);
+         let targetNames = dynamic(['assets.citytouch.com','energy.citytouch.com','account.identity.lighting.philips.com','ws.citytouch.com','controllink.citytouch.com']);
+        
+         dependencies
+         | where target in (targetNames)
+             and resultCode in (errorCodes)
+         | project timestamp, operation_Id, operation_Name, target, name, resultCode, success,customDimensions,  appName
+         | join kind= inner (
+             traces
+             | project operation_Id, message, severityLevel
+             ) on operation_Id
         EOT
     frequency         = 5
     time_window       = 5
     severity          = 4
     trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-    tags = {
-      "PRDHAD00" = "AlertingHAD2"
-    }
-  }
-  "rule6" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
-  "rule7" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
-  "rule8" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
-  "rule9" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    trigger_threshold = 0
+    tags                    = {}
+    throttling              = 0
+   custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Erreur HTTP sur un appel sur l'un des endpoint de citytouch"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Erreur HTTP Citytouch"
+                }
+            )
+    email_subject          = "[GTC Alert] PRC_GTC_001 | Erreur HTTP Citytouch"
   }
   "rule10" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Echec Retraitement Cloture SP3"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2DD0A1B8-B6F4-4036-AEDD-036BD50B6E23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Alert_Prod"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
     enabled           = true
-    query             = "test"
+    query_type              = "Number"
+    query                   = <<-EOT
+           traces
+           | where severityLevel != 1
+           | where message contains "MUS_SBT_EventTopicSubscriber" and message contains "exceeded fault retry limit"
+           | order by timestamp asc
+        EOT
+    tags                    = {}
+    throttling              = 0
     frequency         = 5
     time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    severity          = 3
+    trigger_operator  = "GreaterThanOrEqual"
+    trigger_threshold = 1
+    metric_trigger {
+               metric_trigger_type = "Total"
+               operator            = "GreaterThanOrEqual"
+               threshold           = 1
+            }
   }
   "rule11" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Erreur de recuperation d'EventHub Context"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Pas de messages recupérés depuis l'EventHub Context pour le dernier jour."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
+    query             = "traces | where message contains \"GTC_EVT_ContextMsg\" and message contains \"START\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
     trigger_operator  = "GreaterThan"
     trigger_threshold = 5
-  }
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                   "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                   "Debut de recherche"    = "#searchintervalstarttimeutc"
+                   "Fin de recherche"      = "#searchintervalendtimeutc"
+                   "Lien vers la requête"  = "#linktosearchresults"
+                   "Nombre d'erreurs"      = "#searchresultcount"
+                   Procédure               = "PRC_GTC_001"
+                   "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Context] Problème de recuperations des messages"
+        }
+  
   "rule12" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Erreur de recuperation des Mesures sur le datalake"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Pas de mesures recupérés depuis le datalake pour les dernières quatres heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
+    query             = "traces | where message contains \"GTC_SBT_DatalakeMeasurementTopicSubscriber\" and message contains \"START\""
+    frequency         = 240
+    time_window       = 240
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Datalake] Problème de recuperations des mesures"
+        }
+  
   "rule13" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Erreur de recuperation des événements sur le datalake" 
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Pas d'événements recupérés depuis le datalake pour les dernières quatres heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
+    query             = "traces | where message contains \"GTC_SBT_DatalakeEventTopicSubscriber\" and message contains \"START\""
+    frequency         = 240
+    time_window       = 240
+    severity          = 2
     trigger_operator  = "GreaterThan"
     trigger_threshold = 5
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+  email_subject          = "[GTC Alert] [Datalake] Problème de recuperations des événements"
   }
   "rule14" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Erreur reliée à la RabbitMQ"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Des erreurs reliées à la RabbitMQ ont été remontées pendant les cinq dernières minutes."
     enabled           = true
-    query             = "test"
+    query             = "exceptions | where problemId == \"RabbitMQ\""
     frequency         = 5
     time_window       = 5
-    severity          = 4
+    severity          = 2
     trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [RabbitMQ] Erreur reliée à la RabbitMQ"
+
   }
   "rule15" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "GTC Exception"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Une exception est levée par la GTC"
     enabled           = true
-    query             = "test"
-    frequency         = 5
+    query                   = <<-EOT
+          exceptions
+          | project timestamp , operation_Id , operation_Name , problemId , outerType , outerMessage , outerMethod , details
+          | join kind= inner (
+             traces
+             | project operation_Id , message , customDimensions
+          ) on operation_Id
+          | where problemId !contains "System.Net.Sockets.SocketException" and problemId !contains "GTC.Adapters.Circutor.Services.CircutorHttpHandler+<SendAsync>" and operation_Name !contains "TravelTimes"
+        EOT
+    frequency         = 15
     time_window       = 5
     severity          = 4
     trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    trigger_threshold = 0
+    custom_webhook_payload = jsonencode(
+                {
+                  "Cas de déclenchement"  = "une exception a été levée par la GTC"
+                  "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  "Fin de recherche"      = "#searchintervalendtimeutc"
+                  "Lien vers la requête"  = "#linktosearchresults"
+                  "Nombre d'erreurs"      = "#searchresultcount"
+                  Procédure               = "PRC_GTC_001"
+                  "Titre Alerte"          = "Exception GTC"
+                }
+            )
+           email_subject          = "[GTC Alert] PRC_GTC_001 | Exception GTC"
+    tags                    = {}
+    throttling              = 0 
+
   }
   "rule16" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetSensors"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetSensors ne s'est pas déclenchée pour le jour précédent."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"LCR_ORC_GetSensors\" and message contains \"Succeeded\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+      throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                  "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                  "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  "Fin de recherche"      = "#searchintervalendtimeutc"
+                  "Lien vers la requête"  = "#linktosearchresults"
+                  "Nombre d'erreurs"      = "#searchresultcount"
+                  Procédure               = "PRC_GTC_001"
+                  "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+          email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetSensors"
+
   }
   "rule17" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetTraffiCDensity"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetTraffiCDensity ne s'est pas déclenchée pendant les dix dernières minutes."
     enabled           = true
-    query             = "test"
+    query             = "traces | where operation_Name == \"LCR_ORC_TrafficDensity\" and message contains \"Succeeded\""
     frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    time_window       = 10
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                "Debut de recherche"    = "#searchintervalstarttimeutc"
+                "Fin de recherche"      = "#searchintervalendtimeutc"
+                "Lien vers la requête"  = "#linktosearchresults"
+                "Nombre d'erreurs"      = "#searchresultcount"
+                Procédure               = "PRC_GTC_001"
+                "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetTraffiCDensity"
+
   }
   "rule18" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetTraffiCDensityLevel"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetTraffiCDensityLevel ne s'est pas déclenchée pendant la dernière demi-heure."
     enabled           = true
-    query             = "test"
+    query             = "traces | where operation_Name == \"LCR_ORC_TrafficDensityLevel\" and message contains \"Succeeded\""
     frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    time_window       = 30
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                "Debut de recherche"    = "#searchintervalstarttimeutc"
+                "Fin de recherche"      = "#searchintervalendtimeutc"
+                "Lien vers la requête"  = "#linktosearchresults"
+                "Nombre d'erreurs"      = "#searchresultcount"
+                Procédure               = "PRC_GTC_001"
+                "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetTraffiCDensityLevel"
+
   }
   "rule19" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetTravelTimes"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetTravelTimes ne s'est pas déclenchée pendant les dix dernières minutes."
     enabled           = true
-    query             = "test"
+    query             = "traces | where operation_Name == \"LCR_ORC_TravelTimes\" and message contains \"Succeeded\""
     frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    time_window       = 10
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                "Debut de recherche"    = "#searchintervalstarttimeutc"
+                "Fin de recherche"      = "#searchintervalendtimeutc"
+                "Lien vers la requête"  = "#linktosearchresults"
+                "Nombre d'erreurs"      = "#searchresultcount"
+                Procédure               = "PRC_GTC_001"
+                "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetTravelTimes"
+
   }
   "rule20" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Lacroix Erreur déclenchement de requête GetWays"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête GetWays ne s'est pas déclenchée pour le jour précédent."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"LCR_ORC_GetWays\" and message contains \"Succeeded\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Lacroix] Problème de déclenchement puller GetWays"
+
   }
   "rule21" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Muse Envoie de mesures Burning Hours vers endpoint AddValues"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint AddValues pour la transmission de mesures Burning hours n`a pas été appelé dans la dernière heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_MeasurementTopicSubscriber\" and message contains \"Measures to be sent\" and message contains '\"Burning Hours\"'"
+    frequency         = 60
+    time_window       = 120
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+           email_subject          = "[GTC Alert] [Muse] [BurningHours-AddValues] Problème d`envoie des mesures"
+
   }
   "rule22" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Muse Envoie de mesures Energy vers endpoint AddValues"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint AddValues pour la transmission de mesures Energie n`a pas été appelé dans la dernière demi-heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_MeasurementTopicSubscriber\" and message contains \"Measures to be sent\" and message contains '\"Energy\"'"
+    frequency         = 60
+    time_window       = 120
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Muse] [Energy-AddValues] Problème d`envoie des mesures"
+
   }
   "rule23" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = [] 
+    name              = "Muse Envoie des évènements de Circutor vers endpoint SendImmediateEvent"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint SendImmediateEvent pour la transmission d'évènements de Circutor n`a pas été appelé dans les dernières trois heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_EventTopicSubscriber\" and message !contains \"SendImmediateEventsForFaults\" and message contains \" Response received from Muse after sendImmediateEvent\""
+    frequency         = 180
+    time_window       = 180
+    severity          = 2
+    tags                    = {}
+    throttling              = 0
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Muse] [Circutor-SendImmediateEvents] Problème d`envoie des événements"
+
   }
   "rule24" = {
+    authorized_resource_ids = []
     name              = "SequencedStartStop_Parent"
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint SendImmediateEvent pour la transmission de fautes n`a pas été appelé dans les dernières trois heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_EventTopicSubscriber\" and message contains \"SendImmediateEventsForFaults\" and message contains \" Response received from Muse after sendImmediateEvent\""
+    frequency         = 180
+    time_window       = 180
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+    throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+    email_subject          = "[GTC Alert] [Muse] [Fautes-SendImmediateEvents] Problème d`envoie des événements"
+
   }
   "rule25" = {
-    name              = "SequencedStartStop_Parent"
+    authorized_resource_ids = []
+    name              = "Muse Envoie des évènements de SwitchingPoint vers endpoint AddLightStates"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint AddLightStates pour la transmission des evennemments SwitchingPoint n`a pas été appelé dans le dernier jour."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_EventTopicSubscriber\" and message contains \"AddLightStatesValue Result\""
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    tags                    = {}
+    throttling              = 0
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+     email_subject          = "[GTC Alert] [Muse] [SwitchingPoint-AddLightStates] Problème d`envoie des événements"
   }
   "rule26" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "MUSE Erreur déclenchement de requête ODataPatrimoine"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "La requête ODataPatrimoine ne s'est pas déclenchée pour les 2 dernières heures."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where operation_Name == \"MUS_ORC_ODataPatrimoineAssetPuller\" and message contains \"Succeeded\""
+    frequency         = 60
+    time_window       = 120
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    tags                    = {}
+      throttling              = 0
+    custom_webhook_payload = jsonencode(
+                {
+                  "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                  "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  "Fin de recherche"      = "#searchintervalendtimeutc"
+                  "Lien vers la requête"  = "#linktosearchresults"
+                  "Nombre d'erreurs"      = "#searchresultcount"
+                  Procédure               = "PRC_GTC_001"
+                  "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [MUSE] Problème de déclenchement puller ODataPatrimoine"
   }
   "rule27" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "MUSE Erreur HTTP"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/mail_exploitation"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Erreur HTTP lors de l'envoi de données dans MUSE"
+    enabled           = false
+    query                   = <<-EOT
+          traces
+          | where operation_Name contains "MUS_CTX_HTTP"
+          | project timestamp, operation_Id, message, severityLevel, customDimensions, operation_Name, appName
+          | join kind= inner ( dependencies
+          | project operation_Id, target, name, success, resultCode
+          | where target contains "citegestion.fr" and success == false ) on operation_Id
+        EOT
     frequency         = 5
     time_window       = 5
     severity          = 4
     trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    trigger_threshold = 0
+    tags                    = {}
+      throttling              = 0
+      custom_webhook_payload = jsonencode(
+                {
+                  "Cas de déclenchement"  = "Erreur HTTP lors de l'envoi de données dans MUSE"
+                  "Debut de recherche"    = "#searchintervalstarttimeutc"
+                  "Fin de recherche"      = "#searchintervalendtimeutc"
+                  "Lien vers la requête"  = "#linktosearchresults"
+                  "Nombre d'erreurs"      = "#searchresultcount"
+                  Procédure               = "PRC_GTC_001"
+                  "Titre Alerte"          = "Erreur HTTP MUSE"
+                }
+            )
+    email_subject          = "[GTC Alert] PRC_GTC_001 | Erreur dans la transmission d'information à MUSE"
   }
   "rule28" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Muse Publications de mesures Circutor sur le RabbitMQ"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actionGroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint AddValues pour la transmission de mesures Circutor n`a pas été appelé dans la dernière demi-heure."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
+    query             = "traces | where message contains \"MUS_SBT_MeasurementTopicSubscriber\" and message contains \"Publish\" and message contains '\"Circutor\"'"
+    frequency         = 10
+    time_window       = 30
+    severity          = 2
     trigger_operator  = "GreaterThan"
     trigger_threshold = 5
+    tags = {
+    }
+    throttling = 0
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [Muse] [Circutor-AddValues] Problème de publications des mesures"
   }
   "rule29" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Muse Publications de mesures Passages sur le RabbitMQ"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Les mesures Passages n`ont pas été publiées sur le RabbitMQ pour pour le dernier jour."
     enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    query             = "traces | where message contains \"MUS_SBT_MeasurementTopicSubscriber\" and message contains \"Publish\" and message contains '\"Passage\"'"
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    tags                    = {}
+     throttling              = 0
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [Muse] [Passages-RabbitMQ] Problème de publications des mesures"
   }
   "rule30" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "Muse Publications de mesures TrafficDensityLevel sur le RabbitMQ"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/actiongroups/Mail_Support_L2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "Les mesures TrafficDensityLevel n`ont pas été publiées sur le RabbitMQ pour la dernière demi-heure."
     enabled           = true
     query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    frequency         = 30
+    time_window       = 30
+    severity          = 2
+    tags                    = {}
+    throttling              = 0 
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "Il n`y a pas eu d`appel à GetDevice dans les dernièrs 3 jours"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Problème de déclenchement de requête GetDevice"
+                }
+            )
+            email_subject          = "[GTC Alert] [Muse] [TrafficDensityLevel-RabbitMQ] Problème de publications des mesures"
   }
-  "rule31" = {
-    name              = "SequencedStartStop_Parent"
-    location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
-    enabled           = true
-    query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
-  }
+  "rule31" = {}
   "rule32" = {
-    name              = "SequencedStartStop_Parent"
+    name              = "ReverberiTraffic Endpoint passage pas appeler par le terrain"
+    authorized_resource_ids = []
     location          = "west europe"
-    resource_group    = "CTGWEPRDRSG-Operations"
-    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/default-activitylogalerts/providers/microsoft.insights/actiongroups/ctg-pole-production"]
-    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Operations/providers/Microsoft.OperationalInsights/workspaces/CTGWEPRDLGA001"
-    description       = "Start/Stop VMs during off-hours Runbook: SequencedStartStop_Parent has attempted an action"
+    resource_group    = "CTGWEPRDRSG-GTC"
+    action_group_ids  = ["/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourcegroups/ctgweprdrsg-gtc/providers/microsoft.insights/actiongroups/mail_support_l2"]
+    data_source_id    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
+    description       = "L`endpoint passage n`a pas été convoqué pour le  jour précédent"
     enabled           = true
     query             = "test"
-    frequency         = 5
-    time_window       = 5
-    severity          = 4
-    trigger_operator  = "GreaterThan"
-    trigger_threshold = 5
+    frequency         = 1440
+    time_window       = 1440
+    severity          = 2
+    trigger_operator  = "LessThan"
+    trigger_threshold = 1
+    query                   = <<-EOT
+         traces
+         | where message contains "RVB_ORC_Passages"
+         and message contains "Succeeded"
+        EOT
+        tags                    = {}
+     throttling              = 0
+      custom_webhook_payload = jsonencode(
+                {
+                 "Cas de déclenchement"  = "L`endpoint passage n`a pas été convoqué pour le  jour précédent"
+                 "Debut de recherche"    = "#searchintervalstarttimeutc"
+                 "Fin de recherche"      = "#searchintervalendtimeutc"
+                 "Lien vers la requête"  = "#linktosearchresults"
+                 "Nombre d'erreurs"      = "#searchresultcount"
+                 Procédure               = "PRC_GTC_001"
+                 "Titre Alerte"          = "Pas d`appel de l`endpoint passage"
+                }
+            )
+            email_subject          = "[GTC Alert [ReverberiTraffic] Endpoint passage pas appeler par le terrain"
   }
 }
 
@@ -1351,9 +1852,9 @@ servers = {
 CTGWEPRDHAP001 = {
     vm_type               = "linux"
     location              = "West Europe"
-    resource_group_name   = "ctgweprdrsg-arc"
+    resource_group_name   = "CTGWEPRDRSG-HAP"
     vm_size               = "Standard_D16ds_v4"
-    admin_username        = "CTGADMAZ"
+    admin_username        = "ctgadmaz"
     admin_password        = "Password1234A!"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
     availability_set_name = "CTGWEPRDAVS-ARC"
@@ -1361,6 +1862,59 @@ CTGWEPRDHAP001 = {
     network_interface_id  = "CTGWEPRDMAP001-nic"
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "test"
+    vtpm_enabled                                           = false
+    disable_password_authentication                        = false
+    network_interface_ids                                  = [
+           "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-HAP/providers/Microsoft.Network/networkInterfaces/CTGWEPRDHAP001VMNic",
+        ]
+    os_disk {
+           disk_size_gb              = 32
+           name                      = "CTGWEPRDHAP001-OSDisk"
+           storage_account_type      = "Premium_LRS"
+        }
+    linux_image_reference = {
+      publisher = "RedHat"
+      offer     = "RHEL"
+      sku       = "8"
+      version   = "latest"
+    }
+   source_image_reference {
+           offer     = "0001-com-ubuntu-server-focal"
+           publisher = "Canonical"
+           sku       = "20_04-lts-gen2"
+        }
+
+  }
+  CTGWEPRDHAP002 = { 
+    vm_type = "linux"
+    location              = "West Europe"
+    resource_group_name   = "ctgweprdrsg-arc"
+    vm_size               = "Standard_D16ds_v4"
+    admin_username        = "ctgadmaz"
+    admin_password        = "Password1234A!"
+    admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
+    availability_set_name = "CTGWEPRDAVS-ARC"
+    computer_name         = "CTGWEPRDARC001"
+    network_interface_id  = "CTGWEPRDMAP001-nic"
+    patch_assessment_mode = "AutomaticByPlatform"
+    os_disk_name          = "test"
+    disable_password_authentication                        = false
+    vtpm_enabled                                           = false
+
+    network_interface_ids                                  = [
+           "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-HAP/providers/Microsoft.Network/networkInterfaces/CTGWEPRDHAP002VMNic",
+        ]
+    os_disk {
+          ~ disk_size_gb              = 32
+          ~ name                      = "CTGWEPRDHAP002-OSDisk"
+          ~ storage_account_type      = "Premium_LRS"
+        }
+    source_image_reference {
+          ~ offer     = "0001-com-ubuntu-server-focal" 
+          ~ publisher = "Canonical"
+          ~ sku       = "20_04-lts-gen2"
+        }
+
     linux_image_reference = {
       publisher = "RedHat"
       offer     = "RHEL"
@@ -1368,32 +1922,6 @@ CTGWEPRDHAP001 = {
       version   = "latest"
     }
 
-  }
-  CTGWEPRDHAP002 = { vm_type = "linux"
-    location              = "West Europe"
-    resource_group_name   = "ctgweprdrsg-arc"
-    vm_size               = "Standard_D16ds_v4"
-    admin_username        = "CTGADMAZ"
-    admin_password        = "Password1234A!"
-    admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
-    availability_set_name = "CTGWEPRDAVS-ARC"
-    computer_name         = "CTGWEPRDARC001"
-    network_interface_id  = "CTGWEPRDMAP001-nic"
-    patch_assessment_mode = "AutomaticByPlatform"
-    os_disk_name          = "test"
-    linux_image_reference = {
-      publisher = "RedHat"
-      offer     = "RHEL"
-      sku       = "8"
-      version   = "latest"
-    }
-    tags = {
-      "Application" = "MUSE GMAO"
-      "Platform"    = "Production"
-      "Responsible" = "CTG"
-      "Role"        = "GMAO"
-      "Usage"       = "PRD"
-    }
   }
 
 ################################################################################
@@ -1550,10 +2078,13 @@ CTGWEPRDHAP001 = {
   #   }
   # }
   
-  CTGWEPRDLOG001 = { vm_type = "linux"
+  CTGWEPRDLOG001 = { 
+    vm_type = "linux"
+    disable_password_authentication                        = false
+    availability_set_id                                    = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-LOG/providers/Microsoft.Compute/availabilitySets/CTGWEPRDAVS-LOG"
     location              = "West Europe"
-    resource_group_name   = "ctgweprdrsg-arc"
-    vm_size               = "Standard_D16ds_v4"
+    resource_group_name   = "CTGWEPRDRSG-LOG"
+    vm_size               = "Standard_B2ms"
     admin_username        = "CTGADMAZ"
     admin_password        = "Password1234A!"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
@@ -1562,19 +2093,28 @@ CTGWEPRDHAP001 = {
     network_interface_id  = "CTGWEPRDMAP001-nic"
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "test"
+    vtpm_enabled                                           = false
     linux_image_reference = {
       publisher = "RedHat"
       offer     = "RHEL"
       sku       = "8"
       version   = "latest"
     }
+    network_interface_ids                                  = [
+          "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-LOG/providers/Microsoft.Network/networkInterfaces/CTGWEPRDLOG001-nic",
+        ]
     tags = {
-      "Application" = "MUSE GMAO"
       "Platform"    = "Production"
       "Responsible" = "CTG"
       "Role"        = "GMAO"
       "Usage"       = "PRD"
     }
+           source_image_reference {
+           offer     = "0001-com-ubuntu-server-focal-daily" 
+           publisher = "Canonical"
+           sku       = "20_04-daily-lts-gen2"
+           version   = "20.04.202110010"
+        }
   }
 
   "CTGWEPRDMAP001" = {
@@ -1737,9 +2277,11 @@ CTGWEPRDHAP001 = {
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "CTGWEPRDMAP007-OSDisk"
     disk_size_gb          = 127
+    vtpm_enabled                                           = false
+    private_ip_address                                     = "10.0.10.34"
     winrm_listener = [
       {
-        protocol        = "Http"
+        protocol        = "http"
         certificate_url = null
       }
     ]
@@ -1756,7 +2298,8 @@ CTGWEPRDHAP001 = {
       "Role"        = "GMAO"
       "Usage"       = "PRD"
   } }
-  CTGWEPRDMAP008 = { vm_type = "windows"
+  CTGWEPRDMAP008 = { 
+    vm_type = "windows"
     location              = "West Europe"
     resource_group_name   = "CTGWEPRDRSG-MAP04"
     vm_size               = "Standard_D8ds_v4"
@@ -1767,9 +2310,11 @@ CTGWEPRDHAP001 = {
     network_interface_id  = "CTGWEPRDMAP008-nic"
     patch_assessment_mode = "AutomaticByPlatform"
     os_disk_name          = "CTGWEPRDMAP008-OSDisk"
+     vtpm_enabled                                           = false
+    private_ip_address                                     = "10.0.10.35"
     winrm_listener = [
       {
-        protocol        = "Http"
+        protocol        = "http"
         certificate_url = null
       }
     ]
@@ -1883,6 +2428,7 @@ CTGWEPRDHAP001 = {
       "Usage"       = "PRD"
   } }
   CTGWEPRDMYS001 = { 
+    disable_password_authentication                        = false
     vm_type = "linux"
     location              = "West Europe"
     resource_group_name   = "CTGWEPRDRSG-MYS"
@@ -1895,24 +2441,31 @@ CTGWEPRDHAP001 = {
     patch_assessment_mode = "AutomaticByPlatform"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
     os_disk_name          = "test"
+    vtpm_enabled                                           = false
+    private_ip_address                                     = "10.0.11.51"
     linux_image_reference = {
       publisher = "RedHat"
       offer     = "RHEL"
       sku       = "7.6"
       version   = "latest"
     }
+    network_interface_ids                                  = [
+          "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-MYS/providers/Microsoft.Network/networkInterfaces/CTGWEPRDMYS001-nic",
+        ]
     tags = {
-      "Application" = "MUSE GMAO"
       "Platform"    = "Production"
       "Responsible" = "CTG"
-      "Role"        = "GMAO"
+      "Role"        = "Monitoring"
       "Usage"       = "PRD"
   } 
   }
-  CTGWEPRDRMQ001 = { vm_type = "linux"
+  CTGWEPRDRMQ001 = {
+    vtpm_enabled                                           = false 
+    private_ip_address                                     = "10.0.10.71"
+    vm_type = "linux"
     location              = "West Europe"
     resource_group_name   = "CTGWEPRDRSG-RMQ"
-    vm_size               = "Standard_D16ds_v4"
+    vm_size               = "Standard_B2ms"
     admin_username        = "CTGADMAZ"
     admin_password        = "Password1234A!"
     availability_set_name = "CTGWEPRDAVS-RMQ"
@@ -1921,22 +2474,30 @@ CTGWEPRDHAP001 = {
     patch_assessment_mode = "AutomaticByPlatform"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
     os_disk_name          = "CTGWEPRDRMQ001-OSDisk"
+    disable_password_authentication                        = false
     linux_image_reference = {
       publisher = "RedHat"
       offer     = "RHEL"
       sku       = "8"
       version   = "latest"
     }
+    network_interface_ids                                  = [
+          "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-RMQ/providers/Microsoft.Network/networkInterfaces/CTGWEPRDRMQ001-nic",
+        ]
     tags = {
       "Platform"    = "Production"
       "Responsible" = "CTG"
       "Role"        = "Broker"
       "Usage"       = "PRD"
   } }
-  CTGWEPRDRMQ002 = { vm_type = "linux"
+  CTGWEPRDRMQ002 = { 
+    vtpm_enabled                                           = false
+    private_ip_address                                     = "10.0.10.72"
+    disable_password_authentication                        = false
+    vm_type = "linux"
     location              = "West Europe"
     resource_group_name   = "CTGWEPRDRSG-RMQ"
-    vm_size               = "Standard_D16ds_v4"
+    vm_size               = "Standard_B2ms"
     admin_username        = "CTGADMAZ"
     admin_password        = "Password1234A!"
     admin_ssh_public_key  = "~/.ssh/id_rsa.pub"
@@ -1952,10 +2513,9 @@ CTGWEPRDHAP001 = {
       version   = "latest"
     }
     tags = {
-      "Application" = "MUSE GMAO"
       "Platform"    = "Production"
       "Responsible" = "CTG"
-      "Role"        = "GMAO"
+      "Role"        = "Broker"
       "Usage"       = "PRD"
   } }
   CTGWEPRDSBS001 = { vm_type = "windows"
@@ -4476,6 +5036,20 @@ lb = {
     private_ip_address_allocation = "Static"
     load_balancer_rules           = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-ARC/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-ARC/frontendIPConfigurations/lb-IP"
     subnet_id                     = ""
+    frontend_ip_configuration {
+         id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL/providers/Microsoft.Network/loadBalancers/CTGWEPRDSQL-LB/frontendIPConfigurations/WSFCEndPoint"
+         inbound_nat_rules             = []
+         load_balancer_rules           = [
+             "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL/providers/Microsoft.Network/loadBalancers/CTGWEPRDSQL-LB/loadBalancingRules/WSFCEndPoint",
+            ]
+         name                          = "WSFCEndPoint"
+         outbound_rules                = []
+         private_ip_address            = "10.0.11.30"
+         private_ip_address_allocation = "Static"
+         private_ip_address_version    = "IPv4"
+         subnet_id                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Network/providers/Microsoft.Network/virtualNetworks/CTGWEPRDVNT001/subnets/CTGWEPRDSNT011-PRD_Data"
+         zones                         = []
+        }
     tags = {
       "Platform"    = "Production"
       "Responsible" = "CTG"
@@ -4490,6 +5064,21 @@ lb = {
     private_ip_address_allocation = "Static"
     load_balancer_rules           = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-ARC/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-ARC/frontendIPConfigurations/lb-IP"
     subnet_id                     = ""
+    frontend_ip_configuration {
+          id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL02/frontendIPConfigurations/WSFCEndPoint"
+          inbound_nat_rules             = []
+          load_balancer_rules           = [
+              "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL02/loadBalancingRules/DCM",
+              "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL02/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL02/loadBalancingRules/WSFCEndPoint",
+            ]
+          name                          = "WSFCEndPoint"
+          outbound_rules                = []
+          private_ip_address            = "10.0.11.32"
+          private_ip_address_allocation = "Static"
+          private_ip_address_version    = "IPv4"
+          subnet_id                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Network/providers/Microsoft.Network/virtualNetworks/CTGWEPRDVNT001/subnets/CTGWEPRDSNT011-PRD_Data"
+          zones                         = []
+        }
     tags = {
       "Platform"    = "Production"
       "Responsible" = "CTG"
@@ -4499,11 +5088,26 @@ lb = {
   CTGWEPRDILB-SQL03 = { lb_name = "CTGWEPRDILB-SQL03"
     location                      = "westeurope"
     resource_group                = "CTGWEPRDRSG-SQL03"
-    private_ip_address            = "10.0.10.100"
+    private_ip_address            = "10.0.11.35"
     private_ip_address_allocation = "Static"
     name                          = "SQLAlwaysOnEndPointListener"
     load_balancer_rules           = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-ARC/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-ARC/frontendIPConfigurations/lb-IP"
     subnet_id                     = ""
+    frontend_ip_configuration {
+         id                            = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL03/frontendIPConfigurations/WSFCEndPoint"
+         inbound_nat_rules             = []
+         load_balancer_rules           = [
+             "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL03/loadBalancingRules/DCM",
+             "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-SQL03/providers/Microsoft.Network/loadBalancers/CTGWEPRDILB-SQL03/loadBalancingRules/WSFCEndPoint",
+            ]
+         name                          = "WSFCEndPoint"
+         outbound_rules                = []
+         private_ip_address            = "10.0.11.34"
+         private_ip_address_allocation = "Static"
+         private_ip_address_version    = "IPv4"
+         subnet_id                     = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-Network/providers/Microsoft.Network/virtualNetworks/CTGWEPRDVNT001/subnets/CTGWEPRDSNT011-PRD_Data"
+         zones                         = []
+        }
     tags = {
       "Platform"    = "Production"
       "Responsible" = "CTG"
@@ -4873,17 +5477,17 @@ function_apps = {
             },
         ]
   auth_settings {
-          additional_login_params        = {}> null
-          allowed_external_redirect_urls = []> null
-          enabled                        = false> null
-          token_refresh_extension_hours  = 0> null
-          token_store_enabled            = false> null
+          additional_login_params        = {}
+          allowed_external_redirect_urls = []
+          enabled                        = false
+          token_refresh_extension_hours  = 0
+          token_store_enabled            = false
         }
   source_control {
-          branch             = "main"> null
-          manual_integration = false> null
-          rollback_enabled   = false> null
-          use_mercurial      = false> null
+          branch             = "main"
+          manual_integration = false
+          rollback_enabled   = false
+          use_mercurial      = false
         }
   }
 
@@ -4895,9 +5499,9 @@ function_apps = {
   storage_account_name = "ctgweprdazsgtc"
   storage_account_access_key = "test"
   tags                            = {
-         "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/" -> "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-         "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a" -> "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+         "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+         "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+         "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
         }
   app_settings =  {
            "APPINSIGHTS_INSTRUMENTATIONKEY" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
@@ -4936,13 +5540,12 @@ function_apps = {
     
   function_app_name = "CTGWEPRDAZFGTCDATALAKESERVICE"
   resource_group_name = "CTGWEPRDRSG-GTC"
-  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPPDAPLGTC"
-  storage_account_name = "ctgweprdazsgtc"
+  app_service_plan = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/Microsoft.Web/serverfarms/CTGWEPRDAPLGTC"
   storage_account_access_key = "test"
   tags                            = {
-         "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/" -> "InstrumentationKey=a6555bd5-28fb-4ea6-93c0-97e3fca4c376;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
-         "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a" -> "a6555bd5-28fb-4ea6-93c0-97e3fca4c376"
-         "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC" -> "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPPDRSG-GTC/providers/microsoft.insights/components/CTGWEPPDAINGTC"
+         "hidden-link: /app-insights-conn-string"         = "InstrumentationKey=d964f2a0-f623-4cda-833b-ae1fe431611a;IngestionEndpoint=https://westeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://westeurope.livediagnostics.monitor.azure.com/"
+         "hidden-link: /app-insights-instrumentation-key" = "d964f2a0-f623-4cda-833b-ae1fe431611a"
+         "hidden-link: /app-insights-resource-id"         = "/subscriptions/2dd0a1b8-b6f4-4036-aedd-036bd50b6e23/resourceGroups/CTGWEPRDRSG-GTC/providers/microsoft.insights/components/CTGWEPRDAINGTC"
         }
   app_settings =  {
         "APPINSIGHTS_INSTRUMENTATIONKEY"                                   = "d964f2a0-f623-4cda-833b-ae1fe431611a"
